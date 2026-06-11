@@ -1,0 +1,4308 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+			<meta http-equiv="X-UA-Compatible" content="IE=10" />
+
+	<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+<!-- Google Tag Manager for GA4 -->
+				<script>(function(w,d,s,l,i){w.GAMeasurementID='G-12H8BK1MQK';w[l]=w[l]||[];w[l].push({'gtm.start':
+				new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+				j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+				'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+				})(window,document,'script','cpDataLayerGA4','GTM-K73C5PS');</script>
+				<!-- End Google Tag Manager for GA4 -->
+				<script type='text/javascript'>
+					var enableTelemetry = 'false'
+					var aiConfig = {
+					instrumentationKey: '1cde048e-3185-4906-aa46-c92a7312b60f'						
+					}
+					var appInsights = window.appInsights || function (a) { function b(a) { c[a] = function () { var b = arguments; c.queue.push(function () { c[a].apply(c, b) }) } } var c = { config: a }, d = document, e = window; setTimeout(function () { var b = d.createElement('script'); b.src = a.url || 'https://js.monitor.azure.com/scripts/a/ai.0.js', d.getElementsByTagName('script')[0].parentNode.appendChild(b) }); try { c.cookie = d.cookie } catch (a) { } c.queue = []; for (var f = ['Event', 'Exception', 'Metric', 'PageView', 'Trace', 'Dependency']; f.length;)b('track' + f.pop()); if (b('setAuthenticatedUserContext'), b('clearAuthenticatedUserContext'), b('startTrackEvent'), b('stopTrackEvent'), b('startTrackPage'), b('stopTrackPage'), b('flush'), !a.disableExceptionTracking) { f = 'onerror', b('_' + f); var g = e[f]; e[f] = function (a, b, d, e, h) { var i = g && g(a, b, d, e, h); return !0 !== i && c['_' + f](a, b, d, e, h), i } } return c }(aiConfig);
+					window.appInsights = appInsights, appInsights.queue && 0 === appInsights.queue.length;
+					// Add telemetry initializer
+					appInsights.queue.push(function() {
+						appInsights.context.addTelemetryInitializer(function(envelope) {
+							var telemetryItem = envelope.data.baseData;
+							// To check the telemetry item’s type:
+							if (!false)
+							{
+								//If the telemetry is not enabled, we still want to capture Google map custom event, so only allow that
+								if (envelope.name.indexOf('.Event') == -1)
+									return false;
+							}
+						});
+					});						
+					appInsights.trackPageView();
+				</script>
+	<script>
+		function populateAntiForgery(token) {
+			var input = document.createElement("input");
+			input.name = "__RequestVerificationToken";
+			input.type = "hidden";
+			input.value = token;
+			var absPat = /^https?:\/\/|^\/\//i;
+			var forms = document.getElementsByTagName("form");
+			for (var i = 0; i < forms.length; i++) {
+				if (forms[i].method == "post" &&
+					!forms[i].querySelector('[name="__RequestVerificationToken"]') &&
+					!absPat.test(forms[i].getAttribute("action"))) {
+					forms[i].appendChild(input.cloneNode());
+				}
+			}
+		}
+
+		function getAntiForgeryToken(callback, error) {
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "/antiforgery");
+			xhr.addEventListener("load", function() {
+				try {
+					if (this.status !== 200) {
+						throw Error("Invalid status. Could not retrieve antiforgery token.");
+		}
+					var obj = JSON.parse(this.responseText);
+					callback(obj.token);
+				} catch (e) {
+					typeof error === "function" && error(e);
+				}
+			});
+			xhr.send();
+		}
+
+		getAntiForgeryToken(function(token) {
+			if (document.readyState === "complete"
+				|| document.readyState === "loaded" 
+				|| document.readyState === "interactive") {
+				populateAntiForgery(token);
+				return;
+			}
+			document.addEventListener("DOMContentLoaded", function() {
+				populateAntiForgery(token);
+			}, false);
+		}, console.error);
+			</script>
+			
+
+	<script type="text/javascript">
+		window.departmentHeader = {"DepartmentHeaderId":2325,"DepartmentHeaderName":"Public Works & Utilities"};
+		window.pageSectionTracker = {};
+		window.isResponsiveEnabled = true;
+		window.isRemoveSetHeights= false;
+		if (window.isRemoveSetHeights) {
+			document.documentElement.className += ' removeSetHeights';
+		}
+		window.mainMenuMediaQuery = 'screen and (max-width: 40em)';
+		window.isMobileBrowserIncludingTablets = false;
+		window.fixedResponsiveMenu = false;
+		window.fullWidthResponsiveMenu = false;
+		window.responsiveMenuHeight = '';
+		window.responsiveMenuFontSize = '';
+		window.isContentAdvisor = false;
+		(function () {
+			window.setSizeCookie = function () {
+				document.cookie = "dpi=" + window.devicePixelRatio + "; path=/";
+				document.cookie = "viewportWidth=" + window.innerWidth + "; path=/";
+				document.cookie = "viewportHeight=" + window.innerHeight + "; path=/";
+				if (screen && screen.width && screen.height) {
+					document.cookie = "screenWidth=" + screen.width + "; path=/";
+					document.cookie = "screenHeight=" + screen.height + "; path=/";
+				}
+				document.cookie = "responsiveGhost=1; path=/";
+			};
+
+			setSizeCookie();
+		}());
+	</script>
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<script async src="https://docaccess.com/docbox.js"></script>
+	<meta name="google-site-verification" content="PNn4ZrRWwpdTmcx-9FpL5S8FzMTBvoPtVO1m91tnFcE" />
+
+	<meta name="category0" content="Home" />
+<meta name="category1" content="Departments" />
+<meta name="category2" content="Public Works &amp; Utilities" />
+<meta name="category3" content="What We Do" />
+<meta name="category4" content="Wastewater Division" />
+<meta name="category5" content="Proposed Utility Rate Adjustments" />
+
+	
+	<meta name="theme-color" content="#077e58">
+	<link rel="icon" href="/images/favicon.ico" type="image/x-icon" />
+	<link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon" />
+		<title>Proposed Utility Rate Adjustments | Watsonville</title>
+
+		<meta name="description" content="">
+			<script src="/Assets/Scripts/jQuery/jquery-3.7.1.min.js"></script>
+	<script src="/Assets/Scripts/jQuery/jquery-migrate-3.5.2.min.js" type="text/javascript"></script>
+	
+
+	<!--[if IE 6]><script language="JavaScript" type="text/javascript"> var isie6 = true; </script><![endif]-->
+	<!--[if IE 7]><script language="JavaScript" type="text/javascript"> var isie7 = true; </script><![endif]-->
+	<!--[if IE 8]><script language="JavaScript" type="text/javascript"> var isie8 = true; </script><![endif]-->
+	<!--[if IE 9]><script language="JavaScript" type="text/javascript"> var isie8 = true; </script><![endif]-->
+	<script type="text/javascript"><!--
+	var intCountryCode = 840;
+	var order = '';
+//--></script>
+	
+	<link href="/-1465647691.css" rel="stylesheet" type="text/css" />	<link href="/-1430500018.css" rel="stylesheet" type="text/css" />
+
+	<link rel="stylesheet" type="text/css" href="/Assets/Styles/Print.css" media="print">
+	<script type="text/javascript">
+		window.Pages = window.Pages || {};
+		// FrontEnd RWD initialization
+		window.Pages.rwdReady = $.Deferred();
+		window.Pages.toolBarDeferred = $.Deferred();
+		window.Pages.rwdSetupComplete = $.Deferred();
+		window.Pages.megaMenuLoaded = $.Deferred();
+		window.Pages.angularToolbarComplete = $.Deferred();
+		window.Pages.frontEndToolbarComplete = $.Deferred();
+	</script>
+	<!--CPHeadContent-->
+	<script src="/739942322.js" type="text/javascript"></script>
+	
+	
+	
+	
+
+
+
+
+	<!--[if lte IE 8]><link rel="stylesheet" type="text/css" href="/App_Themes/ie8.css"><![endif]-->
+	<!--[if lte IE 7]><link rel="stylesheet" type="text/css" href="/App_Themes/ie7.css"><![endif]-->
+	<!--[if lte IE 6]><link rel="stylesheet" type="text/css" href="/App_Themes/ie6.css"><![endif]-->
+	<!--[if lt IE 9]><script type="text/javascript" src="/Scripts/html5.js"></script><![endif]-->
+
+	<script type="text/javascript">
+		setEditorVariables(false, 840);
+		function getPrintPreviewType() { return 0; } function printPreview() {pPreview(getPrintPreviewType()); }
+	</script>
+	<script src="/Assets/Scripts/AlpineJS/3.14.1/alpine.min.js" type="text/javascript" defer="defer"></script>
+</head>
+<body class="wide " >
+
+    <script>jQuery(document).click(function (event) {
+	var target = jQuery(event.target);
+	if (target.attr('src') && target.parents('.image').length && target.parents('.widget').length) {
+		var text = target.attr('title');
+		
+		if (!text.length) {
+			text = "N/A";
+		}
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'Image',
+				eventAction: 'Image - ' + text,
+				eventLabel: window.location.href
+			});
+	}
+	if (target.is('button') || target.hasClass('button') || target.parents().hasClass('button')) {
+		var text = "";
+		if (target.parents('.button')[0]) {
+			text = target.parents('.button').first().text();
+		} else if (target.text().length) {
+			text = target.text();
+		} else if (target.attr('title').length) {
+			text = target.attr('title');
+		}
+		if (!text.length) {
+			text = "N/A";
+		}
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'Button',
+				eventAction: 'Button - ' + text,
+				eventLabel: window.location.href
+			});
+	}
+	if (target.parents('.widgetCustomHtml').length) {
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'Custom Html',
+				eventAction: 'Custom Html Clicked',
+				eventLabel: window.location.href
+			});
+	}
+	if (target.parents('.editor').length) {
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'Editor',
+				eventAction: 'Editor Link Clicked',
+				eventLabel: window.location.href
+			});
+	}
+	if (target.parents('.GraphicLinks').length) {
+		var text = "";
+		var targetGraphicLink = target;
+		if (target.hasClass('widgetGraphicLinksLink')) {
+			targetGraphicLink = jQuery(target.children()[0]);
+		}
+		if (targetGraphicLink.hasClass('text')) {
+			text = targetGraphicLink.text();
+		} else if (targetGraphicLink.attr('src').length) {
+			if (targetGraphicLink.attr('alt').length) {
+				text = targetGraphicLink.attr('alt');
+			} else {
+				text = targetGraphicLink.attr('src');
+			}
+		} else {
+			text = "N/A";
+		}
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'Graphic Links',
+				eventAction: 'Graphic Link - ' + text,
+				eventLabel: window.location.href
+			});
+	}
+	if (target.parents('.InfoAdvanced').length) {
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'Info Advanced',
+				eventAction: 'Info Advanced Clicked',
+				eventLabel: window.location.href
+			});
+	}
+	if (target.parents('.list').length) {
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'List',
+				eventAction: 'List Clicked',
+				eventLabel: window.location.href
+			});
+	}
+	if (target.parents('.megaMenuItem').length || target.parents('.topMenuItem').length) {
+		var megaMenuText = jQuery('.topMenuItem.mouseover').find('span').text();
+		var breadCrumbs = [];
+		jQuery('.breadCrumbs > li').each(function () {
+			 breadCrumbs.push(this.textContent);
+		});
+		var pageTitle = breadCrumbs.join('>');
+		var subTitleText = target.parents('.megaMenuItem').children('.widgetTitle').children().text();
+		var text = "";
+		if (pageTitle) {
+			text += pageTitle + " | ";
+		} else {
+			text += document.title + ' - ';
+		}
+		if (target.text() == "" && megaMenuText == "") {
+			text += "N/A";
+		} else if (target.text().length && megaMenuText.length) {
+			if (megaMenuText == target.text()) {
+				text += megaMenuText;
+			} else {
+				text += megaMenuText + " - " + subTitleText + " - " + target.text();
+			}
+		} else if (target.text() == "") {
+			text += megaMenuText;
+		} else {
+			text += target.text();
+		}
+		if (!text.length) {
+			text = "N/A";
+		}
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'Mega Menu',
+				eventAction: 'Mega Menu : ' + text,
+				eventLabel: window.location.href
+			});
+	}
+	if (target.parents('.widgetNewsFlash').length && target.parents('.widgetItem').length) {
+		var text = jQuery(target.parents('.widgetItem')[0]).find('.widgetTitle').children().text();
+		if (!text.length) {
+			text = "N/A";
+		}
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'News Flash',
+				eventAction: 'News Flash - ' + text,
+				eventLabel: window.location.href
+			});
+	}
+	if (target.hasClass('widgetQuickLinksLink') || target.find('.widgetQuickLinksLink').length) {
+		var text = target.text();
+		if (!text.length) {
+			text = "N/A";
+		}
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'Quick Links',
+				eventAction: 'Quick Links - ' + text,
+				eventLabel: window.location.href
+			});
+	}
+	if (target.attr('src') && target.parents('.cpSlideshow').length) {
+		var text = target.attr('title');
+		if (!text.length) {
+			text = "N/A";
+		}
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'Slideshow',
+				eventAction: 'Slideshow - ' + text,
+				eventLabel: window.location.href
+			});
+	}
+	if (target.parents('.widgetText').length) {
+		ga('send',
+			{
+				hitType: 'event',
+				eventCategory: 'Text',
+				eventAction: 'Text Link Clicked',
+				eventLabel: window.location.href
+			});
+	}
+});</script>
+	<div id="popoverModal" class="cp-PopOver cp-PopOver--modal cp-AdminWrap" style="position: fixed; display: none;">
+	<div class="cp-PopOver-header">
+		<h3 class="cp-PopOver-title"></h3>
+		<button class="cp-Btn cp-PopOver-close" onclick="closePopOverModal(event)">
+			<svg class="cp-Icon--close" alt="close" title="close">
+				<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#iconClose"></use>
+			</svg>
+		</button>
+	</div>
+	<div id="cpPopOverBody" class="cp-PopOver-body">
+		<form id="cpPopOverForm" name="cpPopOverForm" novalidate></form>
+	</div>
+	<div id="cpPopOverFooter" class="cp-PopOver-footer">
+		<div class="cp-BtnGroup" id="actionButtons">
+			<!-- Action buttons will be dynamically added here -->
+		</div>
+	</div>
+</div>
+    <div id="fb-root"></div>
+<div id=skipToContentLinks>
+<a href="#ccab964d0d-7fc8-45d5-abab-fd179b35ebbf" target="_self" class="skipToContentLink">Skip to Main Content</a>
+</div>
+    <form id="frmReferenceFormForTelerikEditorDialogs"></form>
+
+        <input type="hidden" id="GoogleMapsKey" value="AIzaSyDWUuE-ifkbhxblF920N8MjpBdTg1Wt784" />
+
+
+
+    <input type="hidden" id="cpcDomain" value="https://cp-civicplusuniversity2.civicplus.com">
+    <input type="hidden" id="hdnStructureID" value="6" />
+    <input type="hidden" id="hdnContentCollectionID" value="d5db37b7-454d-4bc8-91ec-624ef9d5d3c7" />
+    <input type="hidden" id="hdnWorkingCopyID" value="00000000-0000-0000-0000-000000000000" />
+    <input type="hidden" id="hdnThemeID" value="56" />
+    <input type="hidden" id="pageIsFrontEnd" value="true" />
+    <input type="hidden" id="pageModuleID" />
+    <input type="hidden" id="pagePageID" value="2577" />
+
+    <div id="stickyPlaceholder"></div>
+    <div id="outer-wrap" class="outer-wrap">
+        <div id="inner-wrap" class="inner-wrap">
+                <div id="divToolbars" class="cpToolbars newCP mui-fixed" style="">
+                    
+
+
+
+<!-- Begin Signed Out Bar -->
+<div class="cpToolbar user public">
+    <div class="inner selfClear">
+        <p class="dropdown"><a href="/MyAccount/ProfileCreate" class="myConnections" id="signedOutToolbarCreateProfileButton">Create a Website Account</a> <span class="welcomeMessage">- Manage notification subscriptions, save form progress and more. &nbsp;&nbsp;</span></p>
+        <ul class="nav secondary">
+	        <li><a href="/MyAccount" class="button" id="loggedOutToolbarSignInButton">Website Sign In</a></li>
+        </ul>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#signedOutToolbarCreateProfileButton').click(function (event) {
+            event.preventDefault();
+            window.location.href = '/MyAccount/ProfileCreate?from=url&url=/&dn=' + window.location.origin;
+        });
+
+			
+				$('#loggedOutToolbarSignInButton').click(function (event) {
+					event.preventDefault();
+					window.location.href = '/MyAccount/?from=url&url=' + encodeURIComponent(window.location.href.replace(window.location.origin, '')) + '&dn=' + window.location.host;
+				});
+			
+
+		if ('False' == 'True') {
+            $('#loggedOutToolbarSignInButton').hide();
+		}
+    })
+</script>
+<!-- End Signed Out Bar -->
+
+                </div>
+            <div id="bodyWrapper">
+                <div id="mainNavHolderMobile" class="mainNavHolderMobile"></div>
+                
+<div data-cpRole="structuralContainer" id="bodyContainerTS">
+<!-- Header Container --><header data-cpRole="structuralContainer" id="headerContainerTS" class="fixedTopTS">
+<div class="siteWrap"><nav data-cpRole="nav" id="mainNav" class="siteNav mainNav" role="navigation" aria-label="Main navigation">
+<ol id="mainNavMenu" data-parent="2325" class="rootNavMenu" role="menu"><!--
+--><li id="MainItem612" class="topMenuItem" role="none" data-pageid="612" data-displaymegamenu="True"><!--
+			--><!--
+			--> <a role = "menuitem"  aria-haspopup=true aria-expanded='false' aria-controls="mainNavMegaMenu612" id = "mainNavWhatWeDo" class="navMainItem mainNavItem mainNavItem1 " href="/612/What-We-Do" target = "_self" >   What We Do  </a>			<!--
+			--><!--
+			--></li><!----><li id="MainItem1238" class="topMenuItem" role="none" data-pageid="1238" data-displaymegamenu="True"><!--
+			--><!--
+			--> <a role = "menuitem"  aria-haspopup=true aria-expanded='false' aria-controls="mainNavMegaMenu1238" id = "mainNavServices" class="navMainItem mainNavItem mainNavItem2 " href="/1238/Services" target = "_self" >   Services  </a>			<!--
+			--><!--
+			--></li><!----><li id="MainItem973" class="topMenuItem" role="none" data-pageid="973" data-displaymegamenu="True"><!--
+			--><!--
+			--> <a role="menuitem"  id="mainNavPublicOutreach" class="navMainItem mainNavItem mainNavItem3" href="/973/Public-Outreach" target="_self">   Public Outreach </a>			<!--
+			--><!--
+			--></li><!---->
+</ol>
+
+
+	<script type="text/javascript">
+		(function () {
+			function setupMenu() {
+				const menuID = 'mainNavMenu';
+				const menuType = MAIN_MENU;
+
+				//setup menu manager properties for main menu
+				if (!menuManager.mobileMainNav && true)
+					menuManager.adjustMainItemsWidth('#' + menuID);
+				menuManager.isMainMenuEditable = false;
+				menuManager.mainMenuMaxSubMenuLevels = 4;
+				menuManager.setMOMMode(2, menuType);
+
+				//Init main menu
+				const setupDraggable = menuManager.isMainMenuEditable;
+				const urlToGetHiddenMenus = '/Pages/MenuMain/HiddenMainSubMenus?pageID=2325&moduleID=&themeID=56&menuContainerID=mainNav';
+
+				menuManager.setupMenu(menuID, 'mainNav', menuType, setupDraggable, urlToGetHiddenMenus);
+				menuManager.mainMenuInit = true;
+				menuManager.mainMenuTextResizer = true;
+				if (1.00 > 0)
+					menuManager.mainMenuTextResizerRatio = 1.00;
+				if (window.isResponsiveEnabled)
+					menuManager.mainMenuReady.resolve();
+
+			}
+
+			if (document.readyState === "complete"
+				|| document.readyState === "loaded"
+				|| document.readyState === "interactive") {
+				setupMenu();
+				return;
+			}
+
+			document.addEventListener("DOMContentLoaded", setupMenu);
+		})();
+	</script>
+
+
+<aside data-cpRole="megaMenu" id="megaMenu" class="megaMenu" style="display: none;"><input type="hidden" id="megaMenuPopupDirection" value="0"><input type="hidden" id="megaMenuWidthReference" value="1"><aside role="menu" data-cpRole="contentContainer" id="mainNavMegaMenu612" class="contentTop mainNavMegaMenu megaMenuContainer pageID_612 hidden" data-orientation="horizontal">	<div id="cc63b475a8-f1b8-4a24-8c79-fad18a5dcbb0" data-containerid="63b475a8-f1b8-4a24-8c79-fad18a5dcbb0" class="pageContent cpGrid cpGrid24">
+				                
+
+
+
+	</div>
+</aside><aside role="menu" data-cpRole="contentContainer" id="mainNavMegaMenu1238" class="contentTop mainNavMegaMenu megaMenuContainer pageID_1238 hidden" data-orientation="horizontal">	<div id="cccd9d1be7-d031-4e2d-b965-e2c27b586f4f" data-containerid="cd9d1be7-d031-4e2d-b965-e2c27b586f4f" class="pageContent cpGrid cpGrid24">
+				                
+
+
+
+	</div>
+</aside><aside role="menu" data-cpRole="contentContainer" id="mainNavMegaMenu973" class="contentTop mainNavMegaMenu megaMenuContainer pageID_973 hidden" data-orientation="horizontal">	<div id="cc422749e8-5043-4614-a768-ac60ce9a2e49" data-containerid="422749e8-5043-4614-a768-ac60ce9a2e49" class="pageContent cpGrid cpGrid24">
+				                
+
+
+
+	</div>
+</aside></aside></nav></div>
+</header><!-- Banner --><div data-cpRole="structuralContainer" id="bannerContainerTS">
+<div class="siteWrap2"><div data-cpRole="banner" id="bannerLogoTS" class="bannerLogoTS empty">
+
+
+
+
+				<a id="bannerLogoTS-344" style="			display: block; text-align: center;
+" class="bannerObject" href="/2325" target="_self"><img alt="PW_WEBSITEHEADER_2023" class="bannerObject" height="608" src="/ImageRepository/Document?documentID=21988" width="1650" /></a>
+</div><div data-cpRole="contentContainer" id="searchTS">	<div id="ccaab62d26-51a2-49e1-9ec3-7ee38c741c8a" data-containerid="aab62d26-51a2-49e1-9ec3-7ee38c741c8a" class="pageContent cpGrid cpGrid24 isLockedContainer showInMobile" data-contentcontainerbreakpoint="30">
+				                
+
+		<div class="row outer wide"><!--
+--><div class="outer col col11 first" style="" data-widgetcontainerid="00e5687a-b855-47b0-867f-07a7394e0d82">
+				
+	<div class="row nest first last wide">
+
+	
+	<div class="inner col col11 first last id258dc171-7c6b-4001-9406-b7a1f3783594" style="" data-widgetcontainerid="258dc171-7c6b-4001-9406-b7a1f3783594">
+	
+<div data-widget-id="ba528f30-6f53-4016-91bb-14d42fece3fe" data-widget-controller-path="/GraphicLinks/Widget">
+
+
+
+
+<div id="graphicLinkWidgetba528f30-6f53-4016-91bb-14d42fece3fe" class="widget widgetGraphicLinks skin209 widgetOptionSet4 wide" data-elementqueryclasses='{"wide-narrow":"min-width:1em"}' data-elementquerymatch='matchMultiColumn' data-elementqueryunmatch='unmatchMultiColumn' data-modulewidgettype="graphicLinks">
+	<div class="widgetHeader">
+		<div class="">
+				</div>
+	</div>
+	<div class="widgetBody cpGrid cpGrid5 ">
+		<nav class="widgetGraphicLinksNav" aria-labelledby="GraphicLinkHeaderText">
+				<div class="row   wide">
+					<!--
+--><div class="col col1 first "><ul class="semanticList"><!--
+
+	    --><li class="widgetItem GraphicLinks"><a class="widgetDesc widgetGraphicLinksLink" href="/2318/Home---2022" target="_self">
+
+<img src="/ImageRepository/Document?documentID=19127" 
+     class="graphicButtonLink" alt="" 
+     onmouseover="this.src='/ImageRepository/Document?documentID=19127'" 
+	onmouseout="this.src='/ImageRepository/Document?documentID=19127'"
+     onfocus="this.src='/ImageRepository/Document?documentID=19127'" 
+	onblur="this.src='/ImageRepository/Document?documentID=19127'"> 
+</a></li><!--
+--></ul></div><!----><div class="col col1  "><ul class="semanticList"><!--
+
+	    --><li class="widgetItem GraphicLinks"><a class="widgetDesc widgetGraphicLinksLink" href="/facebook" target="_self">
+
+<img src="/ImageRepository/Document?documentID=18468" 
+     class="graphicButtonLink" alt="" 
+     onmouseover="this.src='/ImageRepository/Document?documentID=18468'" 
+	onmouseout="this.src='/ImageRepository/Document?documentID=18468'"
+     onfocus="this.src='/ImageRepository/Document?documentID=18468'" 
+	onblur="this.src='/ImageRepository/Document?documentID=18468'"> 
+</a></li><!--
+--></ul></div><!----><div class="col col1  "><ul class="semanticList"><!--
+
+	    --><li class="widgetItem GraphicLinks"><a class="widgetDesc widgetGraphicLinksLink" href="/twitter" target="_self">
+
+<img src="/ImageRepository/Document?documentID=18476" 
+     class="graphicButtonLink" alt="" 
+     onmouseover="this.src='/ImageRepository/Document?documentID=18476'" 
+	onmouseout="this.src='/ImageRepository/Document?documentID=18476'"
+     onfocus="this.src='/ImageRepository/Document?documentID=18476'" 
+	onblur="this.src='/ImageRepository/Document?documentID=18476'"> 
+</a></li><!--
+--></ul></div><!----><div class="col col1  "><ul class="semanticList"><!--
+
+	    --><li class="widgetItem GraphicLinks"><a class="widgetDesc widgetGraphicLinksLink" href="/instagram" target="_self">
+
+<img src="/ImageRepository/Document?documentID=18469" 
+     class="graphicButtonLink" alt="" 
+     onmouseover="this.src='/ImageRepository/Document?documentID=18469'" 
+	onmouseout="this.src='/ImageRepository/Document?documentID=18469'"
+     onfocus="this.src='/ImageRepository/Document?documentID=18469'" 
+	onblur="this.src='/ImageRepository/Document?documentID=18469'"> 
+</a></li><!--
+--></ul></div><!----><div class="col col1  last"><ul class="semanticList"><!--
+
+	    --><li class="widgetItem GraphicLinks"><a class="widgetDesc widgetGraphicLinksLink" href="/youtube" target="_self">
+
+<img src="/ImageRepository/Document?documentID=18479" 
+     class="graphicButtonLink" alt="" 
+     onmouseover="this.src='/ImageRepository/Document?documentID=18479'" 
+	onmouseout="this.src='/ImageRepository/Document?documentID=18479'"
+     onfocus="this.src='/ImageRepository/Document?documentID=18479'" 
+	onblur="this.src='/ImageRepository/Document?documentID=18479'"> 
+</a></li><!--
+--></ul></div><!--				-->
+				</div>
+			</nav>
+		</div>
+	<div class="widgetFooter">
+			</div>
+</div>
+</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!----><div class="outer col col13 last" style="" data-widgetcontainerid="fc1cc1df-bfd9-457d-a5a2-45544c11c440">
+				
+	<div class="row nest first last wide">
+
+	
+	<div class="inner col col13 first last iddcc7f378-b9fd-4996-b7a0-3a07df51c1a6" style="" data-widgetcontainerid="dcc7f378-b9fd-4996-b7a0-3a07df51c1a6">
+	
+<div data-widget-id="a950b9dc-8819-47e3-877a-5248d375e931" data-widget-controller-path="/Layout/WidgetSearch">
+	
+	<script defer type="text/javascript" src="/Common/Controls/jquery-ui-1.14.1/jquery-ui.min.js"></script>
+	<script defer src="/Areas/Layout/Assets/Scripts/Search.js" type="text/javascript"></script>
+	<script defer type="text/javascript">
+
+		$(document).ready(function () {
+			try {
+				$(".widgetSearchButton.widgetSearchButtona950b9dc-8819-47e3-877a-5248d375e931").click(function (e) {
+				e.preventDefault();
+					if (false||$("#ysnSearchOnlyDepta950b9dc-8819-47e3-877a-5248d375e931").is(':checked'))
+					{
+						doWidgetSearch($(this).siblings(".widgetSearchBox").val(), Number(0));
+					}
+					else {
+						doWidgetSearch($(this).siblings(".widgetSearchBox").val(), 0);
+					}
+			});
+			$("#searchFielda950b9dc-8819-47e3-877a-5248d375e931").keypress(function (e) {
+				if (window.clipboardData) {
+					if (e.keyCode === 13) {
+						if ($("#ysnSearchOnlyDepta950b9dc-8819-47e3-877a-5248d375e931").is(':checked') || false) {
+								doWidgetSearch($(this).val(), Number(0));
+							} else {
+								doWidgetSearch($(this).val(), 0);
+							}
+						return false;
+					}
+				} else {
+					if (e.which === 13) {
+						if ($("#ysnSearchOnlyDepta950b9dc-8819-47e3-877a-5248d375e931").is(':checked') || false) {
+								doWidgetSearch($(this).val(), Number(0));
+							} else {
+								doWidgetSearch($(this).val(), 0);
+							}
+						return false;
+					}
+				}
+				return true;
+			});
+
+				if (true) {
+					var currentRequest = null;
+					var $searchField = $("#searchFielda950b9dc-8819-47e3-877a-5248d375e931").autocomplete({
+						source: function (request, response) {
+							currentRequest = $.ajax({
+								url: '/Search/AutoComplete' + ($("#ysnSearchOnlyDepta950b9dc-8819-47e3-877a-5248d375e931").is(':checked') || false? '?departmentId=0' : ''),
+								dataType: "json",
+								timeout: 10000,
+								beforeSend: function () {
+									if (currentRequest != null) {
+										currentRequest.abort();
+									}
+								},
+								data:
+								{
+									term: request.term,
+								},
+								success: function (data) {
+									response(data);
+									$('.autoCompleteError').remove();
+								},
+								error: function (xmlhttprequest, textstatus, message) {
+									if (textstatus === "timeout") {
+										if ($("#searchFielda950b9dc-8819-47e3-877a-5248d375e931").siblings('.autoCompleteError').length == 0)
+											$('<span class="autoCompleteError"><p class="alert error">Search autocomplete is currently not responding. Please try again later.</p></span>').insertAfter($("#searchFielda950b9dc-8819-47e3-877a-5248d375e931"));
+									}
+								}
+							});
+						},
+						html: true,
+						delay: 500,
+						select: function (event, ui) {
+							$(this).val(ui.item.value);
+							$(this).next().click();
+						}
+					});
+
+					$searchField.data("ui-autocomplete")._renderItem = function (ul, item) {
+						return $("<li class=\"itemList\"></li>")
+							.data("ui-autocomplete-item", item)
+							.append("<a>" + item.label + "</a>")
+							.appendTo(ul);
+					};
+}
+}
+			catch(e) {} //we're going to eat this error. Autocomplete won't work but we dont wan't to break anything else on the page.
+		});
+	</script>
+
+	<section id="widgetPreviewSearch" class="widget widgetSearch skin197 widgetOptionSet86" style="display: block;" aria-label="Search">
+				<!-- For the button right and inside -->
+		<div class="widgetBody buttonRightInside">
+			<input class="widgetSearchBox widgetSearchBoxa950b9dc-8819-47e3-877a-5248d375e931" cp5ph="true" id="searchFielda950b9dc-8819-47e3-877a-5248d375e931" name="searchField" onchange="searchBtnApplyQuery();" placeholder="Search..." type="text" value="" />
+						<a href="/Search/Results" id="btnSearchIcon" class="widgetSearchButton widgetSearchButtona950b9dc-8819-47e3-877a-5248d375e931" role="button"><img alt="Search" class="imageHover" data-hover="/ImageRepository/Document?documentID=19135" data-image="/ImageRepository/Document?documentID=19136" src="/ImageRepository/Document?documentID=19136" /></a>
+
+			<label class="searchLabel" aria-hidden="true" for="searchFielda950b9dc-8819-47e3-877a-5248d375e931">Search</label>
+		</div>
+
+	</section>
+
+
+<style scoped>
+	  
+		.widgetSearch ::-webkit-input-placeholder {
+		color: #045038;
+	  }
+		.widgetSearch :-moz-placeholder { /* Firefox 18- */
+	   color: #045038;
+	}
+		.widgetSearch ::-moz-placeholder {  /* Firefox 19+ */
+	   color: #045038;
+	}
+	.widgetSearch :-ms-input-placeholder {
+	   color: #045038;
+	}
+	
+
+	.widgetSearch .widgetBody .widgetSearchBoxa950b9dc-8819-47e3-877a-5248d375e931
+	{
+		color: #045038;
+		background: #fff; border: 0; box-shadow: inset 0px 3px 5px rgba(0, 0, 0, 0.1); border-radius: 100px; height: 70px; font-family: Alegreya Sans; font-size: 1.1em; font-family: 500; padding: 0 85px 0 25px;
+	}
+	.widgetSearch .widgetBody .widgetSearchButtona950b9dc-8819-47e3-877a-5248d375e931
+	{
+		margin: 6px 6px 0 0;
+	}
+	.widgetSearch .widgetSearch-onlyDepta950b9dc-8819-47e3-877a-5248d375e931
+	{
+		display: inline-block;
+		color: #333;
+		
+		
+		 padding-top: 10px;
+	}
+	#ysnSearchOnlyDepta950b9dc-8819-47e3-877a-5248d375e931
+	{
+		position: relative;
+		top: .125em;
+	}
+
+</style>
+
+<link rel="stylesheet" href="/Common/Controls/jquery-ui-1.14.1/jquery-ui.min.css">
+<link rel="stylesheet" href="/Common/Controls/jquery-ui-1.14.1/jquery-ui.theme.min.css">
+
+
+
+<script type="text/javascript">
+	//Updates search icons href to have the correct queryString
+	function searchBtnApplyQuery() {
+		document.getElementById("btnSearchIcon").href = "/Search?searchPhrase=" + document.getElementById("searchFielda950b9dc-8819-47e3-877a-5248d375e931").value;
+	}
+	</script>
+
+</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!--		--></div> <!-- outer row -->
+
+
+	</div>
+</div></div>
+</div><!-- Banner --><div data-cpRole="structuralContainer" id="bannerWrapTS" class="noOverflowTS">
+<div data-cpRole="banner" id="banner1"><div data-cpRole="structuralContainer" id="bannerSizingTS">
+<div data-cpRole="structuralContainer" id="bannerSearchTS">
+<div class="siteWrap"><div data-cpRole="contentContainer" id="welcomeTS">	<div id="cc27742d47-72b9-4241-b6f9-cc097caf6b12" data-containerid="27742d47-72b9-4241-b6f9-cc097caf6b12" class="pageContent cpGrid cpGrid24 showInMobile">
+				                
+
+
+
+	</div>
+</div></div>
+</div>
+</div>
+
+
+
+
+		<div id="banner1-345" style="display: none"></div>
+			<script type="text/javascript">
+				$(window).on("load", function () {
+					$.when(window.Pages.rwdSetupComplete)
+						.done(function () {
+							renderBanner('banner1-345',
+								'banner1',
+								{"BannerOptionID":345,"ThemeID":56,"SlotName":"banner1","Name":"Default - Public Works","IsDefault":true,"BannerMode":1,"SlideShowSlideTiming":null,"SlideshowTransition":0,"SlideShowTransitionTiming":null,"ImageScale":true,"ImageAlignment":1,"ImageScroll":true,"MuteSound":true,"VideoType":0,"Status":40,"SlideshowControlsPosition":0,"SlideshowControlsAlignment":0,"SlideshowBannerControlsColorScheme":0,"DisplayVideoPauseButton":false,"VideoPauseButtonAlignment":1,"VideoPauseButtonControlsAlignment":0,"VideoPauseButtonStyle":"#FFFFFF","VideoPauseButtonBackgroundStyle":"#000000","VideoPauseButtonAlignmentClass":"alignRight viewport","DisplaySlideshowPauseButton":true,"SlideshowControlsColor":"#FFFFFF","SlideshowControlsBackgroundColor":"#000000","SlideshowPauseButtonClass":"isHidden","BannerImages":[{"BannerImageID":1303,"BannerOptionID":345,"FileName":"/ImageRepository/Document?documentID=19332","Height":400,"Width":2200,"StartingOn":null,"StoppingOn":null,"IsLink":false,"LinkAddress":null,"Sequence":1,"RecordStatus":0,"ModifiedBy":0,"ModifiedOn":"\/Date(-62135575200000)\/","AltText":null},{"BannerImageID":1230,"BannerOptionID":345,"FileName":"/ImageRepository/Document?documentID=18700","Height":400,"Width":2200,"StartingOn":null,"StoppingOn":null,"IsLink":false,"LinkAddress":null,"Sequence":2,"RecordStatus":0,"ModifiedBy":0,"ModifiedOn":"\/Date(-62135575200000)\/","AltText":null},{"BannerImageID":1231,"BannerOptionID":345,"FileName":"/ImageRepository/Document?documentID=18699","Height":400,"Width":2200,"StartingOn":null,"StoppingOn":null,"IsLink":false,"LinkAddress":null,"Sequence":3,"RecordStatus":0,"ModifiedBy":0,"ModifiedOn":"\/Date(-62135575200000)\/","AltText":null}],"BannerVideos":[],"RecordStatus":0,"ModifiedBy":0,"ModifiedOn":"\/Date(-62135575200000)\/"},
+								{"BannerImageID":1303,"BannerOptionID":345,"FileName":"/ImageRepository/Document?documentID=19332","Height":400,"Width":2200,"StartingOn":null,"StoppingOn":null,"IsLink":false,"LinkAddress":null,"Sequence":1,"RecordStatus":0,"ModifiedBy":0,"ModifiedOn":"\/Date(-62135575200000)\/","AltText":null},
+								'/App_Themes/Interior/Images/',
+								'<img alt="" class="bannerObject" src="/ImageRepository/Document?documentID=19332" />');
+						});
+				});
+			</script>
+
+</div>
+</div><!-- Content container --><div data-cpRole="structuralContainer" id="mainContainerTS">
+<div class="siteWrap3"><div data-cpRole="structuralContainer" id="mainWrapTS" class="mainWrap" role="main">
+<div data-cpRole="structuralContainer" id="outerContentWrapTS" class="outerContentWrap">
+<div data-cpRole="structuralContainer" id="contentWrapTS" class="contentWrap">
+<div data-cpRole="breadCrumbs" id="breadCrumbs" class="breadCrumbContainer">		<ol class="semanticList breadCrumbs">
+			<li><a class="breadCrumb" href="/">Home</a></li><li><a class="breadCrumb" href="/148/Departments">Departments</a></li><li><a class="breadCrumb" href="/2325/Public-Works-Utilities">Public Works & Utilities</a></li><li><a class="breadCrumb" href="/612/What-We-Do">What We Do</a></li><li><a class="breadCrumb" href="/812/Wastewater-Division">Wastewater Division</a></li><li id="currentBCPage" data-pageid="2577"><a href class="breadCrumb" aria-current="page">Proposed Utility Rate Adjustments</a></li>
+		</ol>
+
+	   
+    
+</div><div data-cpRole="mainContentContainer" id="moduleContent">
+	
+	<div id="page" class="moduleContentNew">
+		
+
+	<input id="hdnPageID" name="hdnPageID" type="hidden" value="2577" />
+	<input id="hdnParentID" name="hdnParentID" type="hidden" value="812" />
+	<input id="hdnVersionID" name="hdnVersionID" type="hidden" value="29931" />
+	<input id="pageMenuTitle" name="pageMenuTitle" type="hidden" value="Proposed Utility Rate Adjustments" />
+	<input id="pageShowFeatureColumn" name="pageShowFeatureColumn" type="hidden" value="False" />
+	<input id="hdnIsLayoutPage" name="hdnIsLayoutPage" type="hidden" value="False" />
+	<input id="hdnPageStatus" name="hdnPageStatus" type="hidden" value="Published" />
+
+				<h1 id="versionHeadLine" class="headline">
+
+Proposed Utility Rate Adjustments		</h1>
+	
+		<div id="ccab964d0d-7fc8-45d5-abab-fd179b35ebbf" data-containerid="ab964d0d-7fc8-45d5-abab-fd179b35ebbf" class="pageContent cpGrid cpGrid24"  data-contentcontainerbreakpoint="30" data-smoothscrolling="True">
+			
+
+		<div class="row outer wide"><!--
+--><div class="outer col col24 first last" style="" data-widgetcontainerid="a1e3e5fc-c2b1-4fea-ad33-93eda42321eb">
+				
+	<div class="row nest first last wide">
+
+	
+	<div class="inner col col24 first last id125072b9-38a9-46e6-a20c-1349c64b7ca0" style="" data-widgetcontainerid="125072b9-38a9-46e6-a20c-1349c64b7ca0">
+	
+ 
+	<div data-widget-id='aaaaec47-e2ba-48c3-8ee6-03c101b78831' data-moduleName="customHtml" id='widgetCustomHtmlaaaaec47-e2ba-48c3-8ee6-03c101b78831' class="widget widgetCustomHtml skin107 narrow" >
+	<div class="widgetBody pageStyles" id="widgetBodyaaaaec47-e2ba-48c3-8ee6-03c101b78831">
+		<div id="customHtmlaaaaec47-e2ba-48c3-8ee6-03c101b78831"><div><!DOCTYPE html> 
+
+<html lang="en"> 
+
+<head> 
+
+    <meta charset="UTF-8"> 
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+
+    <title>Proposed Utility Rate Adjustments | City of Watsonville</title> 
+
+    <script src="https://cdn.tailwindcss.com"></script> 
+
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script> 
+
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans:500,700,800,900|Work+Sans:400,500,600,700" rel="stylesheet"> 
+
+    <style> 
+
+        :root { 
+
+            --wat-green: #077e58; 
+
+            --wat-dark-green: #045038; 
+
+            --wat-gold: #F3C67D; 
+
+            --wat-text: #333333; 
+
+            --wat-bg: #ffffff; 
+
+            --wat-gray: #f5f5f5; 
+
+        } 
+
+ 
+
+        body {  
+
+            font-family: 'Work Sans', sans-serif;  
+
+            color: var(--wat-text);  
+
+            background-color: var(--wat-bg); 
+
+            margin: 0; 
+
+            padding: 0; 
+
+        } 
+
+ 
+
+        h1, h2, h3, h4, h5, h6, .alegreya { 
+
+            font-family: 'Alegreya Sans', sans-serif; 
+
+        } 
+
+ 
+
+        /* City Header Styles */ 
+
+        .city-top-bar { background-color: var(--wat-dark-green); height: 35px; width: 100%; } 
+
+        .city-header { background-color: var(--wat-green); padding: 15px 0; position: relative; } 
+
+        .city-nav-bar { background-color: white; border-bottom: 2px solid #eaeaea; } 
+
+        .nav-link { color: var(--wat-dark-green); font-weight: 600; font-size: 14px; text-transform: uppercase; padding: 10px 15px; transition: color 0.2s; text-decoration: none; } 
+
+        .nav-link:hover { color: var(--wat-green); } 
+
+ 
+
+        /* Hero Section */ 
+
+        .hero-section { position: relative; height: 400px; background-image: url('https://watsonville.gov/ImageRepository/Document?documentID=18742'); background-size: cover; background-position: center; } 
+
+        .hero-box { position: absolute; bottom: 40px; left: 10%; background-color: rgba(4, 80, 56, 0.9); color: white; padding: 30px 40px; border-left: 5px solid var(--wat-gold); max-width: 500px; } 
+
+         
+
+        /* Content Elements */ 
+
+        .section-title { color: var(--wat-dark-green); font-weight: 800; font-size: 2.2rem; margin-bottom: 1rem; border-bottom: 3px solid var(--wat-gold); padding-bottom: 10px; display: inline-block; } 
+
+         
+
+        /* Card Styles */ 
+
+        .info-card { background: white; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); border-top: 4px solid var(--wat-green); padding: 25px; height: 100%; transition: transform 0.2s; } 
+
+        .info-card:hover { transform: translateY(-5px); } 
+
+        .info-card h3 { color: var(--wat-dark-green); font-size: 1.3rem; font-weight: 700; margin-bottom: 15px; line-height: 1.2; display: flex; align-items: center; } 
+
+ 
+
+        /* Calculator Styles */ 
+
+        .calc-wrapper { background: white; border: 1px solid #ddd; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); } 
+
+         
+
+        /* ADA Contrast Fixed Tab Bar */ 
+
+        .tabs { display: flex; background-color: var(--wat-dark-green); flex-wrap: wrap; border-bottom: 1px solid var(--wat-dark-green); } 
+
+        .tab { flex: 1; padding: 15px; text-align: center; color: white; font-weight: 600; cursor: pointer; transition: all 0.2s; border: none; border-bottom: 4px solid transparent; font-family: 'Alegreya Sans', sans-serif; font-size: 1.1rem; background: transparent; } 
+
+        .tab:hover { background-color: rgba(255,255,255,0.1); } 
+
+        .tab.active { color: var(--wat-dark-green); border-bottom-color: var(--wat-gold); background-color: #fafafa; } 
+
+        .tab:focus { outline: 2px solid var(--wat-gold); outline-offset: -2px; } 
+
+         
+
+        .calc-body { padding: 30px; background-color: #fafafa; } 
+
+        .calc-section { display: none; outline: none; } 
+
+        .calc-section.active { display: block; } 
+
+        .calc-section:focus { outline: 2px solid var(--wat-gold); outline-offset: 4px; } 
+
+         
+
+        .input-label { display: block; font-weight: 600; color: var(--wat-dark-green); margin-bottom: 5px; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.5px; } 
+
+        .input-field { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 6px; font-size: 1rem; font-family: 'Work Sans', sans-serif; margin-bottom: 20px; } 
+
+        .input-field:focus { outline: none; border-color: var(--wat-green); box-shadow: 0 0 0 2px rgba(7,126,88,0.2); } 
+
+         
+
+        /* Accessible Table Styles */ 
+
+        .table-wrap { overflow-x: auto; background: white; border-radius: 8px; border: 1px solid #eee; margin-top: 20px; } 
+
+        table { width: 100%; border-collapse: collapse; text-align: left; } 
+
+        thead th { background-color: var(--wat-gray); color: var(--wat-dark-green); padding: 15px; font-family: 'Alegreya Sans', sans-serif; font-size: 1.1rem; border-bottom: 2px solid #ddd; font-weight: bold; } 
+
+        tbody th { background-color: transparent; color: var(--wat-text); font-family: 'Work Sans', sans-serif; font-size: 1rem; border-bottom: 1px solid #eee; font-weight: 600; padding: 12px 15px; } 
+
+        td { padding: 12px 15px; border-bottom: 1px solid #eee; } 
+
+        tr.total-row th, tr.total-row td { background-color: var(--wat-dark-green); color: white; font-weight: bold; font-size: 1.1rem; } 
+
+        tr.yoy-row th { background-color: #fffaf0; font-style: italic; color: #555; font-weight: normal; border-bottom: 1px solid #eee; } 
+
+        tr.yoy-row td { background-color: #fffaf0; font-style: italic; color: #555; border-bottom: 1px solid #eee; } 
+
+        .positive { color: #d9534f; font-weight: 600; } 
+
+         
+
+        /* FAQs & Accordions */ 
+
+        details { background: white; border: 1px solid #ddd; border-radius: 8px; margin-bottom: 15px; overflow: hidden; box-shadow: 0 2px 5px rgba(0,0,0,0.02); } 
+
+        summary { padding: 20px; font-family: 'Alegreya Sans', sans-serif; font-size: 1.3rem; font-weight: 700; color: var(--wat-dark-green); cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: center; background: var(--wat-gray); transition: background 0.2s; } 
+
+        summary:hover { background: #ebebeb; } 
+
+        summary:focus { outline: 2px solid var(--wat-green); outline-offset: -2px; } 
+
+        summary::-webkit-details-marker { display: none; } 
+
+        details[open] summary { border-bottom: 1px solid #ddd; background: white; } 
+
+        .faq-content { padding: 20px; line-height: 1.7; color: #444; } 
+
+ 
+
+        /* Documents / Image Cards */ 
+
+        .image-card { position: relative; height: 220px; border-radius: 12px; overflow: hidden; background-size: cover; background-position: center; box-shadow: 0 4px 10px rgba(0,0,0,0.15); transition: transform 0.3s; text-decoration: none; display: flex; flex-direction: column; justify-content: flex-end;} 
+
+        .image-card:hover { transform: scale(1.02); } 
+
+        .image-card:focus { outline: 3px solid var(--wat-gold); outline-offset: 2px; transform: scale(1.02); } 
+
+        .image-card::before { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(4,80,56,0.95) 0%, rgba(4,80,56,0.2) 100%); } 
+
+        .image-card-content { position: relative; padding: 20px; color: white; z-index: 10; } 
+
+        .image-card-title { font-family: 'Alegreya Sans', sans-serif; font-size: 1.4rem; font-weight: 800; border-left: 4px solid var(--wat-gold); padding-left: 15px; line-height: 1.2; margin-bottom: 5px; } 
+
+        .image-card-subtitle { font-size: 0.9rem; font-weight: 500; padding-left: 19px; color: var(--wat-gold); } 
+
+ 
+
+        /* Footer */ 
+
+        .site-footer { background-color: var(--wat-dark-green); color: white; padding: 50px 20px; margin-top: 60px; } 
+
+        .site-footer a { color: var(--wat-gold); text-decoration: none; } 
+
+        .site-footer a:hover, .site-footer a:focus { text-decoration: underline; outline: none; } 
+
+    </style> 
+
+</head> 
+
+<body> 
+
+ 
+
+ 
+
+    <!-- Hero Section --> 
+
+    <div class="hero-section" aria-hidden="true"> 
+
+        <div class="hero-box"> 
+
+            <h1 class="alegreya text-4xl md:text-5xl font-extrabold mb-2">Proposed Utility Rate Adjustments</h1> 
+
+            <p class="text-lg md:text-xl">Investing in safe, reliable, and sustainable services for Watsonville.</p> 
+
+        </div> 
+
+    </div> 
+
+ 
+
+    <!-- Screen Reader Only H1 --> 
+
+    <h1 class="sr-only">Proposed Utility Rate Adjustments for the City of Watsonville</h1> 
+
+ 
+
+    <main class="max-w-6xl mx-auto px-4 py-12 space-y-16"> 
+
+ 
+
+        <!-- Introduction & Event Cards --> 
+
+        <section class="text-center max-w-4xl mx-auto" aria-labelledby="intro-heading"> 
+
+            <h2 id="intro-heading" class="sr-only">Introduction</h2> 
+
+            <p class="text-xl leading-relaxed text-gray-700 mb-10"> 
+
+                When you turn on the tap, flush the toilet, or put your bins on the curb, Watsonville’s Public Works and Utilities teams ensure everything works perfectly. Our dedicated staff is on call 24 hours a day. To protect our environment and maintain these reliable services, the City is proposing adjustments to our utility rates. 
+
+            </p> 
+
+ 
+
+            <div class="space-y-6 max-w-3xl mx-auto mt-10" style="display:flex; flex-direction:column;"> 
+
+ <!-- Webinar Event Card --> 
+
+                <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6 flex flex-col md:flex-row items-center gap-6 text-left hover:shadow-md transition-shadow" aria-label="Community Webinar"> 
+
+                    <div class="bg-[#077e58] text-white p-4 rounded-lg flex flex-col items-center justify-center min-w-[110px]" aria-hidden="true"> 
+
+                        <span class="text-sm font-bold uppercase tracking-wider">Apr</span> 
+
+                        <span class="text-4xl font-black alegreya leading-none mt-1">29</span> 
+
+                    </div> 
+
+                    <div class="flex-1"> 
+
+                        <h3 class="text-2xl alegreya font-bold text-[#077e58] mb-2">Community Webinar</h3> 
+
+                        <p class="text-gray-600 text-sm mb-3">We hosted a webinar to provide details about the proposed utility rate adjustments and answer questions.</p> 
+
+              </div> 
+
+                    <div class="mt-4 md:mt-0"> 
+
+                         <a href="https://youtu.be/Kyu-SAL4kHY" class="inline-block border-2 border-[#077e58] text-[#077e58] hover:bg-[#077e58] hover:text-white font-bold py-2 px-6 rounded transition-colors whitespace-nowrap">View Recording Here</a> 
+
+                    </div> 
+
+                </div> 
+
+ 
+
+                <!-- Wastewater Treatment Plant Tour Event Card --> 
+
+                <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6 flex flex-col md:flex-row items-center gap-6 text-left hover:shadow-md transition-shadow" aria-label="Wastewater Treatment Plant Tour Details"> 
+
+                    <div class="bg-[#045038] text-white p-4 rounded-lg flex flex-col items-center justify-center min-w-[110px]" aria-hidden="true"> 
+
+                        <span class="text-sm font-bold uppercase tracking-wider">May</span> 
+
+                        <span class="text-4xl font-black alegreya leading-none mt-1">13</span> 
+
+                    </div> 
+
+                    <div class="flex-1"> 
+
+                        <h3 class="text-2xl alegreya font-bold text-[#045038] mb-2">Wastewater Treatment Plant Tour</h3> 
+
+                        <p class="text-gray-600 text-sm mb-3">Join our Public Works staff as they give you a behind-the-scenes view of how wastewater is safely cleaned and recycled at the City's Wastewater Treatment Plant.</p> 
+
+                        <div class="flex flex-col sm:flex-row gap-4 text-sm text-[#045038] font-semibold"> 
+
+                            <span class="flex items-center gap-2"><span aria-hidden="true">⏰</span> 3:00 p.m.</span> 
+
+                            <span class="flex items-center gap-2"><span aria-hidden="true">📍</span> 500 Clearwater Lane of West Beach Street</span> 
+
+                        </div> 
+
+                    </div> 
+
+                    <div class="mt-4 md:mt-0"> 
+
+                         <a href="https://watsonville.gov/m/newsflash/home/detail/2768" class="inline-block border-2 border-[#045038] text-[#045038] hover:bg-[#045038] hover:text-white font-bold py-2 px-6 rounded transition-colors whitespace-nowrap">Sign Up Here</a> 
+
+                    </div> 
+
+                </div> 
+
+   <!-- Public Hearing Event Card --> 
+
+                <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6 flex flex-col md:flex-row items-center gap-6 text-left hover:shadow-md transition-shadow" aria-label="Public Hearing Event Details"> 
+
+                    <div class="bg-[#045038] text-white p-4 rounded-lg flex flex-col items-center justify-center min-w-[110px]" aria-hidden="true"> 
+
+                        <span class="text-sm font-bold uppercase tracking-wider">May</span> 
+
+                        <span class="text-4xl font-black alegreya leading-none mt-1">26</span> 
+
+                    </div> 
+
+                    <div class="flex-1"> 
+
+                        <h3 class="text-2xl alegreya font-bold text-[#045038] mb-2">City Council Public Hearing</h3> 
+
+                        <p class="text-gray-600 text-sm mb-3">Join us in person to make your voice heard regarding the proposed utility rate adjustments before the final vote.</p> 
+
+                        <div class="flex flex-col sm:flex-row gap-4 text-sm text-[#045038] font-semibold"> 
+
+                            <span class="flex items-center gap-2"><span aria-hidden="true">⏰</span> 5:30 p.m.</span> 
+
+                            <span class="flex items-center gap-2"><span aria-hidden="true">📍</span> City Council Chambers (275 Main St.)</span> 
+
+                        </div> 
+
+                    </div> 
+
+                    <div class="mt-4 md:mt-0"> 
+
+                         <a href="https://watsonville.gov/DocumentCenter/View/27791/Watsonville-CA-Prop-218-Notice-2026" class="inline-block border-2 border-[#045038] text-[#045038] hover:bg-[#045038] hover:text-white font-bold py-2 px-6 rounded transition-colors whitespace-nowrap">View Notice</a> 
+
+                    </div> 
+
+                </div> 
+
+            </div> 
+
+        </section> 
+
+ 
+
+        <!-- Key Messages (Card Grid) --> 
+
+        <section aria-labelledby="value-heading"> 
+
+            <h2 id="value-heading" class="section-title">Critical Factors</h2> 
+
+            <div class="flex flex-col gap-6 mt-6"> 
+
+                 
+
+                <div class="info-card"> 
+
+                    <h3 aria-hidden="true"><span class="mr-2 text-xl">💧</span> Valuable Infrastructure</h3> 
+
+                    <span class="sr-only">Valuable Infrastructure</span> 
+
+                    <ul class="space-y-3 text-sm leading-relaxed"> 
+
+                        <li><strong>Water:</strong> We maintain 178 miles of pipes, 6 tanks, 12 wells, and a treatment plant that serves more than 65,000 people.</li> 
+
+                        <li><strong>Sewer:</strong> We treat 5.5 million gallons of sewage daily through 170 miles of pipes.</li> 
+
+                        <li><strong>Trash:</strong> 52 employees run the drop-off center and sweep 10,000 miles of streets yearly.</li> 
+
+                    </ul> 
+
+                </div> 
+
+ 
+
+                <div class="info-card"> 
+
+                    <h3 aria-hidden="true"><span class="mr-2 text-xl">⏳</span> Why Now?</h3> 
+
+                    <span class="sr-only">Why Now?</span> 
+
+                    <ul class="space-y-3 text-sm leading-relaxed"> 
+
+                        <li>Failing to replace the wastewater plant now will force the City to pay top dollar for emergency repairs when equipment last updated nearly 40 years ago breaks down.</li> 
+
+                        <li>Inflation has sharply increased costs for chemicals, fuel, and pipes.</li> 
+
+                        <li>A sewer project estimated at $15M in 2021 now costs $37M. Waiting guarantees higher costs.</li> 
+
+                    </ul> 
+
+                </div> 
+
+ 
+
+                <div class="info-card"> 
+
+                    <h3 aria-hidden="true"><span class="mr-2 text-xl">💵</span> Transparent and Cost-Based Rates</h3> 
+
+                    <span class="sr-only">Transparent and Cost-Based Rates</span> 
+
+                    <ul class="space-y-3 text-sm leading-relaxed"> 
+
+                        <li>By law, we only charge what it costs. No profits are made, and funds cannot be used for other City services.</li> 
+
+                        <li>Secured a $37M low-interest loan to spread costs over time. Future residents will also help pay for these 50-year upgrades.</li> 
+
+                        <li>We will remain at the lowest combined rate in the region even after the adjustments.</li> 
+
+                    </ul> 
+
+                </div> 
+
+ 
+
+                <div class="info-card"> 
+
+                    <h3 aria-hidden="true"><span class="mr-2 text-xl">🛡️</span> Safety & Environment</h3> 
+
+                    <span class="sr-only">Safety and Environment</span> 
+
+                    <ul class="space-y-3 text-sm leading-relaxed"> 
+
+                        <li>Planning state-required upgrades to treat drinking water for Chromium-6.</li> 
+
+                        <li>Treating wastewater to state and federal standards to safely release into Monterey Bay or recycle for local farms.</li> 
+
+                        <li>Improving trash/recycling to meet state organic waste laws.</li> 
+
+                    </ul> 
+
+                </div> 
+
+ 
+
+            </div> 
+
+        </section> 
+
+ 
+
+        <!-- REGIONAL COMPARISON CHART --> 
+
+        <section aria-labelledby="regional-heading"> 
+
+            <h2 id="regional-heading" class="section-title">Regional Rate Comparison</h2> 
+
+            <p class="mb-6 text-lg text-gray-700">This chart compares the proposed Watsonville rates to what residents in neighboring communities currently pay for similar services. Even with the proposed adjustments, Watsonville remains the most affordable option in the region.</p> 
+
+             
+
+            <div class="bg-white p-6 rounded-xl shadow-md border border-gray-200"> 
+
+                <div id="regionalChart" style="width: 100%; height: 400px;" aria-hidden="true"></div> 
+
+                <p class="text-xs text-gray-500 mt-4 italic text-center">*Estimated bills reflect current rates for neighboring communities based on the smallest available water meter, 8 CCF of monthly water use, and 68-gallon weekly cart service.</p> 
+
+                 
+
+                <!-- ADA Accessible Data Table Toggle --> 
+
+                <details class="mt-6 border-none shadow-none bg-transparent"> 
+
+                    <summary class="text-sm font-bold text-blue-600 bg-gray-50 rounded px-4 py-2 inline-block border hover:bg-gray-100"> 
+
+                        View Chart Data (Accessible Table) 
+
+                    </summary> 
+
+                    <div class="faq-content overflow-x-auto mt-2 p-0 border rounded"> 
+
+                        <table class="min-w-full bg-white text-sm"> 
+
+                            <thead> 
+
+                                <tr> 
+
+                                    <th scope="col">City</th> 
+
+                                    <th scope="col">Water</th> 
+
+                                    <th scope="col">Sewer</th> 
+
+                                    <th scope="col">Garbage</th> 
+
+                                    <th scope="col">Total Monthly Bill</th> 
+
+                                </tr> 
+
+                            </thead> 
+
+                            <tbody> 
+
+                                <tr><th scope="row">Watsonville (Current)</th><td>$65.35</td><td>$61.51</td><td>$76.21</td><td><strong>$203.07</strong></td></tr> 
+
+                                <tr><th scope="row">Watsonville (Proposed FY27)</th><td>$69.08</td><td>$70.42</td><td>$77.63</td><td><strong>$217.13</strong></td></tr> 
+
+                                <tr><th scope="row">Santa Cruz</th><td>$150.00</td><td>$70.00</td><td>$91.70</td><td><strong>$311.70</strong></td></tr> 
+
+                                <tr><th scope="row">Capitola</th><td>$198.00</td><td>$96.00</td><td>$44.97</td><td><strong>$338.97</strong></td></tr> 
+
+                                <tr><th scope="row">Live Oak</th><td>$198.00</td><td>$96.00</td><td>$75.83</td><td><strong>$369.83</strong></td></tr> 
+
+                                <tr><th scope="row">Soquel</th><td>$198.00</td><td>$96.00</td><td>$75.83</td><td><strong>$369.83</strong></td></tr> 
+
+                            </tbody> 
+
+                        </table> 
+
+                    </div> 
+
+                </details> 
+
+            </div> 
+
+        </section> 
+
+ 
+
+        <!-- Interactive Calculator --> 
+
+        <section aria-labelledby="calc-heading"> 
+
+            <h2 id="calc-heading" class="section-title">Interactive 5-Year Bill Calculator</h2> 
+
+            <p class="mb-6 text-lg text-gray-700">Use this calculator to see an estimate of how the proposed rate changes will affect your specific property over the next five years. For the most accurate Combined Bill, please ensure your selections on the Water, Wastewater, and Solid Waste tabs match your actual services.</p> 
+
+<p class="mb-6 text-base text-gray-700"> 
+
+                <a href="https://watsonville.gov/DocumentCenter/View/27800/Bill-Sample-for-Utilities-Adjustment-" target="_blank" rel="noopener noreferrer" style="color: #077e58; font-weight: 600; text-decoration: underline; text-decoration-color: #F3C67D; text-underline-offset: 3px;" aria-label="View a sample utility bill showing where to find your service area, meter size, and usage information (opens in new tab)"> 
+
+                    Where can I find this information on my bill? 
+
+                </a> 
+
+            </p> 
+
+             
+
+            <div class="calc-wrapper"> 
+
+                <div class="tabs" role="tablist" aria-label="Utility Calculator Tabs"> 
+
+                    <button role="tab" aria-selected="true" aria-controls="sec-water" id="tab-water" class="tab active" tabindex="0" onclick="showTab('water')">Water</button> 
+
+                    <button role="tab" aria-selected="false" aria-controls="sec-wastewater" id="tab-wastewater" class="tab" tabindex="-1" onclick="showTab('wastewater')">Wastewater</button> 
+
+                    <button role="tab" aria-selected="false" aria-controls="sec-solidwaste" id="tab-solidwaste" class="tab" tabindex="-1" onclick="showTab('solidwaste')">Solid Waste</button> 
+
+                    <button role="tab" aria-selected="false" aria-controls="sec-combined" id="tab-combined" class="tab" tabindex="-1" onclick="showTab('combined')">Combined Bill</button> 
+
+                </div> 
+
+ 
+
+                <div class="calc-body"> 
+
+                     
+
+                    <!-- WATER TAB --> 
+
+                    <div class="calc-section active" id="sec-water" role="tabpanel" aria-labelledby="tab-water" tabindex="0"> 
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6"> 
+
+                            <div> 
+
+                                <label for="w-area" class="input-label">Service Area</label> 
+
+                                <select id="w-area" class="input-field" onchange="calcWater()"> 
+
+                                    <option value="inside">Inside City</option> 
+
+                                    <option value="outside">Outside City</option> 
+
+                                </select> 
+
+                            </div> 
+
+                            <div> 
+
+                                <label for="w-class" class="input-label">Customer Class</label> 
+
+                                <select id="w-class" class="input-field" onchange="calcWater()"> 
+
+                                    <option value="residential">Residential / Multi-Residential</option> 
+
+                                    <option value="nonresidential">Non-Residential</option> 
+
+                                    <option value="industrial">Industrial</option> 
+
+                                    <option value="irrigation">Irrigation</option> 
+
+                                </select> 
+
+                            </div> 
+
+                            <div> 
+
+                                <label for="w-meter" class="input-label">Meter Size</label> 
+
+                                <select id="w-meter" class="input-field" onchange="calcWater()"> 
+
+                                    <option value="5/8">5/8"</option><option value="3/4" selected="">3/4"</option><option value="1">1"</option> 
+
+                                    <option value="1 1/2">1 1/2"</option><option value="2">2"</option><option value="3">3"</option> 
+
+                                    <option value="4">4"</option><option value="6">6"</option><option value="8">8"</option> 
+
+                                </select> 
+
+                            </div> 
+
+                            <div> 
+
+                                <label for="w-usage" class="input-label">Monthly Usage (CCF)</label> 
+
+                                <input type="number" id="w-usage" class="input-field !mb-1" value="8" min="0" oninput="calcWater()"> 
+
+                                <p class="text-xs text-gray-600 italic mb-4">*CCF stands for Hundred Cubic Feet. 1 CCF equals 748 gallons of water.</p> 
+
+                            </div> 
+
+                        </div> 
+
+                         
+
+                        <div class="table-wrap"><div id="water-table"></div></div> 
+
+                        <div class="mt-8 bg-white p-4 rounded-lg border border-gray-200" aria-hidden="true"> 
+
+                            <h3 class="alegreya text-xl font-bold text-[#045038] mb-4">Water Cost Projection</h3> 
+
+                            <div id="waterChart" style="width: 100%; height: 350px;"></div> 
+
+                        </div> 
+
+                    </div> 
+
+ 
+
+                    <!-- WASTEWATER TAB --> 
+
+                    <div class="calc-section" id="sec-wastewater" role="tabpanel" aria-labelledby="tab-wastewater" tabindex="0"> 
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6"> 
+
+                            <div> 
+
+                                <label for="ww-type" class="input-label">Customer Type</label> 
+
+                                <select id="ww-type" class="input-field" onchange="calcWW(); toggleWWInputs()"> 
+
+                                    <option value="residential">Residential (SFR & MFR)</option> 
+
+                                    <option value="commercial_high">Commercial — High Strength</option> 
+
+                                    <option value="commercial_low">Commercial — Low Strength</option> 
+
+                                    <option value="industrial">Industrial</option> 
+
+                                </select> 
+
+                            </div> 
+
+                            <div id="ww-commercial-inputs" style="display:none"> 
+
+                                <label for="ww-ccf" class="input-label">Monthly Water Usage (CCF)</label> 
+
+                                <input type="number" id="ww-ccf" class="input-field !mb-1" value="20" min="0" oninput="calcWW()"> 
+
+                                <p class="text-xs text-gray-600 italic mb-4">*CCF stands for Hundred Cubic Feet. 1 CCF equals 748 gallons of water.</p> 
+
+                            </div> 
+
+                        </div> 
+
+                         
+
+                        <div id="ww-industrial-inputs" style="display:none" class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6"> 
+
+                            <div> 
+
+                                <label for="ww-flow" class="input-label">Flow (MG/Month)</label> 
+
+                                <input type="number" id="ww-flow" class="input-field" value="1" min="0" step="0.01" oninput="calcWW()"> 
+
+                            </div> 
+
+                            <div> 
+
+                                <label for="ww-bod" class="input-label">BOD (1,000 LB/Month)</label> 
+
+                                <input type="number" id="ww-bod" class="input-field" value="1" min="0" step="0.01" oninput="calcWW()"> 
+
+                            </div> 
+
+                            <div> 
+
+                                <label for="ww-tss" class="input-label">TSS (1,000 LB/Month)</label> 
+
+                                <input type="number" id="ww-tss" class="input-field" value="1" min="0" step="0.01" oninput="calcWW()"> 
+
+                            </div> 
+
+                        </div> 
+
+                         
+
+                        <div class="table-wrap"><div id="ww-table"></div></div> 
+
+                        <div class="mt-8 bg-white p-4 rounded-lg border border-gray-200" aria-hidden="true"> 
+
+                            <h3 class="alegreya text-xl font-bold text-[#045038] mb-4">Wastewater Cost Projection</h3> 
+
+                            <div id="wwChart" style="width: 100%; height: 350px;"></div> 
+
+                        </div> 
+
+                    </div> 
+
+ 
+
+                    <!-- SOLID WASTE TAB --> 
+
+                    <div class="calc-section" id="sec-solidwaste" role="tabpanel" aria-labelledby="tab-solidwaste" tabindex="0"> 
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6"> 
+
+                            <div> 
+
+                                <label for="sw-type" class="input-label">Service Type</label> 
+
+                                <select id="sw-type" class="input-field" onchange="calcSW()"> 
+
+                                    <option value="cart">Cart Service</option> 
+
+                                    <option value="container">Container Service</option> 
+
+                                    <option value="dropbox">Drop Box Service</option> 
+
+                                    <option value="compactor">Compactor Drop Box Service</option> 
+
+                                </select> 
+
+                            </div> 
+
+                            <div> 
+
+                                <label for="sw-size" class="input-label">Container Size</label> 
+
+                                <select id="sw-size" class="input-field" onchange="calcSW()"></select> 
+
+                            </div> 
+
+                        </div> 
+
+                         
+
+                        <div class="table-wrap"><div id="sw-table"></div></div> 
+
+                        <div class="mt-8 bg-white p-4 rounded-lg border border-gray-200" aria-hidden="true"> 
+
+                            <h3 class="alegreya text-xl font-bold text-[#045038] mb-4">Solid Waste Cost Projection</h3> 
+
+                            <div id="swChart" style="width: 100%; height: 350px;"></div> 
+
+                        </div> 
+
+                    </div> 
+
+ 
+
+                    <!-- COMBINED TAB --> 
+
+                    <div class="calc-section" id="sec-combined" role="tabpanel" aria-labelledby="tab-combined" tabindex="0"> 
+
+                        <p class="mb-6 text-gray-600 italic">This tab combines your selections from the Water, Wastewater, and Solid Waste tabs above.</p> 
+
+                         
+
+                        <div class="mb-6 max-w-xs"> 
+
+                            <label for="combined-fy" class="input-label">View Summary For Year:</label> 
+
+                            <select id="combined-fy" class="input-field mb-0" onchange="updateCombined()"> 
+
+                                <option value="0" selected="">FY 2026 (Current)</option> 
+
+                                <option value="1">FY 2027</option> 
+
+                                <option value="2">FY 2028</option> 
+
+                                <option value="3">FY 2029</option> 
+
+                                <option value="4">FY 2030</option> 
+
+                                <option value="5">FY 2031</option> 
+
+                            </select> 
+
+                        </div> 
+
+ 
+
+                        <div id="combined-summary" class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8"></div> 
+
+                         
+
+                        <div class="table-wrap"><div id="combined-table"></div></div> 
+
+                         
+
+                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8" aria-hidden="true"> 
+
+                            <div class="bg-white p-4 rounded-lg border border-gray-200 lg:col-span-2"> 
+
+                                <h3 class="alegreya text-xl font-bold text-[#045038] mb-4">Combined Cost by Year</h3> 
+
+                                <div id="combinedStackedChart" style="width: 100%; height: 350px;"></div> 
+
+                            </div> 
+
+                            <div class="bg-white p-4 rounded-lg border border-gray-200 flex flex-col justify-center"> 
+
+                                <h3 class="alegreya text-xl font-bold text-[#045038] mb-4 text-center" id="pieTitle">Share of Bill</h3> 
+
+                                <div id="combinedPieChart" style="width: 100%; height: 280px;"></div> 
+
+                            </div> 
+
+                        </div> 
+
+                    </div> 
+
+ 
+
+                </div> 
+
+            </div> 
+
+        </section> 
+
+ 
+
+        <!-- FAQs --> 
+
+        <section aria-labelledby="faq-heading"> 
+
+            <h2 id="faq-heading" class="section-title">Frequently Asked Questions</h2> 
+
+            <div class="mt-6 space-y-4"> 
+
+                 
+
+                <details> 
+
+                    <summary>Why are rate adjustments needed right now? <span class="text-xl" aria-hidden="true">+</span></summary> 
+
+                    <div class="faq-content"> 
+
+                        Our wastewater treatment plant was built in 1961. The equipment is simply worn out. At the same time, inflation has driven up the cost of the chemicals, fuel, and pipes we need to run our utilities. We must update our rates to cover these true costs of service and replace failing equipment before it breaks. 
+
+                    </div> 
+
+                </details> 
+
+ 
+
+                <details> 
+
+                    <summary>What happens if the City does not increase rates? <span class="text-xl" aria-hidden="true">+</span></summary> 
+
+                    <div class="faq-content"> 
+
+                        Delaying repairs costs our customers more money in the long run. For example, a sewer replacement project that cost $15 million in 2021 now costs $37 million today. Doing nothing also forces the City to pay for expensive emergency repairs and puts us at risk of state environmental fines. 
+
+                    </div> 
+
+                </details> 
+
+ 
+
+                <details> 
+
+                    <summary>Are you using my utility money to pay for other City projects? <span class="text-xl" aria-hidden="true">+</span></summary> 
+
+                    <div class="faq-content"> 
+
+                        No. By state law, utility funds are strictly protected. Money collected for water, sewer, and trash can only be used to run and repair those specific services. Utility money cannot be used to pay for parks, police, fire, or other general City services. 
+
+                    </div> 
+
+                </details> 
+
+ 
+
+                <details> 
+
+                    <summary>What is the City doing to keep my bill as low as possible? <span class="text-xl" aria-hidden="true">+</span></summary> 
+
+                    <div class="faq-content"> 
+
+                        The City works hard to secure outside funding, so current customers do not carry the entire burden. We recently secured a $37 million low-interest state loan to spread the cost of these 50-year upgrades over time. We are also upgrading our waste-to-energy system so we can buy electricity from PG&E at a lower cost. 
+
+                    </div> 
+
+                </details> 
+
+ 
+
+                <details> 
+
+                    <summary>How do Watsonville's rates compare to neighboring cities? <span class="text-xl" aria-hidden="true">+</span></summary> 
+
+                    <div class="faq-content"> 
+
+                        Even with the proposed adjustments, Watsonville customers will continue to pay the lowest combined utility rates in our entire region. 
+
+                    </div> 
+
+                </details> 
+
+<details> 
+
+                    <summary>Why are single-family and multi-family residential units charged the same sewer rate? <span class="text-xl" aria-hidden="true">+</span></summary> 
+
+                    <div class="faq-content"> 
+
+                        The City's wastewater rate structure charges all residential customers (single-family and multi-family) a flat monthly rate per dwelling unit. This approach was recommended because wastewater flows are relatively similar across residential dwelling unit types. A charge per dwelling unit reasonably reflects each customer's share of system costs, which are largely fixed (e.g., collection system costs, system maintenance, billing, and administration). 
+
+                    </div> 
+
+                </details> 
+
+ 
+
+                <details> 
+
+                    <summary>Is there help available for customers who cannot pay their bills? <span class="text-xl" aria-hidden="true">+</span></summary> 
+
+                    <div class="faq-content"> 
+
+                        If you are having trouble paying your utility bill, please contact our billing office at (831) 768-3133 for a list of outside resources and alternative payment options.  
+
+                    </div> 
+
+                </details> 
+
+ 
+
+                <details> 
+
+                    <summary>How do I submit a formal protest and/or objection? <span class="text-xl" aria-hidden="true">+</span></summary> 
+
+                    <div class="faq-content"> 
+
+                        <p class="mb-3">If you own property or are a customer of record, you have the right to submit a written protest against/objection to the proposed rates.</p> 
+
+                        <ul class="list-disc pl-5 space-y-2"> 
+
+                            <li><strong>Protests</strong> must be submitted in writing, include your name and the service address, and received by the City Clerk before the close of the Public Hearing on May 26, 2026. Please read the Notice of Public Hearing document below for exact mailing instructions.</li> 
+
+                            <li><strong>Objections</strong> must be submitted in writing and include a statement that your communication is a written objection, a description of the nature of the objection, and other important details, which are detailed in the Proposition 218 notice. The deadline for objections is May 20, 2026.</li> 
+
+                        </ul> 
+
+                    </div> 
+
+                </details> 
+
+   <details> 
+
+                    <summary>If I live at a property with several separate individual homes but one owner, can we all protest the proposed rates? <span class="text-xl" aria-hidden="true">+</span></summary> 
+
+                    <div class="faq-content"> 
+
+                        No, only one protest is allowed per parcel. 
+
+                    </div> 
+
+                </details> 
+
+ 
+
+                <details> 
+
+                    <summary>When will the proposed new rates go into effect? <span class="text-xl" aria-hidden="true">+</span></summary> 
+
+                    <div class="faq-content"> 
+
+                        If approved by the City Council, the proposed new rates will go into effect on July 1, 2026. 
+
+                    </div> 
+
+                </details> 
+
+ 
+
+            </div> 
+
+        </section> 
+
+ 
+
+        <!-- Documents & Events --> 
+
+        <section aria-labelledby="docs-heading" id="docs-heading"> 
+
+            <h2 class="section-title">Official Documents & Important Dates</h2> 
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-6"> 
+
+                 
+
+                <a href="https://watsonville.gov/DocumentCenter/View/27791/Watsonville-CA-Prop-218-Notice-2026" class="image-card" style="background-image: url('https://watsonville.gov/ImageRepository/Document?documentID=19045');"> 
+
+                    <div class="image-card-content"> 
+
+                        <div class="image-card-title">Notice of Public Hearing</div> 
+
+                        <div class="image-card-subtitle">PDF Download</div> 
+
+                    </div> 
+
+                </a> 
+
+ 
+
+                <a href="https://watsonville.gov/DocumentCenter/View/27898/Watsonville_Rate_Study_Report_to-client-corrected" class="image-card" style="background-image: url('https://watsonville.gov/ImageRepository/Document?documentID=19046');"> 
+
+                    <div class="image-card-content"> 
+
+                        <div class="image-card-title">Utility Rate Study</div> 
+
+                        <div class="image-card-subtitle">PDF Download</div> 
+
+                    </div> 
+
+                </a> 
+
+ 
+
+                <a href="https://youtu.be/Kyu-SAL4kHY" class="image-card" style="background-image: url('https://watsonville.gov/ImageRepository/Document?documentID=19054');"> 
+
+                    <div class="image-card-content"> 
+
+                        <div class="image-card-title">Community Webinar</div> 
+
+                        <div class="image-card-subtitle">View Recording</div> 
+
+                    </div> 
+
+                </a> 
+
+ 
+
+                <a href="#" class="image-card" style="background-image: url('https://watsonville.gov/ImageRepository/Document?documentID=19055');"> 
+
+                    <div class="image-card-content"> 
+
+                        <div class="image-card-title">City Council Public Hearing</div> 
+
+                        <div class="image-card-subtitle">May 26, 2026 @ 5:30 p.m.</div> 
+
+                    </div> 
+
+                </a> 
+
+ 
+
+            </div> 
+
+        </section> 
+
+ 
+
+    </main> 
+
+ 
+
+ 
+
+    <!-- Scripts for Interactive Calculator & Charts --> 
+
+    <script> 
+
+        const YRS = ['2026','2027','2028','2029','2030','2031']; 
+
+        const YR_LABELS = ['Current','FY 2027','FY 2028','FY 2029','FY 2030','FY 2031']; 
+
+        const YR_DISPLAY = ['FY 2026','FY 2027','FY 2028','FY 2029','FY 2030','FY 2031']; 
+
+         
+
+        // Brand Colors mapping 
+
+        const COLOR_TEAL = '#077e58';   // Water 
+
+        const COLOR_GREEN = '#045038';  // Wastewater 
+
+        const COLOR_GOLD = '#F3C67D';   // Solid Waste 
+
+ 
+
+        // Dynamic Screen Reader Announcer 
+
+        function announceToScreenReader(message) { 
+
+            const announcer = document.getElementById('sr-announcer'); 
+
+            if(announcer) { 
+
+                announcer.textContent = '';  
+
+                setTimeout(() => { announcer.textContent = message; }, 50); 
+
+            } 
+
+        } 
+
+ 
+
+        // Roving Tabindex for Keyboard ADA Arrow Navigation 
+
+        const tabList = document.querySelector('[role="tablist"]'); 
+
+        const tabs = Array.from(tabList.querySelectorAll('[role="tab"]')); 
+
+         
+
+        tabList.addEventListener('keydown', e => { 
+
+            let index = tabs.findIndex(t => t.getAttribute('aria-selected') === 'true'); 
+
+            let newIndex = index; 
+
+            if (e.key === 'ArrowRight') { 
+
+                newIndex = (index + 1) % tabs.length; 
+
+                e.preventDefault(); 
+
+            } else if (e.key === 'ArrowLeft') { 
+
+                newIndex = (index - 1 + tabs.length) % tabs.length; 
+
+                e.preventDefault(); 
+
+            } 
+
+            if (newIndex !== index) { 
+
+                tabs[newIndex].click(); 
+
+                tabs[newIndex].focus(); 
+
+            } 
+
+        }); 
+
+ 
+
+        // Robust Chart Renderer 
+
+        function renderEChart(elementId, option) { 
+
+            const dom = document.getElementById(elementId); 
+
+            if (!dom || dom.clientWidth === 0) return null;  
+
+             
+
+            let chart = echarts.getInstanceByDom(dom); 
+
+            if (!chart) { 
+
+                chart = echarts.init(dom); 
+
+            } 
+
+            chart.setOption(option); 
+
+            chart.resize(); 
+
+            return chart; 
+
+        } 
+
+ 
+
+        // REGIONAL CHART INITIALIZATION 
+
+        let eRegChart; 
+
+        function initRegionalChart() { 
+
+            try { 
+
+                const categories = ['Watsonville\n(Current)', 'Watsonville\n(Proposed FY27)', 'Santa Cruz', 'Capitola', 'Live Oak', 'Soquel']; 
+
+                const totals = [203.07, 217.13, 311.70, 338.97, 369.83, 369.83]; 
+
+                 
+
+                const dataWater = [65.35, 69.08, 150.00, 198.00, 198.00, 198.00]; 
+
+                const dataSewer = [61.51, 70.42, 70.00, 96.00, 96.00, 96.00]; 
+
+                const dataGarbage = [76.21, 77.63, 91.70, 44.97, 75.83, 75.83]; 
+
+ 
+
+                const option = { 
+
+                    tooltip: { 
+
+                        trigger: 'axis', 
+
+                        axisPointer: { type: 'shadow' }, 
+
+                        valueFormatter: v => '$' + Number(v).toFixed(2) 
+
+                    }, 
+
+                    legend: { data: ['Water', 'Sewer', 'Garbage'], bottom: 0 }, 
+
+                    grid: { left: '3%', right: '4%', bottom: '15%', top: '15%', containLabel: true }, 
+
+                    xAxis: { type: 'category', data: categories, axisLabel: { interval: 0, fontWeight: 'bold' } }, 
+
+                    yAxis: { type: 'value', axisLabel: { formatter: '${value}' } }, 
+
+                    series: [ 
+
+                        { name: 'Water', type: 'bar', stack: 'total', itemStyle: { color: COLOR_TEAL }, barWidth: '45%', data: dataWater }, 
+
+                        { name: 'Sewer', type: 'bar', stack: 'total', itemStyle: { color: COLOR_GREEN }, data: dataSewer }, 
+
+                        {  
+
+                            name: 'Garbage',  
+
+                            type: 'bar',  
+
+                            stack: 'total',  
+
+                            itemStyle: { color: COLOR_GOLD },  
+
+                            data: dataGarbage, 
+
+                            label: { 
+
+                                show: true, 
+
+                                position: 'top', 
+
+                                formatter: function(params) { 
+
+                                    return '$' + totals[params.dataIndex].toFixed(2); 
+
+                                }, 
+
+                                color: '#333333', 
+
+                                fontWeight: 'bold', 
+
+                                fontSize: 14 
+
+                            } 
+
+                        } 
+
+                    ] 
+
+                }; 
+
+                eRegChart = renderEChart('regionalChart', option); 
+
+            } catch(e) { console.error("Error init Regional Chart:", e); } 
+
+        } 
+
+ 
+
+        // Data Models 
+
+        const waterFixed = { 
+
+          inside: { 
+
+            '5/8':   [29.93,32.16,33.768,35.4564,37.22922,39.090681], 
+
+            '3/4':   [29.93,32.16,33.768,35.4564,37.22922,39.090681], 
+
+            '1':     [59.43,65.01,68.2605,71.673525,75.2572,79.0201], 
+
+            '1 1/2': [108.61,119.75,125.7375,132.024375,138.6256,145.5569], 
+
+            '2':     [167.61,185.45,194.7225,204.458625,214.6816,225.4156], 
+
+            '3':     [324.96,360.64,378.672,397.6056,417.4859,438.3602], 
+
+            '4':     [501.98,557.73,585.6165,614.897325,645.6422,677.9243], 
+
+            '6':     [993.70,1105.20,1160.46,1218.483,1279.4072,1343.3775], 
+
+            '8':     [1583.78,1762.16,1850.268,1942.7814,2039.9205,2141.9165] 
+
+          }, 
+
+          outside: { 
+
+            '5/8':   [35.15,38.92,40.866,42.9093,45.054765,47.3075], 
+
+            '3/4':   [35.15,38.92,40.866,42.9093,45.054765,47.3075], 
+
+            '1':     [72.48,81.92,86.016,90.3168,94.8326,99.5743], 
+
+            '1 1/2': [134.71,153.58,161.259,169.32195,177.7880,186.6774], 
+
+            '2':     [209.39,239.57,251.5485,264.125925,277.3322,291.1988], 
+
+            '3':     [408.51,468.88,492.324,516.9402,542.7872,569.9266], 
+
+            '4':     [632.52,726.86,763.203,801.36315,841.4313,883.5029], 
+
+            '6':     [1254.80,1443.46,1515.633,1591.41465,1670.9854,1754.5347], 
+
+            '8':     [2001.52,2303.37,2418.5385,2539.465425,2666.4387,2799.7606] 
+
+          } 
+
+        }; 
+
+ 
+
+        const waterCons = { 
+
+          residential: { 
+
+            tier1: [4.11,4.32,4.536,4.7628,5.00094,5.250987], 
+
+            tier2: [5.38,5.50,5.775,6.06375,6.36694,6.68528], 
+
+            tier3: [8.33,7.58,7.959,8.35695,8.77480,9.21354] 
+
+          }, 
+
+          nonresidential: [4.91,5.08,5.334,5.6007,5.880735,6.17477], 
+
+          industrial:     [3.91,4.20,4.41,4.6305,4.862025,5.10513], 
+
+          irrigation:     [7.02,6.89,7.2345,7.596225,7.97604,8.37484] 
+
+        }; 
+
+ 
+
+        const wwResFixed  = [61.51,70.42,78.8704,83.602624,88.6188,93.9359]; 
+
+        const wwCommFixed = [33.93,35.04,39.2448,41.599488,44.0955,46.7412]; 
+
+        const wwCommHigh  = [7.90,8.50,9.52,10.0912,10.6967,11.3385]; 
+
+        const wwCommLow   = [4.56,5.31,5.9472,6.304032,6.68227,7.08321]; 
+
+        const wwIndFlow   = [3194.97,4359.89,4883.0768,5176.061408,5486.6251,5815.8226]; 
+
+        const wwIndBOD    = [318.28,528.20,591.584,627.07904,664.7038,704.586]; 
+
+        const wwIndTSS    = [765.91,592.23,663.2976,703.095456,745.2812,789.998]; 
+
+ 
+
+        const swData = { 
+
+          cart: { 
+
+            '32 gal': [45.41,46.16,47.0832,48.024864,48.9854,49.9651], 
+
+            '68 gal': [76.21,77.63,79.1826,80.766252,82.3816,84.0292], 
+
+            '95 gal': [99.32,101.24,103.2648,105.330096,107.4367,109.5854] 
+
+          }, 
+
+          container: { 
+
+            '1 cu yd':   [190.84,194.77,198.6654,202.638708,206.6915,210.8253], 
+
+            '1.5 cu yd': [277.23,283.06,288.7212,294.495624,300.3855,306.3932], 
+
+            '2 cu yd':   [363.64,371.35,378.777,386.35254,394.0796,401.9612], 
+
+            '3 cu yd':   [536.45,547.94,558.8988,570.076776,581.4783,593.1079], 
+
+            '4 cu yd':   [709.24,724.53,739.0206,753.801012,768.877,784.2546], 
+
+            '6 cu yd':   [1054.85,1077.71,1099.2642,1121.249484,1143.6745,1166.548], 
+
+            '8 cu yd':   [1400.47,1430.88,1459.4976,1488.687552,1518.4613,1548.8305] 
+
+          }, 
+
+          dropbox: { 
+
+            '20 cu yd': [3474.10,3549.94,3620.9388,3693.357576,3767.2247,3842.5692], 
+
+            '25 cu yd': [4338.12,4432.88,4521.5376,4611.968352,4704.2077,4798.2919], 
+
+            '30 cu yd': [5202.14,5315.82,5422.1364,5530.579128,5641.1907,5754.0145], 
+
+            '35 cu yd': [6066.16,6198.76,6322.7352,6449.189904,6578.1737,6709.7372], 
+
+            '40 cu yd': [6930.18,7081.70,7223.334,7367.80068,7515.1567,7665.4598] 
+
+          }, 
+
+          compactor: { 
+
+            '3 cu yd':  [1573.26,1607.47,1639.6194,1672.411788,1705.86,1739.9772], 
+
+            '4 cu yd':  [2091.68,2137.23,2179.9746,2223.574092,2268.0456,2313.4065], 
+
+            '10 cu yd': [5202.14,5315.82,5422.1364,5530.579128,5641.1907,5754.0145], 
+
+            '15 cu yd': [7794.20,7964.64,8123.9328,8286.411456,8452.1397,8621.1825], 
+
+            '20 cu yd': [10386.24,10613.45,10825.719,11042.23338,11263.078,11488.3396], 
+
+            '22 cu yd': [11423.07,11672.98,11906.4396,12144.568392,12387.4598,12635.2090], 
+
+            '25 cu yd': [12978.30,13262.27,13527.5154,13798.065708,14074.027,14355.5076], 
+
+            '30 cu yd': [15570.35,15911.09,16229.3118,16553.898036,16884.976,17222.6755], 
+
+            '35 cu yd': [18162.41,18559.91,18931.1082,19309.730364,19695.925,20089.8435], 
+
+            '40 cu yd': [20754.45,21208.73,21632.9046,22065.562692,22506.874,22957.0114] 
+
+          } 
+
+        }; 
+
+ 
+
+        const fmt = v => '$' + v.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ','); 
+
+        const fmtDiff = d => d >= 0 ? ('+$' + d.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')) : ('-$' + Math.abs(d).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',')); 
+
+        const fmtPct = p => (p >= 0 ? '+' : '') + p.toFixed(1) + '%'; 
+
+        const diffCls = d => d > 0.005 ? 'positive' : d < -0.005 ? 'text-[#077e58] font-bold' : 'text-gray-500'; 
+
+ 
+
+        // Tab Navigation 
+
+        function showTab(t) { 
+
+            document.querySelectorAll('.tab').forEach(el => { 
+
+                el.classList.remove('active'); 
+
+                el.setAttribute('aria-selected', 'false'); 
+
+                el.setAttribute('tabindex', '-1'); 
+
+            }); 
+
+            document.querySelectorAll('.calc-section').forEach(el => el.classList.remove('active')); 
+
+             
+
+            const btn = document.getElementById('tab-' + t); 
+
+            if(btn) { 
+
+                btn.classList.add('active'); 
+
+                btn.setAttribute('aria-selected', 'true'); 
+
+                btn.setAttribute('tabindex', '0'); 
+
+            } 
+
+            document.getElementById('sec-' + t).classList.add('active'); 
+
+             
+
+            setTimeout(() => { 
+
+                try { 
+
+                    if (t === 'water') { calcWater(); } 
+
+                    if (t === 'wastewater') { calcWW(); } 
+
+                    if (t === 'solidwaste') { calcSW(); } 
+
+                    if (t === 'combined') { updateCombined(); } 
+
+                } catch(e) { console.error("Chart resize error:", e); } 
+
+            }, 100); 
+
+        } 
+
+ 
+
+        // Table Generator 
+
+        function buildTable(title, componentRows, totals) { 
+
+            let h = `<table><thead><tr><th scope="col">Component</th>`; 
+
+            YR_LABELS.forEach(l => { h += `<th scope="col">${l}</th>`; }); 
+
+            h += `</tr></thead><tbody>`; 
+
+            componentRows.forEach(r => { 
+
+                h += `<tr><th scope="row">${r.label}</th>`; 
+
+                r.values.forEach(v => { h += `<td>${fmt(v)}</td>`; }); 
+
+                h += `</tr>`; 
+
+            }); 
+
+            h += `<tr class="total-row"><th scope="row">${title}</th>`; 
+
+            totals.forEach(v => { h += `<td>${fmt(v)}</td>`; }); 
+
+            h += `</tr>`; 
+
+             
+
+            h += `<tr class="yoy-row"><th scope="row">$ Change (YoY)</th><td>—</td>`; 
+
+            for (let i = 1; i < 6; i++) { 
+
+                const d = totals[i] - totals[i-1]; 
+
+                h += `<td class="${diffCls(d)}">${fmtDiff(d)}</td>`; 
+
+            } 
+
+            h += `</tr><tr class="yoy-row"><th scope="row">% Change (YoY)</th><td>—</td>`; 
+
+            for (let i = 1; i < 6; i++) { 
+
+                const d = totals[i] - totals[i-1]; 
+
+                const p = totals[i-1] !== 0 ? (d / totals[i-1]) * 100 : 0; 
+
+                h += `<td class="${diffCls(d)}">${fmtPct(p)}</td>`; 
+
+            } 
+
+            h += `</tr></tbody></table>`; 
+
+            return h; 
+
+        } 
+
+ 
+
+        function buildStackedCalcChart(elementId, componentRows, totals, colorBase) { 
+
+            const tints = [colorBase, '#5b7b43', '#8c9c73', '#b8c4a6'];  
+
+            if(colorBase === COLOR_TEAL) tints.splice(0,4, COLOR_TEAL, '#66a2ad', '#8bbdbf', '#b0d6d5'); 
+
+            if(colorBase === COLOR_GOLD) tints.splice(0,4, COLOR_GOLD, '#f7d69b', '#fce6b9', '#fdf3d7'); 
+
+ 
+
+            const series = componentRows.map((r, idx) => ({ 
+
+                name: r.label, 
+
+                type: 'bar', 
+
+                stack: 'total', 
+
+                itemStyle: { color: tints[idx % tints.length] }, 
+
+                data: r.values 
+
+            })); 
+
+ 
+
+            const option = { 
+
+                tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, valueFormatter: v => '$' + Number(v).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',') }, 
+
+                legend: { bottom: 0 }, 
+
+                grid: { left: '2%', right: '4%', bottom: '15%', containLabel: true }, 
+
+                xAxis: { type: 'category', data: YR_LABELS }, 
+
+                yAxis: { type: 'value', axisLabel: { formatter: '${value}' } }, 
+
+                series: series 
+
+            }; 
+
+            return renderEChart(elementId, option); 
+
+        } 
+
+ 
+
+        function getWaterData() { 
+
+            const area = document.getElementById('w-area').value, cls = document.getElementById('w-class').value, meter = document.getElementById('w-meter').value; 
+
+            const usage = parseFloat(document.getElementById('w-usage').value) || 0; 
+
+            let components = [], totalArr = [], fixedArr = []; 
+
+             
+
+            for (let i = 0; i < 6; i++) fixedArr.push(waterFixed[area][meter][i]); 
+
+             
+
+            if (cls === 'residential') { 
+
+                let t1Arr=[], t2Arr=[], t3Arr=[]; 
+
+                for (let i=0;i<6;i++) { 
+
+                    const t1u = Math.min(usage,6), t2u = Math.min(Math.max(usage-6,0),6), t3u = Math.max(usage-12,0); 
+
+                    t1Arr.push(t1u * waterCons.residential.tier1[i]); 
+
+                    t2Arr.push(t2u * waterCons.residential.tier2[i]); 
+
+                    t3Arr.push(t3u * waterCons.residential.tier3[i]); 
+
+                    totalArr.push(fixedArr[i] + t1Arr[i] + t2Arr[i] + t3Arr[i]); 
+
+                } 
+
+                components = [ 
+
+                    { label: 'Service Charge', values: fixedArr }, 
+
+                    { label: 'Tier 1 (0–6 CCF)', values: t1Arr }, 
+
+                    { label: 'Tier 2 (7–12 CCF)', values: t2Arr }, 
+
+                    { label: 'Tier 3 (over 12)', values: t3Arr } 
+
+                ]; 
+
+            } else { 
+
+                let varArr = []; 
+
+                for (let i=0;i<6;i++) { 
+
+                    varArr.push(usage * waterCons[cls][i]); 
+
+                    totalArr.push(fixedArr[i] + varArr[i]); 
+
+                } 
+
+                components = [ 
+
+                    { label: 'Service Charge', values: fixedArr }, 
+
+                    { label: 'Usage Charge', values: varArr } 
+
+                ]; 
+
+            } 
+
+            return { components, totalArr }; 
+
+        } 
+
+        function calcWater() { 
+
+            try { 
+
+                const d = getWaterData(); 
+
+                document.getElementById('water-table').innerHTML = buildTable('Total Water Bill', d.components, d.totalArr); 
+
+                if (document.getElementById('sec-water').classList.contains('active')) { 
+
+                    eWaterChart = buildStackedCalcChart('waterChart', d.components, d.totalArr, COLOR_TEAL); 
+
+                } 
+
+                announceToScreenReader(`Water bill estimate updated. Current bill is ${fmt(d.totalArr[0])}, rising to ${fmt(d.totalArr[5])} by FY 2031.`); 
+
+            } catch(e) { console.error(e); } 
+
+        } 
+
+ 
+
+        function toggleWWInputs() { 
+
+            const t = document.getElementById('ww-type').value; 
+
+            document.getElementById('ww-commercial-inputs').style.display = (t==='commercial_high'||t==='commercial_low') ? 'block' : 'none'; 
+
+            document.getElementById('ww-industrial-inputs').style.display = (t==='industrial') ? 'grid' : 'none'; 
+
+        } 
+
+        function getWWData() { 
+
+            const type = document.getElementById('ww-type').value; 
+
+            let components = [], totalArr = []; 
+
+            if (type === 'residential') { 
+
+                components = [{ label: 'Residential Fixed Charge', values: [...wwResFixed] }]; 
+
+                totalArr = [...wwResFixed]; 
+
+            } else if (type === 'commercial_high' || type === 'commercial_low') { 
+
+                const ccf = parseFloat(document.getElementById('ww-ccf').value) || 0; 
+
+                const rateArr = type === 'commercial_high' ? wwCommHigh : wwCommLow; 
+
+                let fixArr=[], varArr=[]; 
+
+                for (let i=0;i<6;i++) { 
+
+                    fixArr.push(wwCommFixed[i]); 
+
+                    varArr.push(ccf * rateArr[i]); 
+
+                    totalArr.push(wwCommFixed[i] + ccf * rateArr[i]); 
+
+                } 
+
+                components = [ 
+
+                    { label: 'Commercial Min Fee', values: fixArr }, 
+
+                    { label: (type==='commercial_high'?'High':'Low') + ' Strength Charge', values: varArr } 
+
+                ]; 
+
+            } else { 
+
+                const flow = parseFloat(document.getElementById('ww-flow').value)||0, bod = parseFloat(document.getElementById('ww-bod').value)||0, tss = parseFloat(document.getElementById('ww-tss').value)||0; 
+
+                let fArr=[], bArr=[], tArr=[]; 
+
+                for (let i=0;i<6;i++) { 
+
+                    fArr.push(flow*wwIndFlow[i]); bArr.push(bod*wwIndBOD[i]); tArr.push(tss*wwIndTSS[i]); 
+
+                    totalArr.push(flow*wwIndFlow[i]+bod*wwIndBOD[i]+tss*wwIndTSS[i]); 
+
+                } 
+
+                components = [ 
+
+                    { label: 'Flow Charge', values: fArr }, 
+
+                    { label: 'BOD Charge', values: bArr }, 
+
+                    { label: 'TSS Charge', values: tArr } 
+
+                ]; 
+
+            } 
+
+            return { components, totalArr }; 
+
+        } 
+
+        function calcWW() { 
+
+            try { 
+
+                const d = getWWData(); 
+
+                document.getElementById('ww-table').innerHTML = buildTable('Total Wastewater Bill', d.components, d.totalArr); 
+
+                if (document.getElementById('sec-wastewater').classList.contains('active')) { 
+
+                    eWwChart = buildStackedCalcChart('wwChart', d.components, d.totalArr, COLOR_GREEN); 
+
+                } 
+
+                announceToScreenReader(`Wastewater bill estimate updated. Current bill is ${fmt(d.totalArr[0])}, rising to ${fmt(d.totalArr[5])} by FY 2031.`); 
+
+            } catch(e) { console.error(e); } 
+
+        } 
+
+ 
+
+        function populateSWSizes() { 
+
+            const type = document.getElementById('sw-type').value; 
+
+            const sel = document.getElementById('sw-size'); 
+
+            const curVal = sel.value; 
+
+            sel.innerHTML = ''; 
+
+            Object.keys(swData[type]).forEach(k => { 
+
+                const o = document.createElement('option'); o.value=k; o.textContent=k; sel.appendChild(o); 
+
+            }); 
+
+            if (swData[type][curVal]) sel.value = curVal; 
+
+        } 
+
+        function getSWData() { 
+
+            const type = document.getElementById('sw-type').value, size = document.getElementById('sw-size').value; 
+
+            if (!swData[type][size]) return { components: [], totalArr: [0,0,0,0,0,0] }; 
+
+            const vals = swData[type][size]; 
+
+            return { 
+
+                components: [{ label: type.charAt(0).toUpperCase()+type.slice(1)+' — '+size, values: [...vals] }], 
+
+                totalArr: [...vals] 
+
+            }; 
+
+        } 
+
+        function calcSW() { 
+
+            try { 
+
+                populateSWSizes(); 
+
+                const d = getSWData(); 
+
+                document.getElementById('sw-table').innerHTML = buildTable('Total Solid Waste Bill', d.components, d.totalArr); 
+
+                if (document.getElementById('sec-solidwaste').classList.contains('active')) { 
+
+                    eSwChart = buildStackedCalcChart('swChart', d.components, d.totalArr, COLOR_GOLD); 
+
+                } 
+
+                announceToScreenReader(`Solid waste bill estimate updated. Current bill is ${fmt(d.totalArr[0])}, rising to ${fmt(d.totalArr[5])} by FY 2031.`); 
+
+            } catch(e) { console.error(e); } 
+
+        } 
+
+ 
+
+        function updateCombined() { 
+
+            try { 
+
+                const wD = getWaterData(), wwD = getWWData(), swD = getSWData(); 
+
+                let combinedArr = []; 
+
+                for (let i=0;i<6;i++) combinedArr.push(wD.totalArr[i] + wwD.totalArr[i] + swD.totalArr[i]); 
+
+ 
+
+                const li = parseInt(document.getElementById('combined-fy').value); 
+
+                const fyLabel = YR_DISPLAY[li]; 
+
+ 
+
+                document.getElementById('combined-summary').innerHTML = ` 
+
+                    <div class="bg-white p-4 border border-[#077e58] rounded-lg text-center shadow-sm"> 
+
+                        <div class="text-xs uppercase font-bold text-[#077e58] tracking-wider mb-1">Water</div> 
+
+                        <div class="text-2xl alegreya font-black">${fmt(wD.totalArr[li])}</div> 
+
+                    </div> 
+
+                    <div class="bg-white p-4 border border-[#045038] rounded-lg text-center shadow-sm"> 
+
+                        <div class="text-xs uppercase font-bold text-[#045038] tracking-wider mb-1">Wastewater</div> 
+
+                        <div class="text-2xl alegreya font-black">${fmt(wwD.totalArr[li])}</div> 
+
+                    </div> 
+
+                    <div class="bg-white p-4 border-2 border-[#F3C67D] rounded-lg text-center shadow-sm"> 
+
+                        <div class="text-xs uppercase font-bold text-[#414042] tracking-wider mb-1">Solid Waste</div> 
+
+                        <div class="text-2xl alegreya font-black text-[#414042]">${fmt(swD.totalArr[li])}</div> 
+
+                    </div> 
+
+                    <div class="bg-[#045038] p-4 border border-[#045038] rounded-lg text-center shadow-md text-white"> 
+
+                        <div class="text-xs uppercase font-bold text-gray-200 tracking-wider mb-1">Combined Bill</div> 
+
+                        <div class="text-2xl alegreya font-black">${fmt(combinedArr[li])}</div> 
+
+                    </div> 
+
+                `; 
+
+ 
+
+                let components = [ 
+
+                    { label: 'Water', values: wD.totalArr }, 
+
+                    { label: 'Wastewater', values: wwD.totalArr }, 
+
+                    { label: 'Solid Waste', values: swD.totalArr } 
+
+                ]; 
+
+                document.getElementById('combined-table').innerHTML = buildTable('Total Combined Bill', components, combinedArr); 
+
+ 
+
+                if (document.getElementById('sec-combined').classList.contains('active')) { 
+
+                     
+
+                    const stackOption = { 
+
+                        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' }, valueFormatter: v => '$' + Number(v).toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',') }, 
+
+                        legend: { bottom: 0 }, 
+
+                        grid: { left: '2%', right: '4%', bottom: '15%', containLabel: true }, 
+
+                        xAxis: { type: 'category', data: YR_LABELS }, 
+
+                        yAxis: { type: 'value', axisLabel: { formatter: '${value}' } }, 
+
+                        series: [ 
+
+                            { name: 'Water', type: 'bar', stack: 'total', itemStyle: { color: COLOR_TEAL }, data: wD.totalArr }, 
+
+                            { name: 'Wastewater', type: 'bar', stack: 'total', itemStyle: { color: COLOR_GREEN }, data: wwD.totalArr }, 
+
+                            { name: 'Solid Waste', type: 'bar', stack: 'total', itemStyle: { color: COLOR_GOLD }, data: swD.totalArr } 
+
+                        ] 
+
+                    }; 
+
+                    eCombStackChart = renderEChart('combinedStackedChart', stackOption); 
+
+ 
+
+                    document.getElementById('pieTitle').textContent = `Share of Bill (${fyLabel})`; 
+
+                     
+
+                    const pieOption = { 
+
+                        tooltip: { trigger: 'item', formatter: '{b}: ${c} ({d}%)' }, 
+
+                        series: [{ 
+
+                            type: 'pie', 
+
+                            radius: ['40%', '70%'], 
+
+                            itemStyle: { borderRadius: 5, borderColor: '#fff', borderWidth: 2 }, 
+
+                            label: { show: false }, 
+
+                            data: [ 
+
+                                { value: wD.totalArr[li], name: 'Water', itemStyle: { color: COLOR_TEAL } }, 
+
+                                { value: wwD.totalArr[li], name: 'Wastewater', itemStyle: { color: COLOR_GREEN } }, 
+
+                                { value: swD.totalArr[li], name: 'Solid Waste', itemStyle: { color: COLOR_GOLD } } 
+
+                            ] 
+
+                        }] 
+
+                    }; 
+
+                    eCombPieChart = renderEChart('combinedPieChart', pieOption); 
+
+                } 
+
+                announceToScreenReader(`Combined bill summary updated for ${fyLabel}. Total is ${fmt(combinedArr[li])}.`); 
+
+            } catch(e) { console.error(e); } 
+
+        } 
+
+ 
+
+        // Initialize safely on load 
+
+        document.addEventListener("DOMContentLoaded", () => { 
+
+            try { initRegionalChart(); } catch(e) {} 
+
+            try { populateSWSizes(); } catch(e) {} 
+
+            try { calcWater(); } catch(e) {} 
+
+        }); 
+
+ 
+
+        // Resize listeners 
+
+        window.addEventListener('resize', () => { 
+
+            if (eRegChart) eRegChart.resize(); 
+
+            if (eWaterChart && document.getElementById('sec-water').classList.contains('active')) eWaterChart.resize(); 
+
+            if (eWwChart && document.getElementById('sec-wastewater').classList.contains('active')) eWwChart.resize(); 
+
+            if (eSwChart && document.getElementById('sec-solidwaste').classList.contains('active')) eSwChart.resize(); 
+
+            if (eCombStackChart && document.getElementById('sec-combined').classList.contains('active')) eCombStackChart.resize(); 
+
+            if (eCombPieChart && document.getElementById('sec-combined').classList.contains('active')) eCombPieChart.resize(); 
+
+        }); 
+
+    </script> 
+
+</body> 
+
+</html> </div></div>
+	</div>
+	</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!--		--></div> <!-- outer row -->
+
+
+		</div>
+
+	</div>
+
+	
+	<div class="newCP">
+
+	</div>
+</div>
+</div><aside data-cpRole="contentContainer" id="featureColumn" class="secondaryContent">	<div id="cc5bc4d738-b79e-476c-bfb5-c99dc764cc71" data-containerid="5bc4d738-b79e-476c-bfb5-c99dc764cc71" class="pageContent cpGrid cpGrid24 showInMobile">
+				                
+
+
+
+	</div>
+</aside>
+</div><div data-cpRole="structuralContainer" id="siteSidebarTS" class="siteSidebar">
+<aside data-cpRole="contentContainer" id="sidebarContainer1TS">	<div id="cc6565f8cc-2c55-4e5d-a55f-58373c581415" data-containerid="6565f8cc-2c55-4e5d-a55f-58373c581415" class="pageContent cpGrid cpGrid24 showInMobile">
+				                
+
+
+
+	</div>
+</aside><nav data-cpRole="nav" id="secondaryNav" class="siteNav secondaryNav">
+
+
+
+
+
+	<ol role="menu" id="secondaryMenusecondaryNav" data-parent="812" class="rootNavMenu accordionNav">
+	<li class="topMenuItem sideNavLi hasAccordionChildren" id="SideItem2577" data-pageid="2577">
+		<div class="accordionNavItem">
+			<a href="/2577/Proposed-Utility-Rate-Adjustments" target="_self" class="navMainItem secondaryNavItem cpComponent" data-type="SecondaryMainItem">Proposed Utility Rate Adjustments</a>
+		</div>
+			</li>
+	<li class="topMenuItem sideNavLi hasAccordionChildren" id="SideItem814" data-pageid="814">
+		<div class="accordionNavItem">
+			<a href="/814/Recycle-Water-Groundwater-Overdraft" target="_self" class="navMainItem secondaryNavItem cpComponent" data-type="SecondaryMainItem">Recycle Water &amp; Groundwater Overdraft</a>
+		</div>
+			</li>
+	<li class="topMenuItem sideNavLi hasAccordionChildren" id="SideItem816" data-pageid="816">
+		<div class="accordionNavItem">
+			<a href="/816/Sewer" target="_self" class="navMainItem secondaryNavItem cpComponent" data-type="SecondaryMainItem">Sewer</a>
+				<a href="#" role="button" class="openAccordionNav accordionSecondaryNavItem" aria-label="Sewer Submenu" aria-expanded="false" aria-controls="submenu-lvl1-816"></a>
+		</div>
+					<ol aria-hidden="true" class="accordionNavContainer accordionNavContainer--lvl1" id="submenu-lvl1-816" style="display: none;" data-parent="816">
+						<li class="sideNavLi subMenuItem hasAccordionChildren" id="SideItem1953" data-pageid="1953">
+			<div class="accordionNavItem">
+				<a href="/1953/Private-Sewer-Laterals" target="_self" class="navMenuItem cpComponent" data-type="SecondaryMenuItem"><span lang="en">Private Sewer Laterals</span></a>
+			</div>
+					</li>
+		<li class="sideNavLi subMenuItem hasAccordionChildren" id="SideItem2010" data-pageid="2010">
+			<div class="accordionNavItem">
+				<a href="/2010/Sewer-Lateral-Rebates" target="_self" class="navMenuItem cpComponent" data-type="SecondaryMenuItem"><span lang="en">Sewer Lateral Rebates</span></a>
+			</div>
+					</li>
+
+			</ol>
+	</li>
+	<li class="topMenuItem sideNavLi hasAccordionChildren" id="SideItem1460" data-pageid="1460">
+		<div class="accordionNavItem">
+			<a href="/1460/Wastewater-Discharge-Permit-Applications" target="_self" class="navMainItem secondaryNavItem cpComponent" data-type="SecondaryMainItem">Wastewater Discharge Permit Applications</a>
+		</div>
+			</li>
+	<li class="topMenuItem sideNavLi hasAccordionChildren" id="SideItem2332" data-pageid="2332">
+		<div class="accordionNavItem">
+			<a href="/2332/Industrial-Wastewater-Discharge-Permit" target="_self" class="navMainItem secondaryNavItem cpComponent" data-type="SecondaryMainItem">Industrial Wastewater Discharge Permit</a>
+		</div>
+			</li>
+
+	</ol>
+
+
+	<script type="text/javascript">
+		(function () {
+			function setupSecondaryMenuProperties() {
+				//setup menu manager properties for secondary menu
+				menuManager.isSideMenuEditable = false;
+				menuManager.sideMenuMaxSubMenuLevels = 4;
+				menuManager.sideMenuHasCustomLinks = false;
+			}
+
+			if (document.readyState === "loading") {
+				document.addEventListener("DOMContentLoaded", setupSecondaryMenuProperties, { once: true });
+				return;
+			}
+
+			setupSecondaryMenuProperties();
+		})();
+	</script>
+
+	<script type="text/javascript">
+		(function () {
+			function setupAccordionSecondaryNav() {
+				var $menuContainer = $('#secondaryNav');
+
+				$menuContainer.find('*[id^="SideItem"]').each(function () {
+					var ids = $('[id="' + this.id + '"]');
+					if (ids.length > 1)
+						$.each(ids, function (index, value) {
+							value.id = value.id + '_' + index;
+						});
+				});
+
+				$menuContainer.find('.hasAccordionChildren .openAccordionNav').off('click.secondaryNav').on('click.secondaryNav', function (e) {
+					e.preventDefault();
+					showHideAccordionMenuForSecondaryNav($(this));
+				});
+
+				$menuContainer.find(".grippy").each(function () {
+					menuManager.setupDraggableElement($(this), SIDE_MENU, '#secondaryNav');
+				});
+
+				$menuContainer.find("li").each(function () {
+					menuManager.setupDroppableAccordionElement($(this), SIDE_MENU);
+				});
+			}
+
+			if (document.readyState === "loading") {
+				document.addEventListener("DOMContentLoaded", setupAccordionSecondaryNav, { once: true });
+				return;
+			}
+
+			setupAccordionSecondaryNav();
+		})();
+	</script>
+
+
+
+</nav><aside data-cpRole="contentContainer" id="sidebarContainer2TS">	<div id="cc472083c9-f1d9-4051-92c5-c821902d1578" data-containerid="472083c9-f1d9-4051-92c5-c821902d1578" class="pageContent cpGrid cpGrid24 showInMobile">
+				                
+
+
+
+	</div>
+</aside>
+</div>
+</div></div>
+</div><!-- GBs --><div data-cpRole="structuralContainer" id="gbsContainerTS">
+<div class="siteWrap"><div data-cpRole="contentContainer" id="gbsTS">	<div id="cc433688cf-4d8f-4945-b6ad-6bc4183a0810" data-containerid="433688cf-4d8f-4945-b6ad-6bc4183a0810" class="pageContent cpGrid cpGrid24 isLockedContainer showInMobile" data-contentcontainerbreakpoint="75">
+				                
+
+		<div class="row outer wide"><!--
+--><div class="outer col col14 first" style="" data-widgetcontainerid="69ea1ee2-c0b6-4ffa-95b7-2e19bbffa7ff">
+				
+	<div class="row nest first last wide">
+
+	
+	<div class="inner col col14 first last id824d57eb-4fb4-487f-a355-46b4c3fa014c" style="" data-widgetcontainerid="824d57eb-4fb4-487f-a355-46b4c3fa014c">
+	
+<div data-widget-id="900a6b03-f726-41ef-a9d8-7c765f9ea8d6" data-widget-controller-path="/GraphicLinks/Widget">
+
+
+
+
+<div id="graphicLinkWidget900a6b03-f726-41ef-a9d8-7c765f9ea8d6" class="widget widgetGraphicLinks skin110 widgetOptionSet4 wide" data-elementqueryclasses='{"wide-narrow":"min-width:40em"}' data-elementquerymatch='matchMultiColumn' data-elementqueryunmatch='unmatchMultiColumn' data-modulewidgettype="graphicLinks">
+	<div class="widgetHeader">
+		<div class="">
+				</div>
+	</div>
+	<div class="widgetBody cpGrid cpGrid4 ">
+		<nav class="widgetGraphicLinksNav" aria-labelledby="GraphicLinkHeaderText">
+				<div class="row   wide">
+					<!--
+--><div class="col col1 first "><ul class="semanticList"><!--
+
+	    --><li class="widgetItem GraphicLinks">
+
+<div>
+	<a href="/1180/Solid-Waste-Division" target="_self" class="fancyButton fancyButton945 " >
+		<span>
+			<span><span class="text">Solid Waste</span></span>
+		</span>
+	</a>
+</div>
+		<style scoped="scoped">.fancyButton945.fancyButton:link,.fancyButton945.fancyButton:visited, .fancyButton945div.fancyButton{
+	background-image: url('/ImageRepository/Document?documentID=18737');
+	background-repeat: no-repeat;
+	background-position: center 5px ;
+background-size: 110px;
+transition: all .2s ease-in-out;}
+.fancyButton945.fancyButton:hover,.fancyButton945.fancyButton:focus,.fancyButton945.fancyButton:active,.fancyButton945.fancyButton.hover{
+	background-repeat: no-repeat;
+	background-position: center 0px ;
+background-size: 120px;}
+.fancyButton945.fancyButton:link > span,.fancyButton945.fancyButton:visited > span, .fancyButton945div.fancyButton > span{
+}
+.fancyButton945.fancyButton:hover > span,.fancyButton945.fancyButton:focus > span,.fancyButton945.fancyButton:active > span,.fancyButton945.fancyButton.hover > span{
+}
+.fancyButton945.fancyButton .text{
+	color: #077e58;
+	font-size: 1.1em;
+	font-family: "Alegreya Sans";
+	padding-top: 120px;
+	font-weight: 500;
+	text-decoration: none;
+	padding-top: 120px;
+	background-repeat: no-repeat;
+	background-position: left top;
+line-height: 1.2;
+}
+.fancyButton945.fancyButton:hover .text,.fancyButton945.fancyButton:focus .text,.fancyButton945.fancyButton:active .text,.fancyButton945.fancyButton.hover .text{
+	text-decoration: underline;
+	background-repeat: no-repeat;
+	background-position: left top;
+
+
+}
+</style>
+
+ </li><!--
+--></ul></div><!----><div class="col col1  "><ul class="semanticList"><!--
+
+	    --><li class="widgetItem GraphicLinks">
+
+<div>
+	<a href="/1230/Utilities " target="_self" class="fancyButton fancyButton946 " >
+		<span>
+			<span><span class="text">Start Utility Services</span></span>
+		</span>
+	</a>
+</div>
+		<style scoped="scoped">.fancyButton946.fancyButton:link,.fancyButton946.fancyButton:visited, .fancyButton946div.fancyButton{
+	background-image: url('/ImageRepository/Document?documentID=18735');
+	background-repeat: no-repeat;
+	background-position: center 5px ;
+background-size: 110px;
+transition: all .2s ease-in-out;}
+.fancyButton946.fancyButton:hover,.fancyButton946.fancyButton:focus,.fancyButton946.fancyButton:active,.fancyButton946.fancyButton.hover{
+	background-repeat: no-repeat;
+	background-position: center 0px ;
+background-size: 120px;}
+.fancyButton946.fancyButton:link > span,.fancyButton946.fancyButton:visited > span, .fancyButton946div.fancyButton > span{
+}
+.fancyButton946.fancyButton:hover > span,.fancyButton946.fancyButton:focus > span,.fancyButton946.fancyButton:active > span,.fancyButton946.fancyButton.hover > span{
+}
+.fancyButton946.fancyButton .text{
+	color: #077e58;
+	font-size: 1.1em;
+	font-family: "Alegreya Sans";
+	padding-top: 120px;
+	font-weight: 500;
+	text-decoration: none;
+	padding-top: 120px;
+	background-repeat: no-repeat;
+	background-position: left top;
+line-height: 1.2;
+}
+.fancyButton946.fancyButton:hover .text,.fancyButton946.fancyButton:focus .text,.fancyButton946.fancyButton:active .text,.fancyButton946.fancyButton.hover .text{
+	text-decoration: underline;
+	background-repeat: no-repeat;
+	background-position: left top;
+
+
+}
+</style>
+
+ </li><!--
+--></ul></div><!----><div class="col col1  "><ul class="semanticList"><!--
+
+	    --><li class="widgetItem GraphicLinks">
+
+<div>
+	<a href="https://www.watsonville.gov/FormCenter/Public-Works-16/Traffic-Signal-Concern-70" target="_blank" class="fancyButton fancyButton947 "  aria-label="Report Traffic Signal Street Light Issues Opens in new window">
+		<span>
+			<span><span class="text">Report Traffic Signal Street Light Issues</span></span>
+		</span>
+	</a>
+</div>
+		<style scoped="scoped">.fancyButton947.fancyButton:link,.fancyButton947.fancyButton:visited, .fancyButton947div.fancyButton{
+	background-image: url('/ImageRepository/Document?documentID=18736');
+	background-repeat: no-repeat;
+	background-position: center 5px ;
+background-size: 110px;
+transition: all .2s ease-in-out;}
+.fancyButton947.fancyButton:hover,.fancyButton947.fancyButton:focus,.fancyButton947.fancyButton:active,.fancyButton947.fancyButton.hover{
+	background-repeat: no-repeat;
+	background-position: center 0px ;
+background-size: 120px;}
+.fancyButton947.fancyButton:link > span,.fancyButton947.fancyButton:visited > span, .fancyButton947div.fancyButton > span{
+}
+.fancyButton947.fancyButton:hover > span,.fancyButton947.fancyButton:focus > span,.fancyButton947.fancyButton:active > span,.fancyButton947.fancyButton.hover > span{
+}
+.fancyButton947.fancyButton .text{
+	color: #077e58;
+	font-size: 1.1em;
+	font-family: "Alegreya Sans";
+	padding-top: 120px;
+	font-weight: 500;
+	text-decoration: none;
+	padding-top: 120px;
+	background-repeat: no-repeat;
+	background-position: left top;
+line-height: 1.2;
+}
+.fancyButton947.fancyButton:hover .text,.fancyButton947.fancyButton:focus .text,.fancyButton947.fancyButton:active .text,.fancyButton947.fancyButton.hover .text{
+	text-decoration: underline;
+	background-repeat: no-repeat;
+	background-position: left top;
+
+
+}
+</style>
+
+ </li><!--
+--></ul></div><!----><div class="col col1  last"><ul class="semanticList"><!--
+
+	    --><li class="widgetItem GraphicLinks">
+
+<div>
+	<a href="/717/Business-Resident-Water-Conservation-Res" target="_self" class="fancyButton fancyButton1071 " >
+		<span>
+			<span><span class="text">Water Rebates</span></span>
+		</span>
+	</a>
+</div>
+		<style scoped="scoped">.fancyButton1071.fancyButton:link,.fancyButton1071.fancyButton:visited, .fancyButton1071div.fancyButton{
+	background-image: url(/ImageRepository/Document?documentID=18738);
+	background-repeat: no-repeat;
+	background-position: center 5px ;
+background-size: 110px;
+transition: all .2s ease-in-out;}
+.fancyButton1071.fancyButton:hover,.fancyButton1071.fancyButton:focus,.fancyButton1071.fancyButton:active,.fancyButton1071.fancyButton.hover{
+	background-repeat: no-repeat;
+	background-position: center 0px ;
+background-size: 120px;}
+.fancyButton1071.fancyButton:link > span,.fancyButton1071.fancyButton:visited > span, .fancyButton1071div.fancyButton > span{
+}
+.fancyButton1071.fancyButton:hover > span,.fancyButton1071.fancyButton:focus > span,.fancyButton1071.fancyButton:active > span,.fancyButton1071.fancyButton.hover > span{
+}
+.fancyButton1071.fancyButton .text{
+	color: #077e58;
+	font-size: 1.1em;
+	font-family: "Alegreya Sans";
+	padding-top: 120px;
+	font-weight: 500;
+	text-decoration: none;
+	padding-top: 120px;
+	background-repeat: no-repeat;
+	background-position: left top;
+line-height: 1.2;
+}
+.fancyButton1071.fancyButton:hover .text,.fancyButton1071.fancyButton:focus .text,.fancyButton1071.fancyButton:active .text,.fancyButton1071.fancyButton.hover .text{
+	text-decoration: underline;
+	background-repeat: no-repeat;
+	background-position: left top;
+
+
+}
+</style>
+
+ </li><!--
+--></ul></div><!--				-->
+				</div>
+			</nav>
+		</div>
+	<div class="widgetFooter">
+			</div>
+</div>
+</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!----><div class="outer col col10 last" style="" data-widgetcontainerid="7a822b48-f706-46d7-9bd2-14d1081ba801">
+				
+	<div class="row nest first last wide">
+
+	
+	<div class="inner col col10 first last id802e0208-2a91-4671-9353-a96030c11f3e" style="" data-widgetcontainerid="802e0208-2a91-4671-9353-a96030c11f3e">
+	
+<div data-widget-id="f74f1891-159e-46ca-b98c-6b4d3795bc13" data-widget-controller-path="/GraphicLinks/Widget">
+
+
+
+
+<div id="graphicLinkWidgetf74f1891-159e-46ca-b98c-6b4d3795bc13" class="widget widgetGraphicLinks skin110 widgetOptionSet4 wide" data-elementqueryclasses='{"wide-narrow":"min-width:30em"}' data-elementquerymatch='matchMultiColumn' data-elementqueryunmatch='unmatchMultiColumn' data-modulewidgettype="graphicLinks">
+	<div class="widgetHeader">
+		<div class="">
+				</div>
+	</div>
+	<div class="widgetBody cpGrid cpGrid3 ">
+		<nav class="widgetGraphicLinksNav" aria-labelledby="GraphicLinkHeaderText">
+				<div class="row   wide">
+					<!--
+--><div class="col col1 first "><ul class="semanticList"><!--
+
+	    --><li class="widgetItem GraphicLinks">
+
+<div>
+	<a href="/1230/Utilities" target="_self" class="fancyButton fancyButton949 " >
+		<span>
+			<span><span class="text">Bill Pay</span></span>
+		</span>
+	</a>
+</div>
+		<style scoped="scoped">.fancyButton949.fancyButton:link,.fancyButton949.fancyButton:visited, .fancyButton949div.fancyButton{
+	background-image: url('/ImageRepository/Document?documentID=18733');
+	background-repeat: no-repeat;
+	background-position: center 5px ;
+background-size: 110px;
+transition: all .2s ease-in-out;}
+.fancyButton949.fancyButton:hover,.fancyButton949.fancyButton:focus,.fancyButton949.fancyButton:active,.fancyButton949.fancyButton.hover{
+	background-repeat: no-repeat;
+	background-position: center 0px ;
+background-size: 120px;}
+.fancyButton949.fancyButton:link > span,.fancyButton949.fancyButton:visited > span, .fancyButton949div.fancyButton > span{
+}
+.fancyButton949.fancyButton:hover > span,.fancyButton949.fancyButton:focus > span,.fancyButton949.fancyButton:active > span,.fancyButton949.fancyButton.hover > span{
+}
+.fancyButton949.fancyButton .text{
+	color: #077e58;
+	font-size: 1.1em;
+	font-family: "Alegreya Sans";
+	padding-top: 120px;
+	font-weight: 500;
+	text-decoration: none;
+	padding-top: 120px;
+	background-repeat: no-repeat;
+	background-position: left top;
+line-height: 1.2;
+}
+.fancyButton949.fancyButton:hover .text,.fancyButton949.fancyButton:focus .text,.fancyButton949.fancyButton:active .text,.fancyButton949.fancyButton.hover .text{
+	text-decoration: underline;
+	background-repeat: no-repeat;
+	background-position: left top;
+
+
+}
+</style>
+
+ </li><!--
+--></ul></div><!----><div class="col col1  "><ul class="semanticList"><!--
+
+	    --><li class="widgetItem GraphicLinks">
+
+<div>
+	<a href="/973/Public-Participation" target="_self" class="fancyButton fancyButton1070 " >
+		<span>
+			<span><span class="text">Conservation Programs</span></span>
+		</span>
+	</a>
+</div>
+		<style scoped="scoped">.fancyButton1070.fancyButton:link,.fancyButton1070.fancyButton:visited, .fancyButton1070div.fancyButton{
+	background-image: url('/ImageRepository/Document?documentID=19150');
+	background-repeat: no-repeat;
+	background-position: center 5px ;
+background-size: 110px;
+transition: all .2s ease-in-out;}
+.fancyButton1070.fancyButton:hover,.fancyButton1070.fancyButton:focus,.fancyButton1070.fancyButton:active,.fancyButton1070.fancyButton.hover{
+	background-repeat: no-repeat;
+	background-position: center 0px ;
+background-size: 120px;}
+.fancyButton1070.fancyButton:link > span,.fancyButton1070.fancyButton:visited > span, .fancyButton1070div.fancyButton > span{
+}
+.fancyButton1070.fancyButton:hover > span,.fancyButton1070.fancyButton:focus > span,.fancyButton1070.fancyButton:active > span,.fancyButton1070.fancyButton.hover > span{
+}
+.fancyButton1070.fancyButton .text{
+	color: #077e58;
+	font-size: 1.1em;
+	font-family: "Alegreya Sans";
+	padding-top: 120px;
+	font-weight: 500;
+	text-decoration: none;
+	padding-top: 120px;
+	background-repeat: no-repeat;
+	background-position: left top;
+line-height: 1.2;
+}
+.fancyButton1070.fancyButton:hover .text,.fancyButton1070.fancyButton:focus .text,.fancyButton1070.fancyButton:active .text,.fancyButton1070.fancyButton.hover .text{
+	text-decoration: underline;
+	background-repeat: no-repeat;
+	background-position: left top;
+
+
+}
+</style>
+
+ </li><!--
+--></ul></div><!----><div class="col col1  last"><ul class="semanticList"><!--
+
+	    --><li class="widgetItem GraphicLinks">
+
+<div>
+	<a href="https://www.watsonville.gov/2289/Environmental-Division" target="_blank" class="fancyButton fancyButton951 "  aria-label="Climate Action &amp; Adaptation Plan Opens in new window">
+		<span>
+			<span><span class="text">Climate Action &amp; Adaptation Plan</span></span>
+		</span>
+	</a>
+</div>
+		<style scoped="scoped">.fancyButton951.fancyButton:link,.fancyButton951.fancyButton:visited, .fancyButton951div.fancyButton{
+	background-image: url('/ImageRepository/Document?documentID=19148');
+	background-repeat: no-repeat;
+	background-position: center 5px ;
+background-size: 110px;
+transition: all .2s ease-in-out;}
+.fancyButton951.fancyButton:hover,.fancyButton951.fancyButton:focus,.fancyButton951.fancyButton:active,.fancyButton951.fancyButton.hover{
+	background-repeat: no-repeat;
+	background-position: center 0px ;
+background-size: 120px;}
+.fancyButton951.fancyButton:link > span,.fancyButton951.fancyButton:visited > span, .fancyButton951div.fancyButton > span{
+}
+.fancyButton951.fancyButton:hover > span,.fancyButton951.fancyButton:focus > span,.fancyButton951.fancyButton:active > span,.fancyButton951.fancyButton.hover > span{
+}
+.fancyButton951.fancyButton .text{
+	color: #077e58;
+	font-size: 1.1em;
+	font-family: "Alegreya Sans";
+	padding-top: 120px;
+	font-weight: 500;
+	text-decoration: none;
+	padding-top: 120px;
+	background-repeat: no-repeat;
+	background-position: left top;
+line-height: 1.2;
+}
+.fancyButton951.fancyButton:hover .text,.fancyButton951.fancyButton:focus .text,.fancyButton951.fancyButton:active .text,.fancyButton951.fancyButton.hover .text{
+	text-decoration: underline;
+	background-repeat: no-repeat;
+	background-position: left top;
+
+
+}
+</style>
+
+ </li><!--
+--></ul></div><!--				-->
+				</div>
+			</nav>
+		</div>
+	<div class="widgetFooter">
+			</div>
+</div>
+</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!--		--></div> <!-- outer row -->
+
+
+	</div>
+</div></div>
+</div><!-- Footer --><footer data-cpRole="structuralContainer" id="footerContainerTS">
+<div class="siteWrap"><div data-cpRole="contentContainer" id="footerTS">	<div id="ccb5bfa4be-2666-4586-b6e7-e855bf93a13f" data-containerid="b5bfa4be-2666-4586-b6e7-e855bf93a13f" class="pageContent cpGrid cpGrid24 isLockedContainer showInMobile" data-contentcontainerbreakpoint="40">
+				                
+
+		<div class="row outer wide"><!--
+--><div class="outer col col6 first" style="" data-widgetcontainerid="84b04717-9858-4e66-aa3e-a4460f711b76">
+				
+	<div class="row nest first last wide">
+
+	
+	<div class="inner col col6 first last idabb7e3f5-8480-4617-9d7e-d731d982ca83" style="" data-widgetcontainerid="abb7e3f5-8480-4617-9d7e-d731d982ca83">
+	
+    <div data-widget-id="41ec3d92-ba8f-4693-90ee-8d0b2070bf1b" data-widget-controller-path="/InfoAdvanced/Widget">
+
+
+
+
+
+	<section id="divInfoAdv41ec3d92-ba8f-4693-90ee-8d0b2070bf1b" class="widget widgetInfoAdvanced skin197 widgetOptionSet5 wide" data-modulewidgettype="infoAdv" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}' data-elementquerymatch='matchMultiColumn' data-elementqueryunmatch='unmatchMultiColumn' aria-label="Info Advanced">
+			<header class="widgetHeader" id="header41ec3d92-ba8f-4693-90ee-8d0b2070bf1b">
+		<div class="">
+								</div>
+	</header>
+	<div class="widgetBody  cpGrid cpGrid1 ">
+		<div class="row  wide">
+					<div class="col col1 first last">
+						<ol class="pageStyles semanticList">
+
+<li class="InfoAdvanced widgetItem fr-view">
+	<p><br><a href="/"><img src="/ImageRepository/Document?documentId=21978" class="fr-dib" alt="WEB_LOGO_PW_2023" style="width: 385px;"></a></p>
+</li>						</ol>
+					</div>
+		</div>
+	</div>
+	<div class="widgetFooter">
+
+	</div>
+
+	</section>
+
+
+
+<script type="text/javascript">
+	//Render slideshow if info advacned items contain one.
+	$(document).ready(function (e) {
+		$('#divInfoAdv41ec3d92-ba8f-4693-90ee-8d0b2070bf1b .InfoAdvanced.widgetItem').each(function () {
+			renderSlideshowIfApplicable($(this));		
+		});
+	});
+</script></div>	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!----><div class="outer col col1" style="" data-widgetcontainerid="01a9e9d8-faf3-45fa-acc7-9f669134a264">
+				
+	<div class="row nest first last wide">
+
+	
+	<div class="inner col col1 first last id489e3106-25b9-4540-8279-48e451d52a28" style="" data-widgetcontainerid="489e3106-25b9-4540-8279-48e451d52a28">
+	
+
+<div class="widget widgetSpacer" id="f5854088-3c4e-4268-ab5a-1301648b155b"></div>	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!----><div class="outer col col5" style="" data-widgetcontainerid="a324441e-ed52-439e-829a-e66cf3ea1458">
+				
+	<div class="row nest first last wide">
+
+	
+	<div class="inner col col5 first last idfb0a5652-0f15-41f1-97df-3c5e3aa5364b" style="" data-widgetcontainerid="fb0a5652-0f15-41f1-97df-3c5e3aa5364b">
+	
+    <div data-widget-id="7ca97df0-84d1-4924-89c4-f11c5b413d6c" data-widget-controller-path="/InfoAdvanced/Widget">
+
+
+
+
+
+	<section id="divInfoAdv7ca97df0-84d1-4924-89c4-f11c5b413d6c" class="widget widgetInfoAdvanced skin199 widgetOptionSet5 wide" data-modulewidgettype="infoAdv" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}' data-elementquerymatch='matchMultiColumn' data-elementqueryunmatch='unmatchMultiColumn' aria-labelledby="header7ca97df0-84d1-4924-89c4-f11c5b413d6c">
+			<header class="widgetHeader" id="header7ca97df0-84d1-4924-89c4-f11c5b413d6c">
+		<div class="">
+					<h3 >Contact Us</h3>
+								</div>
+	</header>
+	<div class="widgetBody  cpGrid cpGrid1 ">
+		<div class="row  wide">
+					<div class="col col1 first last">
+						<ol class="pageStyles semanticList">
+
+<li class="InfoAdvanced widgetItem fr-view">
+	<p>250 Main Street<br>Watsonville, CA 95076</p><p>Phone: <a href="tel:831-768-3100">831-768-3100</a></p><p><a href="/Directory.aspx?did=51">Staff Directory</a></p>
+</li>						</ol>
+					</div>
+		</div>
+	</div>
+	<div class="widgetFooter">
+
+	</div>
+
+	</section>
+
+
+
+<script type="text/javascript">
+	//Render slideshow if info advacned items contain one.
+	$(document).ready(function (e) {
+		$('#divInfoAdv7ca97df0-84d1-4924-89c4-f11c5b413d6c .InfoAdvanced.widgetItem').each(function () {
+			renderSlideshowIfApplicable($(this));		
+		});
+	});
+</script></div>	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!----><div class="outer col col1" style="" data-widgetcontainerid="940647e6-be01-4237-b407-85580eb59272">
+				
+	<div class="row nest first last wide">
+
+	
+	<div class="inner col col1 first last id2a46bfdd-7b8f-40e6-a738-4a52cdd9b4cc" style="" data-widgetcontainerid="2a46bfdd-7b8f-40e6-a738-4a52cdd9b4cc">
+	
+
+<div class="widget widgetSpacer" id="d467c7de-61ec-491f-82d8-410140008eee"></div>	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!----><div class="outer col col5" style="" data-widgetcontainerid="fb904e4d-80cb-45f0-b7cd-bc5949610845">
+				
+	<div class="row nest first last wide">
+
+	
+	<div class="inner col col5 first last id78630deb-89ce-44aa-96eb-925ece529981" style="" data-widgetcontainerid="78630deb-89ce-44aa-96eb-925ece529981">
+	
+	<div data-widget-id="71d211d6-b087-4f07-b5d7-c98493714c11" data-widget-controller-path="/QuickLinks/Widget">
+
+
+
+
+
+
+
+
+	<section id="widgetQuicklink71d211d6-b087-4f07-b5d7-c98493714c11" class="widget widgetQuickLinks skin199 widgetOptionSet75 narrow" data-modulewidgettype="quickLinks" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}' data-elementquerymatch='matchMultiColumn' data-elementqueryunmatch='unmatchMultiColumn' aria-labelledby="quickLinksHeader71d211d6-b087-4f07-b5d7-c98493714c11">
+			<header class="widgetHeader" id="quickLinksHeader71d211d6-b087-4f07-b5d7-c98493714c11">
+		<div class="">
+					<h3><a  style="" href="/QuickLinks.aspx?CID=141" >Quick Links</a></h3>
+						</div>
+	</header>
+	<div class="widgetBody cpGrid cpGrid1 ">
+        <div class="row  narrow">
+				<div class="col col1 first last">
+					<ol class="semanticList">
+
+    <li style="position:relative" class="widgetItem QuickLinks">
+        <a class="widgetDesc widgetQuickLinksLink" href="/777/Water-Quality" target="_self" >Water Quality</a>
+        <div class="widgetMeta"></div>
+    </li>
+
+    <li style="position:relative" class="widgetItem QuickLinks">
+        <a class="widgetDesc widgetQuickLinksLink" href="https://watsonville.gov/2603/Traffic-Engineering-Services" target="_self" >Traffic Engineering Services</a>
+        <div class="widgetMeta"></div>
+    </li>
+
+    <li style="position:relative" class="widgetItem QuickLinks">
+        <a class="widgetDesc widgetQuickLinksLink" href="/973/Public-Education" target="_self" >Public Education</a>
+        <div class="widgetMeta"></div>
+    </li>
+					</ol>
+				</div>
+		</div>
+        
+	</div>
+	<div class="widgetFooter">
+	</div>
+	<div class="addItemModal hidden">
+		<div class="url hidden">/QuickLinks.aspx</div>
+	</div>
+
+	</section>
+</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!----><div class="outer col col1" style="" data-widgetcontainerid="24f698d5-b5de-426a-83ac-66193c339c23">
+				
+	<div class="row nest first last wide">
+
+	
+	<div class="inner col col1 first last id02f9036b-7f1a-4a2d-92a0-5dacb35297bf" style="" data-widgetcontainerid="02f9036b-7f1a-4a2d-92a0-5dacb35297bf">
+	
+
+<div class="widget widgetSpacer" id="cfe8995f-39db-43cf-863d-25b3e2315557"></div>	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!----><div class="outer col col5 last" style="" data-widgetcontainerid="b307bea7-2f7a-430c-9a3b-c61e853e1a70">
+				
+	<div class="row nest first last wide">
+
+	
+	<div class="inner col col5 first last idb6fc5cf4-89a7-444e-a5ba-3c07ab5eab23" style="" data-widgetcontainerid="b6fc5cf4-89a7-444e-a5ba-3c07ab5eab23">
+	
+	<div data-widget-id="733b4d23-8626-448b-b818-9f69e3225b1f" data-widget-controller-path="/QuickLinks/Widget">
+
+
+
+
+
+
+
+
+	<section id="widgetQuicklink733b4d23-8626-448b-b818-9f69e3225b1f" class="widget widgetQuickLinks skin109 widgetOptionSet75 narrow" data-modulewidgettype="quickLinks" data-elementqueryclasses='{"wide-narrow":"min-width:25em"}' data-elementquerymatch='matchMultiColumn' data-elementqueryunmatch='unmatchMultiColumn' aria-labelledby="quickLinksHeader733b4d23-8626-448b-b818-9f69e3225b1f">
+			<header class="widgetHeader" id="quickLinksHeader733b4d23-8626-448b-b818-9f69e3225b1f">
+		<div class="">
+					<h3><a  style="" href="/QuickLinks.aspx?CID=14" >Site Links</a></h3>
+						</div>
+	</header>
+	<div class="widgetBody cpGrid cpGrid1 ">
+        <div class="row  narrow">
+				<div class="col col1 first last">
+					<ol class="semanticList">
+
+    <li style="position:relative" class="widgetItem QuickLinks">
+        <a class="widgetDesc widgetQuickLinksLink" href="/" target="_self" >Home</a>
+        <div class="widgetMeta"></div>
+    </li>
+
+    <li style="position:relative" class="widgetItem QuickLinks">
+        <a class="widgetDesc widgetQuickLinksLink" href="/sitemap" target="_self" >Site Map</a>
+        <div class="widgetMeta"></div>
+    </li>
+
+    <li style="position:relative" class="widgetItem QuickLinks">
+        <a class="widgetDesc widgetQuickLinksLink" href="/accessibility" target="_self" >Accessibility</a>
+        <div class="widgetMeta"></div>
+    </li>
+
+    <li style="position:relative" class="widgetItem QuickLinks">
+        <a class="widgetDesc widgetQuickLinksLink" href="/site/copyright" target="_self" >Copyright Notices</a>
+        <div class="widgetMeta"></div>
+    </li>
+					</ol>
+				</div>
+		</div>
+        
+	</div>
+	<div class="widgetFooter">
+	</div>
+	<div class="addItemModal hidden">
+		<div class="url hidden">/QuickLinks.aspx</div>
+	</div>
+
+	</section>
+</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!--		--></div> <!-- outer row -->
+
+
+	</div>
+</div></div>
+</footer><!-- Powered By --><div data-cpRole="structuralContainer" id="poweredByContainerTS">
+<div class="siteWrap"><div data-cpRole="contentContainer" id="poweredByTS">	<div id="cc95b9c9df-2d6a-4baa-95c9-6680b818078d" data-containerid="95b9c9df-2d6a-4baa-95c9-6680b818078d" class="pageContent cpGrid cpGrid24 isLockedContainer showInMobile">
+				                
+
+		<div class="row outer wide"><!--
+--><div class="outer col col24 first last" style="" data-widgetcontainerid="da26fe0b-ea09-416c-8c44-3717a5b9a04d">
+				
+	<div class="row nest first last wide">
+
+	
+	<div class="inner col col24 first last id0bbc2044-1942-49e1-a4bc-4873269f9461" style="" data-widgetcontainerid="0bbc2044-1942-49e1-a4bc-4873269f9461">
+	
+ 
+	<div data-widget-id='c6f3aaa3-b4b0-4d67-9078-70113238a290' data-moduleName="customHtml" id='widgetCustomHtmlc6f3aaa3-b4b0-4d67-9078-70113238a290' class="widget widgetCustomHtml skin111 narrow" >
+	<div class="widgetBody pageStyles" id="widgetBodyc6f3aaa3-b4b0-4d67-9078-70113238a290">
+		<div id="customHtmlc6f3aaa3-b4b0-4d67-9078-70113238a290"><div><style>
+  /* CP icon */
+  .cpBylineIconTS {
+    color: #fff;
+  }
+  /* CP Text */
+  .cpBylineTextTS,
+  .cpBylineTextTS a:link {
+    color: #fff;
+  }
+
+  .cpBylineTS {
+    text-align: center;
+  }
+  
+  .cpBylineIconTS {
+    fill: currentColor;
+    width: 39px;
+    height: 26px;
+    display: inline;
+    vertical-align: middle;
+  }
+</style>
+
+<div class="widgetItem cpBylineTS">
+  <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 100 100" class="cpBylineIconTS">
+    <path class="c" d="M73.4,23.2h-19v16.7h19c2.8,0,5,2.2,5,5c0,2.8-2.2,5-5,5h-19v28.4h5.5l11.3-11.7h2.2c11.9,0,21.6-9.7,21.6-21.6C95,33,85.3,23.2,73.4,23.2"></path>
+    <path class="p" d="M45.8,66.5H26.6C14.7,66.5,5,56.8,5,44.9C5,33,14.7,23.2,26.6,23.2h19.1v16.7H26.6c-2.8,0-5,2.2-5,5c0,2.8,2.2,5,5,5h19.1V66.5z"></path>
+  </svg>
+  <span class="cpBylineTextTS">Government Websites by <a href="https://connect.civicplus.com/referral">CivicPlus&reg;</a></span>
+</div>
+</div></div>
+	</div>
+	</div>
+	</div> <!-- inner column -->
+
+	</div> <!-- inner row -->
+
+			</div><!-- outer column --><!--		--></div> <!-- outer row -->
+
+
+	</div>
+</div></div>
+</div>
+</div>
+
+            </div>
+        </div>
+    </div>
+
+<link href="/745732998.css" rel="stylesheet" type="text/css" />
+
+<div id="SplashMessageWrapper" class="cp-Splash-wrapper">
+	<div role="dialog" aria-labelledby="cp-Splash-title" aria-describedby="editorContentDesc" aria-modal="true" tabindex="-1" id="SplashMessage" class="hidden cp-Splash cp-Splash--modal is-open">
+		<div class="cp-Splash-header">
+			<h2 class="cp-Splash-title" id="cp-Splash-title">Loading</h2>
+			<button class="cp-Splash-Btn cp-Splash-close" aria-label="Close this modal" title="Close this window">
+				<svg id="iconClose" viewBox="0 0 25 25">
+					<polygon style="fill:currentcolor"
+							 points="18.806,6.98 18.075,6.248 12.532,11.792 6.989,6.248 6.257,6.98 11.786,12.508 6.212,18.084 6.943,18.815 12.532,13.224 18.12,18.815 18.851,18.084 13.277,12.508"></polygon>
+				</svg>
+			</button>
+		</div>
+		<div class="cp-Splash-body">
+			<div class="cp-Splash-Prose editorContent fr-view" id="editorContentDesc">
+				<!-- Content from the Froala Editor will go here. -->
+				Loading
+			</div>
+		</div>
+		<div class="cp-Splash-footer">
+			<button class="cp-Splash-Btn cp-Splash-Btn--NoShow">Do Not Show Again</button>
+			<button class="cp-Splash-Btn cp-Splash-Btn--Close">Close</button>
+		</div>
+	</div>
+</div>
+
+<script src="/Assets/Scripts/APIClient.js"></script>
+<script src="/Assets/Mystique/Shared/Scripts/Moment/Moment.min.js"></script>
+<script src="/Assets/Scripts/SplashModal/SplashModalRender.js"></script>
+<script>
+
+		$(document).ready(function () {
+			var filter = {
+				targetId: '2577',
+				targetType: 1
+			}
+
+			new SplashModalRender().triggerRender(filter);
+		});
+</script>
+
+
+	
+	
+	
+	
+
+
+
+	
+
+
+
+
+
+
+    <script src="/-978663714.js" type="text/javascript"></script>
+    <!-- Fixed Nav Adjustment -->
+<script>
+  function getValueTS(elem, attr) {
+    const val = elem.css(attr);
+    if (val === undefined) return undefined;
+    const num = parseInt(val, 10);
+    if (num === NaN) return undefined;
+    return num;
+  }
+
+  function clampTS(number, min, max) {
+    return Math.min(Math.max(number, min), max);
+  }
+
+  function isPageEditingTS() {
+    return (
+      $("#doneEditing").length > 0 || // In live edit
+      typeof DesignCenter !== "undefined" // In theme manager
+    );
+  }
+
+  const bgColorRegexTS = /rgba\((\d+), (\d+), (\d+), (\d*\.?\d*)\)/;
+  function isTransparentTS(elem) {
+    const bg = elem.css('background-color');
+    if (typeof bg !== "string" || !bg.startsWith('rgba(')) return false;
+    const matchState = bg.match(bgColorRegexTS);
+    if (!matchState || matchState.length !== 5) return false;
+    const alpha = parseFloat(matchState[4], 10);
+    if (!(alpha >= 0 && alpha < 1)) return false;
+    return true;
+  }
+
+  function iterateLeftpads(cb) {
+    const containersTS = $("[class^='siteWrap'],[class*=' siteWrap']");
+    for (let i = 0; i < containersTS.length; i++) {
+      const containerTS = containersTS[i];
+      // Skip the body container and anything with data-skip-leftpad
+      if (
+        containerTS.id !== "bodyContainerTS" &&
+        containerTS.getAttribute('data-skip-leftpad') === null
+      ) {
+        cb(containerTS);
+      }
+    }
+  }
+
+  const anchor = $("#divToolbars");
+
+  // Outer banner padding (push banner down)
+  const outerSizingTS = $("#bannerContainerTS");
+  // Inner banner padding (push banner content down) - Transparent header OR on attaching headers
+  const innerSizingTS = $("#bannerSizingTS");
+  const bodyContainerTS = $("#bodyContainerTS");
+
+  const forceUnfixClassTS = "forceUnfixTS";
+
+  const fixedTopTS = $(".fixedTopTS");
+  const fixedBottomTS = $(".fixedBottomTS");
+  const fixedLeftTS = $(".fixedLeftTS");
+
+  var initialTopTS;
+  var topAttachTS;
+  if (fixedTopTS && fixedTopTS.length === 1) {
+    initialTopTS = getValueTS(fixedTopTS, 'top');
+    const attachment = fixedTopTS.attr('data-attach');
+    if (attachment) topAttachTS = $("#" + attachment);
+    if (!topAttachTS || topAttachTS.length !== 1) topAttachTS = undefined;
+  }
+
+  function resizeAdjustmentTS() {
+    const editing = isPageEditingTS();
+
+    // Fixed top script
+    (function () {
+      if (!fixedTopTS || fixedTopTS.length !== 1 || initialTopTS === undefined) return;
+
+      if (editing) {
+        fixedTopTS[0].classList.add(forceUnfixClassTS);
+      } else {
+        fixedTopTS[0].classList.remove(forceUnfixClassTS);
+      }
+
+      const topPosition = fixedTopTS.css('position');
+      if (topPosition === 'fixed') {
+        if (topAttachTS) {
+          scrollAdjustmentTS();
+        } else {
+          const anchorHeight = anchor.outerHeight() - 1;
+          fixedTopTS.css('top', anchorHeight + initialTopTS);
+        }
+      } else {
+        fixedTopTS.css('top', initialTopTS);
+      }
+
+      if (topPosition === 'fixed' || topPosition === 'absolute') {
+        // Bump the banner content down
+        if (isTransparentTS(fixedTopTS)) {
+          innerSizingTS.css('padding-top', initialTopTS + fixedTopTS.outerHeight() - 1);
+          outerSizingTS.css('padding-top', '');
+
+          try {
+            window.Pages.onResizeHandlersExecute();
+          } catch (e) { }
+        } else {
+          outerSizingTS.css('padding-top', fixedTopTS.outerHeight() - 1);
+          innerSizingTS.css('padding-top', '');
+        }
+      } else {
+        innerSizingTS.css('padding-top', '');
+        outerSizingTS.css('padding-top', '');
+      }
+    })();
+
+    // Fixed bottom script
+    (function () {
+      if (!fixedBottomTS || fixedBottomTS.length === 0) return;
+
+      // If the widget has gone narrow, force unfix
+      if (editing || fixedBottomTS.outerHeight() > 200) {
+        fixedBottomTS[0].classList.add(forceUnfixClassTS);
+      } else {
+        fixedBottomTS[0].classList.remove(forceUnfixClassTS);
+      }
+
+      if (fixedBottomTS.css('position') === 'fixed') {
+        bodyContainerTS.css('padding-bottom', fixedBottomTS.outerHeight());
+      } else {
+        bodyContainerTS.css('padding-bottom', '');
+      }
+    })();
+
+    // Fixed left script
+    (function () {
+      if (!fixedLeftTS || fixedLeftTS.length === 0) return;
+
+      if (editing) {
+        fixedLeftTS[0].classList.add(forceUnfixClassTS);
+      } else {
+        fixedLeftTS[0].classList.remove(forceUnfixClassTS);
+      }
+
+      if (fixedLeftTS.css('position') === 'fixed') {
+        const anchorHeight = anchor.outerHeight() - 1;
+        fixedLeftTS.css('top', anchorHeight);
+        const leftBoundingTS = fixedLeftTS[0].getBoundingClientRect();
+        iterateLeftpads(function (containerTS) {
+          const containerBoundingTS = containerTS.getBoundingClientRect();
+          if (containerBoundingTS.left <= leftBoundingTS.right) {
+            $(containerTS).css('padding-left', leftBoundingTS.width + 16);
+          }
+        });
+      } else {
+        fixedLeftTS.css('top', '');
+        iterateLeftpads(function (containerTS) {
+          $(containerTS).css('padding-left', '');
+        });
+      }
+    })();
+  }
+
+  function scrollAdjustmentTS() {
+    if (!fixedTopTS || fixedTopTS.length !== 1 || !topAttachTS || topAttachTS.length !== 1) return;
+    const topPosition = fixedTopTS.css('position');
+    if (topPosition === 'fixed' || topPosition === 'absolute') {
+      const anchorBounding = anchor[0].getBoundingClientRect();
+      const attachBounding = topAttachTS[0].getBoundingClientRect();
+      const scrollTop = $(window).scrollTop();
+
+      fixedTopTS.css('top', Math.max(anchorBounding.bottom - 1, attachBounding.bottom));
+    } else {
+      fixedTopTS.css('top', initialTopTS);
+    }
+  }
+
+  $(window).load(function () {
+    setTimeout(function () {
+      resizeAdjustmentTS();
+    }, 350);
+
+    $(window).scroll(function () {
+      scrollAdjustmentTS();
+    });
+
+    var adjustTimeoutTS;
+    $(window).resize(function () {
+      clearTimeout(adjustTimeoutTS);
+      adjustTimeoutTS = setTimeout(function () {
+        resizeAdjustmentTS();
+      }, 350);
+    });
+
+    $.when(window.Pages.angularToolbarComplete).done(function () {
+      resizeAdjustmentTS();
+    });
+  });
+</script>
+<!-- End Fixed Nav Adjustment -->
+
+<!-- Move banner to outer wrap --> 
+<script> 
+  function moveBannerToOuterWrap() { 
+      if ($(".fixedBannerTS").length) { 
+          if ($("#bannerDivbanner2").length) { 
+              $("#bannerDivbanner2").appendTo("#outer-wrap"); 
+          } else { 
+              setTimeout(function() { 
+                  moveBannerToOuterWrap(); 
+              }, 500); 
+          } 
+      }
+  } 
+  moveBannerToOuterWrap(); 
+  </script> 
+  <!-- end move banner to outer wrap -->
+
+<!----------Google Translate (Mobile Friendly)--------->
+
+<style>
+  #google-translate-container {
+    float: right;
+    padding: 3px 5px 0px 0px;
+    position: fixed; 
+    bottom: 16px; 
+    right: 10px; 
+    z-index: 5;
+  }
+  
+  .goog-te-combo, .goog-te-banner *, .goog-te-ftab *, .goog-te-menu *, .goog-te-menu2 *, .goog-te-balloon * {
+    font-family: arial;
+    font-size: 10pt;
+    background-image: url("https://www.gstatic.com/images/branding/product/2x/translate_24dp.png");
+    background-position: 5px 5px;
+    background-size: 18px;
+    background-repeat: no-repeat;
+    text-indent: 16px;
+    background-color: #fff;
+    color: #000 !important;
+  }
+  
+  .goog-logo-link {
+    display: none !important;
+  }
+  
+  .goog-te-gadget {
+    color: transparent !important;
+  }
+  
+  .goog-te-gadget .goog-te-combo {
+    margin: 2px 0 !important;
+    border-radius: 15px !important;
+    }
+  
+  .goog-te-combo{
+    border: 1px solid !important;
+    border-color: #bcc9d7 #96a3b1 #96a3b1 #bcc9d7 !important;
+    border-radius: 50px !important;
+    height:31px !important;
+    padding: 0 1px 0 .25rem !important;
+                width: 156px;
+  }
+
+  #launcher-wrapper {
+    bottom: 50px !important;
+  }
+
+</style>
+
+<div id="google-translate-container">
+  <div id="google_translate_element">
+  </div>
+</div>
+
+<script>
+
+  function googleTranslateElementInit() {
+    var el = document.getElementById("google_translate_element");
+    if (el && el.innerHTML.trim() !== "") {
+        return;
+    }
+
+    new google.translate.TranslateElement({ pageLanguage: "en" }, "google_translate_element");
+    // begin accessibility compliance
+    $('img.goog-te-gadget-icon').attr('alt','Google Translate');
+    $('div#goog-gt-tt div.logo img').attr('alt','translate');
+    $('div#goog-gt-tt .original-text').css('text-align','left');
+    $('.goog-te-gadget-simple .goog-te-menu-value span').css('color','#000000');
+    $('.goog-te-combo').attr('aria-label','google translate languages');
+    $('svg.goog-te-spinner').attr('title','Google Translate Spinner');
+    $('.goog-te-gadget-simple .goog-te-menu-value span').css('color','#000000');
+  }
+
+  $(function() {
+    $.getScript("//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit");
+  });
+
+</script>
+
+<!--------------End Google Translate----------------->
+
+<!--
+<script type="text/javascript">
+    window._monsido = window._monsido || {
+        token: "VgqIlqENcZUO_FkvGDYlLw",
+        statistics: {
+            enabled: true,
+            cookieLessTracking: true,
+            documentTracking: {
+                enabled: true,
+                documentCls: "monsido_download",
+                documentIgnoreCls: "monsido_ignore_download",
+                documentExt: [],
+            },
+        },
+        heatmap: {
+            enabled: true,
+        },
+        pageCorrect: {
+            enabled: true,
+        },
+        pageAssistV2: {
+            enabled: true,
+            theme: "light",
+            mainColor: "#783CE2",
+            textColor: "#ffffff",
+            linkColor: "#783CE2",
+            buttonHoverColor: "#783CE2",
+            mainDarkColor: "#052942",
+            textDarkColor: "#ffffff",
+            linkColorDark: "#FFCF4B",
+            buttonHoverDarkColor: "#FFCF4B",
+            greeting: "Discover your personalization options",
+            direction: "leftbottom",
+            coordinates: "undefined undefined undefined undefined",
+            iconShape: "circle",
+            title: "Personalization Options",
+            titleText: "Welcome to PageAssist toolbar! Adjust the options below to cater the website to your accessibility needs.",
+            iconPictureUrl: "logo",
+            logoPictureUrl: "",
+            logoPictureBase64: "",
+            languages: [""],
+            defaultLanguage: "",
+            skipTo: false,
+            alwaysOnTop: false,
+        },
+    };
+</script>
+<script type="text/javascript" async src="https://app-script.monsido.com/v2/monsido-script.js"></script>
+-->
+
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-5NHJJ5ZZ');</script>
+<!-- End Google Tag Manager -->
+
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5NHJJ5ZZ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<script type="text/javascript">!function(){var b=function(){window.__AudioEyeSiteHash = "259a150f34e438ed84718ce287672f74"; var a=document.createElement("script");a.src="https://wsmcdn.audioeye.com/aem.js";a.type="text/javascript";a.setAttribute("async","");document.getElementsByTagName("body")[0].appendChild(a)};"complete"!==document.readyState?window.addEventListener?window.addEventListener("load",b):window.attachEvent&&window.attachEvent("onload",b):b()}();</script><!-- AudioEye --> <script type="text/javascript">!function(){var b=function(){window.__AudioEyeSiteHash="259a150f34e438ed84718ce287672f74";var a=document.createElement("script");a.src="https://wsmcdn.audioeye.com/aem.js";a.type="text/javascript";a.setAttribute("async","");document.getElementsByTagName("body")[0].appendChild(a)};"complete"!==document.readyState?window.addEventListener?window.addEventListener("load",b):window.attachEvent&&window.attachEvent("onload",b):b()}();</script> <!-- End AudioEye -->
+
+
+    <script type="text/javascript">
+        $(function () {
+            document.cookie = "responsiveGhost=0; path=/";
+        });
+        $(window).on("load", function () {
+            $('body').addClass('doneLoading').removeClass('hideContent');
+
+            if ($('#404Content').length > 0)
+                $('div#bodyWrapper').css('padding', '0px');
+        });
+    </script>
+
+    <noscript>
+        <style>
+            body.hideContent {
+                opacity: 1 !important;
+            }
+        </style>
+    </noscript>
+
+        
+<div style="display: none;">
+	<svg xmlns="http://www.w3.org/2000/svg" style="display:none;">
+
+		<symbol id="iconArrow--left" viewbox="0 0 25 25">
+			<title>Arrow Left</title>
+			<polygon style="fill:currentcolor" points="18.044,25 19.498,23.545 8.409,12.454 19.408,1.455 17.954,0 5.502,12.452"></polygon>
+		</symbol>
+
+		<symbol id="iconArrow--right" viewbox="0 0 25 25">
+			<title>Arrow Right</title>
+			<polygon style="fill:currentcolor" points="6.957,0 5.502,1.455 16.591,12.546 5.592,23.545 7.047,25 19.498,12.548"></polygon>
+		</symbol>
+
+	</svg>
+</div>
+    <script type="text/javascript">loadCSS('//fonts.googleapis.com/css?family=Alegreya+Sans:500,500italic,700,700italic,800,800italic,900,900italic,italic,regular|Poppins:500,600,700,800,900,italic,regular|Work+Sans:500,600,700,regular|');</script>
+    
+
+    <div class="hidden activeWidgetSkinComponentsOnPageJson">[]</div>
+        <div style="display: none;">
+            <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+                <symbol id="iconSlideshowArrowLeft" viewBox="0 0 22.68 40">
+                    <title>Slideshow Left Arrow</title>
+                    <g>
+                        <path style="fill:currentcolor;" d="M20,40a2.67,2.67,0,0,1-1.9-.79L.79,21.9a2.68,2.68,0,0,1,0-3.79L18.1.79a2.68,2.68,0,1,1,3.79,3.79L6.47,20,21.89,35.42A2.68,2.68,0,0,1,20,40Z"></path>
+                    </g>
+                </symbol>
+                <symbol id="iconSlideshowArrowRight" viewBox="0 0 22.68 40">
+                    <title>Slideshow Right Arrow</title>
+                    <g>
+                        <path style="fill:currentcolor;" d="M2.68,0a2.67,2.67,0,0,1,1.9.79L21.89,18.1a2.68,2.68,0,0,1,0,3.79L4.58,39.21A2.68,2.68,0,0,1,.79,35.42L16.21,20,.79,4.58A2.68,2.68,0,0,1,2.68,0Z"></path>
+                    </g>
+                </symbol>
+            </svg>
+        </div>
+    
+	
+
+    <div id="root-picker-outlet"></div>
+</body>
+</html>
