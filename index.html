@@ -1,17 +1,829 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sacramento Calculator</title>
-    <style>
-        body { font-family: Inter, system-ui, sans-serif; padding: 40px; line-height: 1.6; }
-        h1 { color: #1976d2; }
-    </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>City of Sacramento — Utility Bill Estimator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Mulish:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ---------- Sacramento brand tokens (WCAG-audited) ----------
+   Cobalt 2758C  -> #2A3B66  (text on white ~10:1, white on cobalt ~10:1)  AA/AAA
+   Slate  284C   -> #76AFDF  (DECORATIVE / chart fills only; fails as text)
+   Slate (text)  -> #356094  (accessible darker slate, ~6.5:1 on white)    AA
+   Feather gold  -> #E9C791  (DECORATIVE rules/accents only; fails as text)
+   ----------------------------------------------------------------------- */
+:root{
+  --cobalt:#2A3B66;
+  --cobalt-700:#223052;
+  --slate:#76AFDF;          /* fills only */
+  --slate-text:#356094;     /* accessible */
+  --slate-fill-dk:#4f7fb3;
+  --gold:#E9C791;           /* decorative rule */
+  --gold-edge:#d9b06a;
+  --ink:#16203a;
+  --muted:#4a5269;          /* ~8:1 on white */
+  --bg:#ffffff;
+  --surface:#f3f6fa;
+  --surface-2:#e9eef5;
+  --border:#cfd7e4;
+  --danger:#9a2f2f;
+  --danger-bg:#fbeeee;
+  --ok:#1f6b46;
+  /* chart series — graphical, paired with external dark labels */
+  --c-wfix:#2A3B66;
+  --c-wvol:#4f7fb3;
+  --c-ww:#76AFDF;
+  --c-solid:#b4842f;
+  --c-storm:#5c7f8c;
+  --c-sweep:#8a93a8;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:'Mulish',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  color:var(--ink);
+  background:var(--surface);
+  line-height:1.55;
+}
+.wrap{max-width:1040px;margin:0 auto;padding:24px 20px 64px}
+
+/* ---------- Masthead / brand signature ---------- */
+.masthead{display:flex;flex-wrap:wrap;align-items:flex-end;gap:24px;padding:8px 0 18px}
+.wordmark{line-height:1}
+.wordmark .city{font-family:'EB Garamond',Georgia,serif;font-style:italic;font-weight:500;
+  color:var(--slate-text);font-size:1.5rem;display:block;margin:0 0 -.12em .06em}
+.wordmark .sac{font-family:'Mulish',sans-serif;font-weight:800;letter-spacing:.06em;
+  color:var(--cobalt);font-size:2.55rem;display:block}
+.wordmark .rule{height:4px;background:var(--gold);border-radius:2px;margin-top:6px}
+.masthead-text{flex:1 1 280px;min-width:240px}
+.masthead-text h1{font-family:'EB Garamond',Georgia,serif;font-weight:500;color:var(--cobalt);
+  font-size:1.7rem;margin:0 0 2px}
+.masthead-text p{margin:0;color:var(--muted);font-size:1.02rem}
+
+/* ---------- Intro ---------- */
+.lede{font-size:1.08rem;color:var(--ink);max-width:72ch;margin:6px 0 18px}
+.help-link{display:inline-flex;align-items:center;gap:8px;font-weight:700;color:var(--cobalt);
+  background:none;border:0;cursor:pointer;font-size:1rem;font-family:inherit;padding:10px 0;
+  text-decoration:underline;text-decoration-color:var(--gold-edge);text-decoration-thickness:2px;
+  text-underline-offset:3px}
+.help-link:hover{color:var(--cobalt-700)}
+.help-link:focus-visible{outline:3px solid var(--slate-text);outline-offset:3px;border-radius:4px}
+.help-link svg{flex:none}
+
+/* ---------- Tabs ---------- */
+.tabs{display:flex;gap:4px;background:var(--cobalt);padding:4px;border-radius:10px 10px 0 0;margin-top:14px}
+.tab{flex:1;padding:14px 12px;border:0;cursor:pointer;font-family:inherit;font-weight:800;
+  font-size:1.05rem;color:#eaf0fb;background:transparent;border-radius:7px;letter-spacing:.01em}
+.tab:hover{background:rgba(255,255,255,.12)}
+.tab[aria-selected="true"]{background:#fff;color:var(--cobalt)}
+.tab:focus-visible{outline:3px solid var(--gold);outline-offset:-3px}
+
+.panel{display:none;background:#fff;border:1px solid var(--border);border-top:0;
+  border-radius:0 0 12px 12px;padding:24px;box-shadow:0 12px 30px rgba(20,32,58,.08)}
+.panel.is-active{display:block}
+
+/* ---------- Scope note ---------- */
+.scope{display:flex;gap:12px;background:var(--surface);border:1px solid var(--border);
+  border-left:5px solid var(--gold-edge);border-radius:8px;padding:12px 14px;margin:0 0 22px;font-size:.95rem}
+.scope strong{color:var(--cobalt)}
+
+/* ---------- Form ---------- */
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 20px}
+.field{min-width:0}
+.field.full{grid-column:1 / -1}
+label{display:block;font-weight:700;color:var(--cobalt);margin:0 0 6px;font-size:.86rem;
+  text-transform:uppercase;letter-spacing:.04em}
+select,input[type=number]{width:100%;padding:11px 12px;border:1.5px solid var(--border);
+  border-radius:8px;background:#fff;color:var(--ink);font-size:1rem;font-family:inherit}
+select:focus,input:focus{outline:none;border-color:var(--slate-text);
+  box-shadow:0 0 0 3px rgba(53,96,148,.25)}
+.hint{font-size:.82rem;color:var(--muted);margin:5px 0 0}
+.hidden{display:none !important}
+
+/* ---------- Additional-services toggle ---------- */
+.addsvc{margin:22px 0 6px;border-top:1px dashed var(--border);padding-top:18px}
+.switch{display:flex;align-items:center;gap:12px;cursor:pointer;user-select:none}
+.switch input{position:absolute;opacity:0;width:1px;height:1px}
+.switch .track{width:46px;height:26px;border-radius:13px;background:var(--surface-2);
+  border:1.5px solid var(--border);position:relative;transition:background .15s,border-color .15s;flex:none}
+.switch .track::after{content:"";position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;
+  background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .15s}
+.switch input:checked + .track{background:var(--cobalt);border-color:var(--cobalt)}
+.switch input:checked + .track::after{transform:translateX(20px)}
+.switch input:focus-visible + .track{outline:3px solid var(--slate-text);outline-offset:2px}
+.switch .lbl{font-weight:800;color:var(--cobalt);text-transform:none;letter-spacing:0;font-size:1.02rem}
+.switch .sub{display:block;font-weight:400;color:var(--muted);font-size:.86rem;text-transform:none;letter-spacing:0}
+
+.svc-group{margin-top:18px;border:1px solid var(--border);border-radius:10px;overflow:hidden}
+.svc-group > h3{margin:0;font-family:'EB Garamond',Georgia,serif;font-weight:500;font-size:1.18rem;
+  color:#fff;background:var(--cobalt);padding:10px 16px}
+.svc-body{padding:16px}
+.svc-note{font-size:.82rem;color:var(--muted);margin:10px 0 0;padding-left:12px;border-left:3px solid var(--gold-edge)}
+
+/* ---------- Results ---------- */
+.results-head{display:flex;align-items:baseline;justify-content:space-between;flex-wrap:wrap;gap:8px;margin:26px 0 10px}
+.results-head h2{font-family:'EB Garamond',Georgia,serif;font-weight:500;color:var(--cobalt);font-size:1.5rem;margin:0}
+.table-scroll{overflow-x:auto;border:1px solid var(--border);border-radius:10px}
+table{width:100%;border-collapse:collapse;min-width:560px}
+caption{text-align:left;font-size:.85rem;color:var(--muted);padding:10px 12px;border-bottom:1px solid var(--border)}
+th,td{padding:11px 12px;text-align:right;border-bottom:1px solid var(--border);font-variant-numeric:tabular-nums}
+thead th{background:var(--cobalt);color:#fff;font-weight:700;text-align:right;font-size:.92rem}
+thead th:first-child,tbody th{text-align:left}
+tbody th{font-weight:600;color:var(--ink);background:#fff}
+tr.sub th,tr.sub td{background:var(--surface);font-weight:800}
+tr.total th,tr.total td{background:var(--cobalt);color:#fff;font-weight:800;font-size:1.05rem}
+tr.total th{color:#fff}
+td.empty{color:var(--muted)}
+
+/* ---------- SVG chart ---------- */
+.chart-card{margin-top:22px;background:#fff;border:1px solid var(--border);border-radius:10px;padding:16px}
+.chart-card h3{font-family:'EB Garamond',Georgia,serif;font-weight:500;color:var(--cobalt);font-size:1.2rem;margin:0 0 4px}
+.chart-card .csub{color:var(--muted);font-size:.86rem;margin:0 0 10px}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px}
+.legend span{display:inline-flex;align-items:center;gap:7px;font-size:.86rem;color:var(--ink)}
+.legend i{width:14px;height:14px;border-radius:3px;flex:none}
+
+/* ---------- Disclaimer ---------- */
+.disclaimer{margin-top:26px;background:var(--danger-bg);border:1px solid #e7c9c9;
+  border-left:5px solid var(--danger);border-radius:8px;padding:14px 16px;font-size:.9rem;color:#3a1d1d}
+.disclaimer strong{color:var(--danger)}
+.disclaimer ul{margin:8px 0 0;padding-left:20px}
+.disclaimer li{margin:4px 0}
+
+/* ---------- Modal (sample bill) ---------- */
+.modal-backdrop{position:fixed;inset:0;background:rgba(15,22,42,.62);display:none;
+  align-items:flex-start;justify-content:center;padding:24px 16px;z-index:100;overflow-y:auto}
+.modal-backdrop.is-open{display:flex}
+.modal{background:#fff;border-radius:14px;max-width:760px;width:100%;box-shadow:0 24px 60px rgba(0,0,0,.4);
+  position:relative;margin:auto}
+.modal-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 22px;
+  border-bottom:1px solid var(--border)}
+.modal-top h2{font-family:'EB Garamond',Georgia,serif;font-weight:500;color:var(--cobalt);font-size:1.4rem;margin:0}
+.modal-close{border:1.5px solid var(--border);background:#fff;border-radius:8px;width:38px;height:38px;
+  cursor:pointer;font-size:1.3rem;line-height:1;color:var(--cobalt);flex:none}
+.modal-close:hover{background:var(--surface)}
+.modal-close:focus-visible{outline:3px solid var(--slate-text);outline-offset:2px}
+.modal-body{padding:20px 22px 24px}
+.modal-body > p{margin:0 0 16px;color:var(--muted)}
+
+/* stylized bill */
+.bill{border:1px solid var(--border);border-radius:10px;overflow:hidden;font-size:.86rem}
+.bill-head{background:var(--surface);padding:14px 16px;border-bottom:2px solid var(--gold);display:flex;
+  justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap}
+.bill-head .bw .c{font-family:'EB Garamond',Georgia,serif;font-style:italic;color:var(--slate-text);font-size:.95rem;display:block}
+.bill-head .bw .s{font-weight:800;letter-spacing:.05em;color:var(--cobalt);font-size:1.25rem}
+.bill-head .acct{text-align:right;color:var(--muted);font-size:.8rem}
+.bill-row{display:flex;justify-content:space-between;gap:12px;padding:9px 16px;border-bottom:1px solid var(--border)}
+.bill-row:last-child{border-bottom:0}
+.bill-row .k{color:var(--ink)}
+.bill-row .v{font-variant-numeric:tabular-nums;color:var(--ink)}
+.bill-section{background:var(--surface-2);padding:7px 16px;font-weight:800;color:var(--cobalt);
+  text-transform:uppercase;letter-spacing:.04em;font-size:.74rem}
+/* highlight chips */
+.hl{position:relative;background:rgba(233,199,145,.34);outline:2px solid var(--gold-edge);border-radius:5px;
+  padding:1px 6px;font-weight:700}
+.chip{display:inline-flex;align-items:center;justify-content:center;min-width:20px;height:20px;
+  padding:0 5px;border-radius:10px;background:var(--cobalt);color:#fff;font-size:.72rem;font-weight:800;
+  margin-right:6px;vertical-align:middle}
+.legend-map{margin:18px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:10px 18px}
+.legend-map li{display:flex;gap:8px;align-items:flex-start;font-size:.9rem;color:var(--ink)}
+.legend-map .chip{margin-top:1px}
+.legend-map b{color:var(--cobalt)}
+
+@media (max-width:720px){
+  .grid{grid-template-columns:1fr}
+  .legend-map{grid-template-columns:1fr}
+  .wordmark .sac{font-size:2.1rem}
+}
+@media print{
+  body{background:#fff}
+  .tabs,.help-link,.addsvc .switch .track,.chart-card,.modal-backdrop{display:none !important}
+  .panel{display:block !important;box-shadow:none;border:0;page-break-inside:avoid}
+  thead th,tr.total th,tr.total td{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none !important}}
+</style>
 </head>
 <body>
-    <h1>Sacramento Calculator</h1>
-    <p>This is a test page hosted on GitHub Pages.</p>
-    <p>Your full Blazor app needs a real server (Azure, Render, Railway, etc.).</p>
+<div class="wrap">
+
+  <!-- ===== Masthead ===== -->
+  <header class="masthead">
+    <div class="wordmark" aria-hidden="true">
+      <span class="city">City of</span>
+      <span class="sac">SACRAMENTO</span>
+      <div class="rule"></div>
+    </div>
+    <div class="masthead-text">
+      <h1>Utility Bill Estimator</h1>
+      <p>See how proposed water &amp; wastewater rates affect your bill through FY 2032.</p>
+    </div>
+  </header>
+
+  <p class="lede">
+    Estimate your monthly City utility charges under the current and proposed rate schedules. By default this tool
+    shows <strong>water and wastewater</strong> — the two services every account pays. Turn on
+    <strong>Additional bill services</strong> to add solid waste, storm drainage, and street sweeping and dial in
+    your exact service level.
+  </p>
+
+  <button type="button" class="help-link" id="openBill" aria-haspopup="dialog">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <rect x="4" y="3" width="16" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+      <path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+    </svg>
+    Where do I find these numbers on my bill?
+  </button>
+
+  <!-- ===== Tabs ===== -->
+  <div class="tabs" role="tablist" aria-label="Account type">
+    <button class="tab" role="tab" id="tab-res" aria-controls="panel-res" aria-selected="true">Residential</button>
+    <button class="tab" role="tab" id="tab-com" aria-controls="panel-com" aria-selected="false" tabindex="-1">Commercial</button>
+  </div>
+
+  <!-- ===================== RESIDENTIAL ===================== -->
+  <section class="panel is-active" id="panel-res" role="tabpanel" aria-labelledby="tab-res" tabindex="0">
+    <div class="scope">
+      <span aria-hidden="true">ⓘ</span>
+      <div><strong>What's included:</strong> City water and wastewater (sewer collection) charges. The SacSewer
+      regional treatment charge is billed separately and is <strong>not</strong> included.</div>
+    </div>
+
+    <div class="grid">
+      <div class="field">
+        <label for="r-meter">Water meter size</label>
+        <select id="r-meter">
+          <option value="5/8">5/8 inch</option>
+          <option value="3/4">3/4 inch</option>
+          <option value="1">1 inch</option>
+          <option value="1-1/2">1-1/2 inch</option>
+          <option value="2">2 inch</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="r-use">Monthly water use (CCF)</label>
+        <input type="number" id="r-use" value="7" min="0" step="1" inputmode="decimal">
+        <p class="hint">1 CCF = 748 gallons.</p>
+      </div>
+
+      <div class="field">
+        <label for="r-type">Dwelling type</label>
+        <select id="r-type">
+          <option value="sfr">Single-family</option>
+          <option value="mfr">Multi-family</option>
+        </select>
+      </div>
+      <div class="field hidden" id="r-units-field">
+        <label for="r-units">Dwelling units</label>
+        <input type="number" id="r-units" value="4" min="1" step="1">
+        <p class="hint">Used for the proposed per-unit wastewater rate.</p>
+      </div>
+
+      <div class="field">
+        <label for="r-rooms">Number of rooms</label>
+        <select id="r-rooms">
+          <option value="0">1 to 3 rooms</option>
+          <option value="1">4 to 5 rooms</option>
+          <option value="2" selected>6 to 7 rooms</option>
+          <option value="3">8 to 9 rooms</option>
+          <option value="4">10 to 15 rooms</option>
+          <option value="5">Over 15 rooms</option>
+        </select>
+        <p class="hint">Sets the current room-tier wastewater &amp; storm drainage charge. Most customers are billed
+          for 6–7 rooms.</p>
+      </div>
+      <div class="field hidden" id="r-extrarooms-field">
+        <label for="r-extrarooms">Rooms over 15</label>
+        <input type="number" id="r-extrarooms" value="1" min="1" step="1">
+      </div>
+    </div>
+
+    <!-- additional services -->
+    <div class="addsvc">
+      <label class="switch" for="r-addsvc">
+        <input type="checkbox" id="r-addsvc">
+        <span class="track" aria-hidden="true"></span>
+        <span class="lbl">Additional bill services
+          <span class="sub">Add solid waste, storm drainage, and street sweeping</span>
+        </span>
+      </label>
+
+      <div id="r-extras" class="hidden">
+
+        <div class="svc-group">
+          <h3>Solid waste</h3>
+          <div class="svc-body">
+            <div class="grid">
+              <div class="field">
+                <label for="sw-cart">Garbage cart size</label>
+                <select id="sw-cart">
+                  <option value="32G">32-gallon</option>
+                  <option value="64G">64-gallon</option>
+                  <option value="96G">96-gallon</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="sw-garb-total">Total garbage carts</label>
+                <input type="number" id="sw-garb-total" value="1" min="1" step="1">
+                <p class="hint">The first cart is the base rate; each cart beyond it adds the additional-can fee.</p>
+              </div>
+
+              <div class="field">
+                <label for="sw-recyc-total">Total recycling carts</label>
+                <input type="number" id="sw-recyc-total" value="1" min="0" step="1">
+                <p class="hint">Enter 0 if you have no recycling service.</p>
+              </div>
+              <div class="field">
+                <label for="sw-org">Organics service</label>
+                <select id="sw-org">
+                  <option value="yardfood">Yard + food waste</option>
+                  <option value="foodonly">Food waste only</option>
+                  <option value="none">None</option>
+                </select>
+              </div>
+              <div class="field" id="sw-org-total-field">
+                <label for="sw-org-total">Total organics carts</label>
+                <input type="number" id="sw-org-total" value="1" min="1" step="1">
+                <p class="hint">Each cart beyond the first adds the additional-can fee.</p>
+              </div>
+            </div>
+            <p class="svc-note">Solid waste rates are flat (effective Jan 1, 2024) and are shown unchanged across all
+              years; this rate study does not propose solid-waste increases.</p>
+          </div>
+        </div>
+
+        <div class="svc-group">
+          <h3>Storm drainage</h3>
+          <div class="svc-body">
+            <p class="hint" style="margin-top:0">The 1996 room-based charge is calculated automatically from the room
+              count you selected above.</p>
+            <div class="grid">
+              <div class="field full">
+                <label for="r-storm-parcel">2022 parcel storm charge (from your bill)</label>
+                <input type="number" id="r-storm-parcel" value="0" min="0" step="0.01" inputmode="decimal">
+                <p class="hint">Optional. This charge varies by your parcel's impervious area, so enter the amount
+                  printed on your bill to include it in the total.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="svc-group">
+          <h3>Street sweeping</h3>
+          <div class="svc-body">
+            <div class="grid">
+              <div class="field full">
+                <label for="sw-sweep">Sweeping category</label>
+                <select id="sw-sweep">
+                  <option value="sfr">Single-family residence</option>
+                  <option value="two">Two-family residence</option>
+                  <option value="u34">3–4 units</option>
+                  <option value="u5">5+ units / premise</option>
+                </select>
+              </div>
+            </div>
+            <p class="svc-note">Flat charge effective Jan 1, 2024; shown unchanged across all years.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- results -->
+    <div class="results-head"><h2>Estimated monthly bill</h2></div>
+    <div class="table-scroll">
+      <table id="r-table" aria-label="Residential estimated monthly utility charges by year"></table>
+    </div>
+
+    <div class="chart-card" aria-hidden="false">
+      <h3>Where your money goes</h3>
+      <p class="csub">Stacked monthly charge by service, current through FY 2032.</p>
+      <div id="r-chart" role="img"></div>
+      <div class="legend" id="r-legend"></div>
+    </div>
+  </section>
+
+  <!-- ===================== COMMERCIAL ===================== -->
+  <section class="panel" id="panel-com" role="tabpanel" aria-labelledby="tab-com" tabindex="0" hidden>
+    <div class="scope">
+      <span aria-hidden="true">ⓘ</span>
+      <div><strong>What's included:</strong> City water and wastewater charges, plus optional street sweeping.
+      Commercial SacSewer treatment charges are <strong>excluded</strong>.</div>
+    </div>
+
+    <div class="grid">
+      <div class="field">
+        <label for="c-meter">Water meter size</label>
+        <select id="c-meter">
+          <option value="5/8">5/8 inch</option>
+          <option value="3/4">3/4 inch</option>
+          <option value="1">1 inch</option>
+          <option value="1-1/2">1-1/2 inch</option>
+          <option value="2">2 inch</option>
+        </select>
+      </div>
+      <div class="field">
+        <label for="c-use">Monthly water use (CCF)</label>
+        <input type="number" id="c-use" value="40" min="0" step="1" inputmode="decimal">
+        <p class="hint">1 CCF = 748 gallons.</p>
+      </div>
+      <div class="field full">
+        <label for="c-edu">Equivalent dwelling units (EDUs)</label>
+        <input type="number" id="c-edu" value="1" min="1" step="1">
+        <p class="hint">Used for the proposed (FY 2028+) wastewater rate. Current wastewater uses your meter's
+          metered minimum.</p>
+      </div>
+    </div>
+
+    <div class="addsvc">
+      <label class="switch" for="c-addsvc">
+        <input type="checkbox" id="c-addsvc">
+        <span class="track" aria-hidden="true"></span>
+        <span class="lbl">Additional bill services
+          <span class="sub">Add street sweeping</span>
+        </span>
+      </label>
+
+      <div id="c-extras" class="hidden">
+        <div class="svc-group">
+          <h3>Street sweeping</h3>
+          <div class="svc-body">
+            <p class="hint" style="margin-top:0">Commercial street sweeping (5+ units / premise) ranges from $4.89 to
+              $5.64; this estimate uses $5.64.</p>
+            <p class="svc-note">Flat charge effective Jan 1, 2024; shown unchanged across all years.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="results-head"><h2>Estimated monthly bill</h2></div>
+    <div class="table-scroll">
+      <table id="c-table" aria-label="Commercial estimated monthly utility charges by year"></table>
+    </div>
+
+    <div class="chart-card" aria-hidden="false">
+      <h3>Where your money goes</h3>
+      <p class="csub">Stacked monthly charge by service, current through FY 2032.</p>
+      <div id="c-chart" role="img"></div>
+      <div class="legend" id="c-legend"></div>
+    </div>
+  </section>
+
+  <!-- ===== Disclaimer / methodology ===== -->
+  <div class="disclaimer">
+    <strong>Estimates only.</strong> Figures are for planning and illustration; your actual bill may differ.
+    <ul>
+      <li>The regional <strong>SacSewer treatment charge</strong> appears on the same bill but is set by SacSewer and
+        is excluded here.</li>
+      <li><strong>Commercial wastewater</strong>: current = the metered minimum for your meter size; FY 2028–2032 =
+        the proposed Non-Residential rate × your EDUs.</li>
+      <li><strong>Storm drainage</strong> calculates the 1996 room-based charge automatically; the 2022 parcel rate
+        varies by impervious area, so it's included only when you enter the amount from your bill.</li>
+      <li><strong>Solid waste &amp; street sweeping</strong> are flat (effective Jan 1, 2024) and held constant across
+        all years.</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- ===== Sample-bill modal ===== -->
+<div class="modal-backdrop" id="billModal" role="dialog" aria-modal="true" aria-labelledby="billTitle">
+  <div class="modal">
+    <div class="modal-top">
+      <h2 id="billTitle">Find these on your bill</h2>
+      <button type="button" class="modal-close" id="closeBill" aria-label="Close">&times;</button>
+    </div>
+    <div class="modal-body">
+      <p>The highlighted lines below show where each calculator field appears on a typical City of Sacramento utility
+        statement.</p>
+
+      <div class="bill">
+        <div class="bill-head">
+          <div class="bw" aria-hidden="true">
+            <span class="c">City of</span><span class="s">SACRAMENTO</span>
+          </div>
+          <div class="acct">Utility statement<br>Account 0000-000000<br>Service period: monthly</div>
+        </div>
+
+        <div class="bill-section">Water service</div>
+        <div class="bill-row"><span class="k">Meter size</span>
+          <span class="v"><span class="chip">1</span><span class="hl">3/4 inch</span></span></div>
+        <div class="bill-row"><span class="k">Water used this period</span>
+          <span class="v"><span class="chip">2</span><span class="hl">7 CCF</span></span></div>
+        <div class="bill-row"><span class="k">Water service charge</span><span class="v">$35.72</span></div>
+
+        <div class="bill-section">Wastewater &amp; account</div>
+        <div class="bill-row"><span class="k">Number of rooms</span>
+          <span class="v"><span class="chip">3</span><span class="hl">6 to 7 rooms</span></span></div>
+        <div class="bill-row"><span class="k">Dwelling units</span>
+          <span class="v"><span class="chip">4</span><span class="hl">1</span></span></div>
+        <div class="bill-row"><span class="k">Wastewater charge</span><span class="v">$31.65</span></div>
+
+        <div class="bill-section">Solid waste &amp; other</div>
+        <div class="bill-row"><span class="k">Garbage cart</span>
+          <span class="v"><span class="chip">5</span><span class="hl">96-gallon</span></span></div>
+        <div class="bill-row"><span class="k">Garbage carts</span>
+          <span class="v"><span class="chip">6</span><span class="hl">1</span></span></div>
+        <div class="bill-row"><span class="k">Street sweeping</span><span class="v">$1.73</span></div>
+      </div>
+
+      <ul class="legend-map">
+        <li><span class="chip">1</span><span><b>Meter size</b> — sets your fixed water charge.</span></li>
+        <li><span class="chip">2</span><span><b>Water used (CCF)</b> — drives the volume charge.</span></li>
+        <li><span class="chip">3</span><span><b>Number of rooms</b> — current wastewater &amp; storm tier.</span></li>
+        <li><span class="chip">4</span><span><b>Dwelling units / EDUs</b> — proposed wastewater.</span></li>
+        <li><span class="chip">5</span><span><b>Garbage cart size</b> — solid-waste base charge.</span></li>
+        <li><span class="chip">6</span><span><b>Total carts</b> — base rate plus additional-can fees.</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+"use strict";
+
+/* ===================== DATA (Master Data Ledger v2) ===================== */
+const YEARS = ["Current","FY 2028","FY 2029","FY 2030","FY 2031","FY 2032"];
+
+const D = {
+  // Fixed meter charges — all classes
+  waterFixed: {
+    "5/8":   [35.72, 28.78, 33.67, 39.06, 43.75, 47.25],
+    "3/4":   [35.72, 32.13, 37.63, 43.68, 48.94, 52.88],
+    "1":     [35.72, 40.52, 47.53, 55.23, 61.94, 66.95],
+    "1-1/2": [67.29, 65.65, 77.20, 89.87, 100.89, 109.15],
+    "2":     [105.15, 94.13, 110.82, 129.13, 145.06, 157.01]
+  },
+  // Variable usage rate, $/CCF — all classes
+  waterVar: [1.4587, 1.6465, 1.9961, 2.4042, 2.8804, 3.4262],
+
+  // Residential wastewater — current room tiers (index 0..5)
+  wwRoomCurrent: [20.74, 26.28, 31.65, 36.56, 41.95, 41.95],
+  wwOver15PerRoom: 2.87,
+  // Residential wastewater — proposed
+  wwSfrFlat:  [null, 33.22, 38.54, 43.94, 49.22, 54.15],   // per account
+  wwMfrUnit:  [null, 22.90, 26.57, 30.29, 33.93, 37.33],   // per dwelling unit
+
+  // Commercial / non-residential wastewater
+  commMinByMeter: { "5/8":15.54, "3/4":22.02, "1":34.99, "1-1/2":67.42, "2":106.33 }, // current
+  nonResEdu:  [null, 21.63, 25.09, 28.60, 32.03, 35.27],   // proposed, $/EDU
+
+  // Storm drainage — 1996 room-based (index 0..4) + over-15 per room
+  stormRoom: [7.53, 9.58, 11.31, 13.38, 15.25],
+  stormOver15PerRoom: 0.40,
+
+  // Solid waste (flat, Jan 1 2024)
+  garbage:     { "32G":19.04, "64G":25.07, "96G":30.51 },
+  garbageAddl: { "32G":18.83, "64G":21.82, "96G":25.76 },
+  recycle: 8.10, recycleAddl: 2.79,
+  organicsYardFood: 19.18, organicsAddl: 6.23, foodOnly: 13.43,
+
+  // Street sweeping (flat, Jan 1 2024)
+  sweep: { sfr:1.73, two:2.74, u34:4.89, u5:5.64 }
+};
+
+const usd = v => (v == null) ? "—"
+  : new Intl.NumberFormat('en-US',{style:'currency',currency:'USD'}).format(v);
+const num = id => { const v = parseFloat(document.getElementById(id).value); return isFinite(v)?v:0; };
+const val = id => document.getElementById(id).value;
+const el  = id => document.getElementById(id);
+
+/* component definitions for charts/colors */
+const COLORS = {
+  "Water fixed":"var(--c-wfix)", "Water volume":"var(--c-wvol)", "Wastewater":"var(--c-ww)",
+  "Solid waste":"var(--c-solid)", "Storm drainage":"var(--c-storm)", "Street sweeping":"var(--c-sweep)"
+};
+
+/* ===================== TABS ===================== */
+const tabRes = el('tab-res'), tabCom = el('tab-com');
+const panRes = el('panel-res'), panCom = el('panel-com');
+function selectTab(which){
+  const res = which === 'res';
+  tabRes.setAttribute('aria-selected', res); tabCom.setAttribute('aria-selected', !res);
+  tabRes.tabIndex = res ? 0 : -1; tabCom.tabIndex = res ? -1 : 0;
+  panRes.classList.toggle('is-active', res); panCom.classList.toggle('is-active', !res);
+  panRes.hidden = !res; panCom.hidden = res;
+}
+tabRes.addEventListener('click', ()=>selectTab('res'));
+tabCom.addEventListener('click', ()=>selectTab('com'));
+[tabRes,tabCom].forEach(t=>t.addEventListener('keydown', e=>{
+  if(e.key==='ArrowRight'||e.key==='ArrowLeft'){
+    e.preventDefault(); selectTab(t===tabRes?'com':'res'); (t===tabRes?tabCom:tabRes).focus();
+  }
+}));
+
+/* ===================== RESIDENTIAL CALC ===================== */
+function calcRes(){
+  const meter = val('r-meter');
+  const use   = num('r-use');
+  const type  = val('r-type');
+  const units = Math.max(1, num('r-units'));
+  const roomIdx = parseInt(val('r-rooms'),10);
+  const extraRooms = Math.max(0, num('r-extrarooms'));
+  const showExtras = el('r-addsvc').checked;
+
+  // toggles
+  el('r-units-field').classList.toggle('hidden', type!=='mfr');
+  el('r-extrarooms-field').classList.toggle('hidden', roomIdx!==5);
+  el('r-extras').classList.toggle('hidden', !showExtras);
+  el('sw-org-total-field').classList.toggle('hidden', val('sw-org')!=='yardfood');
+
+  const rows = [];
+  const wFix=[], wVol=[], ww=[], solid=[], storm=[], sweep=[], total=[];
+
+  for(let i=0;i<YEARS.length;i++){
+    const f = D.waterFixed[meter][i];
+    const v = use * D.waterVar[i];
+    wFix.push(f); wVol.push(v);
+
+    // wastewater
+    let w;
+    if(i===0){ // current = room tier (+over15)
+      w = D.wwRoomCurrent[roomIdx] + (roomIdx===5 ? extraRooms*D.wwOver15PerRoom : 0);
+    } else {   // proposed
+      w = (type==='mfr') ? D.wwMfrUnit[i]*units : D.wwSfrFlat[i];
+    }
+    ww.push(w);
+
+    let sTotal = f + v + w;
+
+    if(showExtras){
+      // solid waste
+      const cart = val('sw-cart');
+      const garbTotal = Math.max(1, num('sw-garb-total'));
+      let sw = D.garbage[cart] + (garbTotal-1)*D.garbageAddl[cart];
+      const recycTotal = Math.max(0, num('sw-recyc-total'));
+      if(recycTotal>=1){ sw += D.recycle + (recycTotal-1)*D.recycleAddl; }
+      const org = val('sw-org');
+      if(org==='yardfood'){
+        const orgTotal = Math.max(1, num('sw-org-total'));
+        sw += D.organicsYardFood + (orgTotal-1)*D.organicsAddl;
+      } else if(org==='foodonly'){ sw += D.foodOnly; }
+      solid.push(sw); sTotal += sw;
+
+      // storm: 1996 room-based + optional 2022 parcel charge entered from the bill
+      const baseIdx = Math.min(roomIdx,4);
+      let st = D.stormRoom[baseIdx] + (roomIdx===5 ? extraRooms*D.stormOver15PerRoom : 0);
+      st += Math.max(0, num('r-storm-parcel'));
+      storm.push(st); sTotal += st;
+
+      // sweep
+      const sp = D.sweep[val('sw-sweep')];
+      sweep.push(sp); sTotal += sp;
+    }
+    total.push(sTotal);
+  }
+
+  // build rows
+  rows.push(['Water fixed', wFix]);
+  rows.push(['Water volume', wVol]);
+  rows.push(['Water subtotal', wFix.map((x,i)=>x+wVol[i]), 'sub']);
+  rows.push(['Wastewater', ww]);
+  if(showExtras){
+    rows.push(['Solid waste', solid]);
+    rows.push(['Storm drainage', storm]);
+    rows.push(['Street sweeping', sweep]);
+  }
+  rows.push(['Total monthly bill', total, 'total']);
+
+  const rCaption = (type==='mfr')
+    ? 'Multi-family estimate; proposed wastewater = per-unit rate × '+units+' units.'
+    : 'Single-family residential estimate.';
+  renderTable('r-table', rows, rCaption);
+
+  // chart series (exclude subtotal/total)
+  const series = [['Water fixed',wFix],['Water volume',wVol],['Wastewater',ww]];
+  if(showExtras){ series.push(['Solid waste',solid],['Storm drainage',storm],['Street sweeping',sweep]); }
+  renderChart('r-chart','r-legend', series, total);
+}
+
+/* ===================== COMMERCIAL CALC ===================== */
+function calcCom(){
+  const meter = val('c-meter');
+  const use   = num('c-use');
+  const edus  = Math.max(1, num('c-edu'));
+  const showExtras = el('c-addsvc').checked;
+  el('c-extras').classList.toggle('hidden', !showExtras);
+
+  const wFix=[], wVol=[], ww=[], sweep=[], total=[];
+  for(let i=0;i<YEARS.length;i++){
+    const f = D.waterFixed[meter][i];
+    const v = use * D.waterVar[i];
+    wFix.push(f); wVol.push(v);
+    const w = (i===0) ? D.commMinByMeter[meter] : D.nonResEdu[i]*edus;
+    ww.push(w);
+    let t = f+v+w;
+    if(showExtras){ const sp = D.sweep.u5; sweep.push(sp); t += sp; }
+    total.push(t);
+  }
+
+  const rows = [
+    ['Water fixed', wFix],
+    ['Water volume', wVol],
+    ['Water subtotal', wFix.map((x,i)=>x+wVol[i]), 'sub'],
+    ['Wastewater', ww]
+  ];
+  if(showExtras) rows.push(['Street sweeping', sweep]);
+  rows.push(['Total monthly bill', total, 'total']);
+
+  renderTable('c-table', rows,
+    'Commercial estimate; current wastewater = metered minimum, proposed = Non-Residential rate × '+edus+' EDU(s).');
+
+  const series = [['Water fixed',wFix],['Water volume',wVol],['Wastewater',ww]];
+  if(showExtras) series.push(['Street sweeping',sweep]);
+  renderChart('c-chart','c-legend', series, total);
+}
+
+/* ===================== TABLE RENDER ===================== */
+function renderTable(id, rows, caption){
+  const head = '<thead><tr><th scope="col">Service</th>'+
+    YEARS.map(y=>`<th scope="col">${y}</th>`).join('')+'</tr></thead>';
+  const body = '<tbody>'+rows.map(([label,vals,cls])=>{
+    const c = cls?` class="${cls}"`:'';
+    const cells = vals.map(v=>{
+      if(v==null) return '<td class="empty">—</td>';
+      return `<td>${usd(v)}</td>`;
+    }).join('');
+    return `<tr${c}><th scope="row">${label}</th>${cells}</tr>`;
+  }).join('')+'</tbody>';
+  el(id).innerHTML = `<caption>${caption}</caption>${head}${body}`;
+}
+
+/* ===================== SVG STACKED-BAR CHART (no deps) ===================== */
+function renderChart(chartId, legendId, series, totals){
+  const W=720, H=320, padL=52, padR=16, padT=14, padB=42;
+  const plotW=W-padL-padR, plotH=H-padT-padB;
+  const n=YEARS.length;
+  const maxTotal=Math.max(...totals, 1);
+  // nice ceiling
+  const step=Math.pow(10,Math.floor(Math.log10(maxTotal)));
+  const ceil=Math.ceil(maxTotal/step)*step || maxTotal;
+  const yTo=v=>padT+plotH-(v/ceil)*plotH;
+  const bandW=plotW/n, barW=Math.min(64, bandW*0.6);
+
+  let g='';
+  // gridlines + y labels (4 lines)
+  for(let k=0;k<=4;k++){
+    const v=ceil*k/4, y=yTo(v);
+    g+=`<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W-padR}" y2="${y.toFixed(1)}" stroke="var(--border)" stroke-width="1"/>`;
+    g+=`<text x="${padL-8}" y="${(y+4).toFixed(1)}" text-anchor="end" font-size="11" fill="var(--muted)">$${Math.round(v)}</text>`;
+  }
+  // bars
+  for(let i=0;i<n;i++){
+    const cx=padL+bandW*i+bandW/2;
+    let yCursor=padT+plotH;
+    series.forEach(([name,vals])=>{
+      const v=vals[i]||0; if(v<=0) return;
+      const h=(v/ceil)*plotH; yCursor-=h;
+      g+=`<rect x="${(cx-barW/2).toFixed(1)}" y="${yCursor.toFixed(1)}" width="${barW.toFixed(1)}" height="${h.toFixed(1)}" fill="${COLORS[name]}"><title>${name}: ${usd(v)}</title></rect>`;
+    });
+    // total label above bar
+    const ty=yTo(totals[i])-6;
+    g+=`<text x="${cx.toFixed(1)}" y="${Math.max(ty,padT+10).toFixed(1)}" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)">${usd(totals[i])}</text>`;
+    // x label
+    g+=`<text x="${cx.toFixed(1)}" y="${(H-padB+18).toFixed(1)}" text-anchor="middle" font-size="11.5" fill="var(--ink)">${YEARS[i]}</text>`;
+  }
+
+  const aria = 'Stacked bar chart of estimated monthly charges. ' +
+    YEARS.map((y,i)=>`${y}: ${usd(totals[i])}`).join('; ') + '.';
+  el(chartId).innerHTML =
+    `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${aria}" style="display:block">${g}</svg>`;
+
+  el(legendId).innerHTML = series.map(([name])=>
+    `<span><i style="background:${COLORS[name]}"></i>${name}</span>`).join('');
+}
+
+/* ===================== SAMPLE-BILL MODAL ===================== */
+const modal=el('billModal'), openBtn=el('openBill'), closeBtn=el('closeBill');
+let lastFocus=null;
+function openModal(){ lastFocus=document.activeElement; modal.classList.add('is-open'); closeBtn.focus(); document.body.style.overflow='hidden'; }
+function closeModal(){ modal.classList.remove('is-open'); document.body.style.overflow=''; if(lastFocus) lastFocus.focus(); }
+openBtn.addEventListener('click', openModal);
+closeBtn.addEventListener('click', closeModal);
+modal.addEventListener('click', e=>{ if(e.target===modal) closeModal(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && modal.classList.contains('is-open')) closeModal(); });
+// simple focus trap
+modal.addEventListener('keydown', e=>{
+  if(e.key!=='Tab') return;
+  const f=modal.querySelectorAll('button, [href], input, select, [tabindex]:not([tabindex="-1"])');
+  if(!f.length) return;
+  const first=f[0], last=f[f.length-1];
+  if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+  else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+});
+
+/* ===================== WIRE INPUTS ===================== */
+['r-meter','r-use','r-type','r-units','r-rooms','r-extrarooms','r-addsvc',
+ 'sw-cart','sw-garb-total','sw-recyc-total','sw-org','sw-org-total','sw-sweep','r-storm-parcel']
+  .forEach(id=>{ const e=el(id); e.addEventListener('input',calcRes); e.addEventListener('change',calcRes); });
+
+['c-meter','c-use','c-edu','c-addsvc']
+  .forEach(id=>{ const e=el(id); e.addEventListener('input',calcCom); e.addEventListener('change',calcCom); });
+
+calcRes(); calcCom();
+</script>
 </body>
 </html>
