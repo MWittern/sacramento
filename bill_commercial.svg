@@ -1,0 +1,163 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 500" role="img"
+  aria-label="Annotated City of Sacramento commercial utility bill showing which fields map to calculator inputs">
+<defs>
+  <style>
+    * { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+    .mono { font-family: 'Courier New', Courier, monospace; }
+    .sec  { font-size: 9px; font-weight: 700; letter-spacing: 0.7px; fill: #2A3B66; }
+    .lbl  { font-size: 11.5px; fill: #16203a; }
+    .lbl-b{ font-size: 11.5px; fill: #16203a; font-weight: 700; }
+    .amt  { font-size: 11.5px; fill: #16203a; }
+    .amt-b{ font-size: 11.5px; fill: #16203a; font-weight: 700; }
+    .muted{ font-size: 10px; fill: #4a5269; }
+    .note { font-size: 9.5px; fill: #7a3800; font-style: italic; }
+    .irr  { font-size: 9.5px; fill: #1f6b46; font-weight: 700; }
+    .irr-n{ font-size: 9px; fill: #1f6b46; font-style: italic; }
+    .excl { font-size: 10.5px; fill: #9a2f2f; font-weight: 700; }
+    .excl-n{ font-size: 9px; fill: #9a2f2f; font-style: italic; }
+    .thdr { font-size: 9px; fill: #2A3B66; font-weight: 700; }
+    .tval { font-size: 10.5px; fill: #16203a; }
+    .ital { font-style: italic; font-weight: 700; }
+    .more { font-size: 10px; fill: #4a5269; font-style: italic; }
+  </style>
+</defs>
+
+<!-- ═══════════════════════════════════════════
+     BACKGROUND
+     ═══════════════════════════════════════════ -->
+<rect width="660" height="500" rx="8" fill="white" stroke="#cfd7e4" stroke-width="1.5"/>
+
+<!-- ═══════════════════════════════════════════
+     HEADER
+     ═══════════════════════════════════════════ -->
+<rect width="660" height="50" rx="8" fill="#2A3B66"/>
+<rect y="42" width="660" height="8" fill="#2A3B66"/>
+<text x="20" y="23" font-size="16" font-weight="800" fill="white">City of</text>
+<text x="72" y="23" font-size="16" font-weight="800" fill="white" letter-spacing="1.5">SACRAMENTO</text>
+<text x="21" y="41" font-size="9.5" fill="#a8c4e0" letter-spacing="0.3">DEPARTMENT OF UTILITIES  ·  UTILITY SERVICE BILL  ·  COMMERCIAL</text>
+<rect y="50" width="660" height="3" fill="#E9C791"/>
+
+<!-- ═══════════════════════════════════════════
+     METER TABLE SECTION  (Meter 1 — Commercial)
+     ═══════════════════════════════════════════ -->
+<rect y="53" width="660" height="18" fill="#f3f6fa"/>
+<text x="20" y="66" class="sec">UTILITY SERVICES – COMMERCIAL METERS</text>
+<text x="490" y="66" class="muted">Service 11/6/25–12/2/25</text>
+
+<!-- Table header -->
+<rect y="71" width="660" height="18" fill="#e9eef5"/>
+<text x="20"  y="84" class="thdr">METER NO.</text>
+<text x="140" y="84" class="thdr">METER SIZE</text>
+<text x="235" y="84" class="thdr">CURRENT</text>
+<text x="320" y="84" class="thdr">PREVIOUS</text>
+<text x="415" y="84" class="thdr">READING DIFF.</text>
+<text x="508" y="84" class="thdr">MULT.</text>
+<text x="557" y="84" class="thdr">USAGE (CU. FT.)</text>
+
+<!-- Table data row — Meter 1, 2.0" commercial -->
+<rect y="89" width="660" height="24" fill="white"/>
+<line x1="0" y1="113" x2="660" y2="113" stroke="#cfd7e4" stroke-width="0.8"/>
+<text x="20"  y="105" class="tval mono">[redacted]</text>
+
+<!-- ① Meter size highlight -->
+<rect x="136" y="91" width="60" height="20" rx="3" fill="#fef9ec" stroke="#d97706" stroke-width="1.5"/>
+<text x="146" y="105" class="tval mono" font-weight="700">2.0</text>
+<circle cx="136" cy="101" r="11" fill="#2A3B66"/>
+<text x="136" y="105" text-anchor="middle" font-size="10" font-weight="800" fill="white">1</text>
+
+<text x="235" y="105" class="tval mono">11,986</text>
+<text x="320" y="105" class="tval mono">11,783</text>
+<text x="415" y="105" class="tval mono">203</text>
+<text x="508" y="105" class="tval mono">10×</text>
+
+<!-- ② Usage CF highlight -->
+<rect x="553" y="91" width="98" height="20" rx="3" fill="#fef9ec" stroke="#d97706" stroke-width="1.5"/>
+<text x="560" y="105" class="tval mono" font-weight="700">2,030 CF</text>
+<circle cx="553" cy="101" r="11" fill="#2A3B66"/>
+<text x="553" y="105" text-anchor="middle" font-size="10" font-weight="800" fill="white">2</text>
+
+<!-- ═══════════════════════════════════════════
+     WATER + WASTEWATER — METER 1
+     ═══════════════════════════════════════════ -->
+<rect y="113" width="660" height="17" fill="#f3f6fa"/>
+<text x="20" y="125" class="lbl ital">Water – Commercial Metered</text>
+
+<text x="28" y="145" class="lbl">Base service charge</text>
+<text x="644" y="145" text-anchor="end" class="amt">94.64</text>
+
+<!-- ② CF line for water -->
+<rect x="27" y="151" width="344" height="20" rx="3" fill="#fef9ec" stroke="#d97706" stroke-width="1.5"/>
+<text x="35"  y="165" class="lbl-b">2,030 cubic feet @ $0.014587 per cubic foot</text>
+<text x="375" y="165" font-size="10" font-weight="700" fill="#9a2f2f">➜ 2,030 ÷ 100 = 20 CCF</text>
+<text x="644" y="165" text-anchor="end" class="amt">29.61</text>
+<circle cx="14" cy="161" r="11" fill="#2A3B66"/>
+<text x="14" y="165" text-anchor="middle" font-size="10" font-weight="800" fill="white">2</text>
+
+<!-- Wastewater metered -->
+<text x="28" y="185" class="lbl ital">Wastewater – Commercial Meter</text>
+
+<!-- ② same CF used for WW (same meter read) -->
+<rect x="27" y="191" width="344" height="20" rx="3" fill="#fef9ec" stroke="#d97706" stroke-width="1.5"/>
+<text x="35" y="205" class="lbl-b">2,030 cubic feet @ $0.012953 per cubic foot</text>
+<text x="375" y="205" font-size="9.5" fill="#4a5269" font-style="italic">← same CF reading</text>
+<text x="644" y="205" text-anchor="end" class="amt">26.29</text>
+<circle cx="14" cy="201" r="11" fill="#2A3B66"/>
+<text x="14" y="205" text-anchor="middle" font-size="10" font-weight="800" fill="white">2</text>
+
+<text x="28" y="225" class="lbl">Adj to meet minimum charge</text>
+<text x="644" y="225" text-anchor="end" class="amt">45.98</text>
+
+<line x1="0" y1="233" x2="660" y2="233" stroke="#cfd7e4" stroke-width="0.8"/>
+<text x="28" y="249" class="lbl-b">Subtotal — Meter 1</text>
+<text x="644" y="249" text-anchor="end" class="amt-b">$196.52</text>
+
+<!-- ═══════════════════════════════════════════
+     "MORE METERS" SEPARATOR
+     ═══════════════════════════════════════════ -->
+<line x1="0" y1="258" x2="660" y2="258" stroke="#cfd7e4" stroke-width="0.8"/>
+<rect y="259" width="660" height="28" fill="#f8f9fc"/>
+<text x="330" y="278" text-anchor="middle" class="more">↕  Additional meter sections appear below for each meter on the account</text>
+<line x1="0" y1="287" x2="660" y2="287" stroke="#cfd7e4" stroke-width="0.8"/>
+
+<!-- ═══════════════════════════════════════════
+     IRRIGATION METER EXAMPLE
+     ═══════════════════════════════════════════ -->
+<rect y="288" width="660" height="18" fill="#f3f6fa"/>
+<text x="20" y="301" class="sec">IRRIGATION METER EXAMPLE  (1.5" meter)</text>
+<text x="460" y="301" class="muted">Water only — no wastewater section</text>
+
+<!-- ③ Irrigation: water only, NO wastewater section -->
+<rect y="306" width="660" height="17" fill="#f3f6fa"/>
+<text x="20" y="318" class="lbl ital">Water – Irrigation Services</text>
+
+<text x="28" y="338" class="lbl">Base service charge</text>
+<text x="644" y="338" text-anchor="end" class="amt">60.56</text>
+
+<text x="28" y="358" class="lbl">25,280 cubic feet @ $0.014587 per cubic foot</text>
+<text x="644" y="358" text-anchor="end" class="amt">368.76</text>
+
+<line x1="0" y1="366" x2="660" y2="366" stroke="#cfd7e4" stroke-width="0.8"/>
+<text x="28" y="382" class="lbl-b">Subtotal — Irrigation meter</text>
+<text x="644" y="382" text-anchor="end" class="amt-b">$429.32</text>
+
+<!-- ③ Irrigation — no WW notice -->
+<rect y="390" width="660" height="34" fill="#ecf7f0"/>
+<circle cx="20" cy="407" r="11" fill="#2A3B66"/>
+<text x="20" y="411" text-anchor="middle" font-size="10" font-weight="800" fill="white">3</text>
+<text x="38" y="402" class="irr">No wastewater section for this meter — it is an irrigation account.</text>
+<text x="38" y="416" class="irr-n">In the calculator, select "Irrigation (no wastewater charge)" for this meter row.</text>
+
+<!-- ═══════════════════════════════════════════
+     SACSEWER — EXCLUDED
+     ═══════════════════════════════════════════ -->
+<line x1="0" y1="424" x2="660" y2="424" stroke="#cfd7e4" stroke-width="0.8"/>
+<rect y="425" width="660" height="39" fill="#fbeeee"/>
+<text x="20" y="440" class="excl">Sewage Treatment and Resource Recovery (SacSewer)</text>
+<text x="644" y="440" text-anchor="end" class="excl">varies</text>
+<text x="20" y="456" class="excl-n">Billed by Sacramento Area Sewer District — NOT included in this rate study calculator.</text>
+
+<!-- Bottom rounded corner fill -->
+<rect y="464" width="660" height="36" rx="8" fill="white"/>
+<line x1="0" y1="464" x2="660" y2="464" stroke="#cfd7e4" stroke-width="0.8"/>
+
+</svg>

@@ -1,0 +1,180 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 492" role="img"
+  aria-label="Annotated City of Sacramento residential utility bill showing which fields map to calculator inputs">
+<defs>
+  <style>
+    * { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif; }
+    .mono { font-family: 'Courier New', Courier, monospace; }
+    .sec  { font-size: 9px; font-weight: 700; letter-spacing: 0.7px; fill: #2A3B66; }
+    .lbl  { font-size: 11.5px; fill: #16203a; }
+    .lbl-b{ font-size: 11.5px; fill: #16203a; font-weight: 700; }
+    .amt  { font-size: 11.5px; fill: #16203a; }
+    .amt-b{ font-size: 11.5px; fill: #16203a; font-weight: 700; }
+    .muted{ font-size: 10px; fill: #4a5269; }
+    .note { font-size: 9.5px; fill: #7a3800; font-style: italic; }
+    .excl { font-size: 10.5px; fill: #9a2f2f; font-weight: 700; }
+    .excl-n{ font-size: 9px; fill: #9a2f2f; font-style: italic; }
+    .thdr { font-size: 9px; fill: #2A3B66; font-weight: 700; }
+    .tval { font-size: 10.5px; fill: #16203a; }
+    .ital { font-style: italic; font-weight: 700; }
+  </style>
+</defs>
+
+<!-- ═══════════════════════════════════════════
+     BACKGROUND
+     ═══════════════════════════════════════════ -->
+<rect width="660" height="492" rx="8" fill="white" stroke="#cfd7e4" stroke-width="1.5"/>
+
+<!-- ═══════════════════════════════════════════
+     HEADER
+     ═══════════════════════════════════════════ -->
+<rect width="660" height="50" rx="8" fill="#2A3B66"/>
+<rect y="42" width="660" height="8" fill="#2A3B66"/>
+<text x="20" y="23" font-size="16" font-weight="800" fill="white">City of</text>
+<text x="72" y="23" font-size="16" font-weight="800" fill="white" letter-spacing="1.5">SACRAMENTO</text>
+<text x="21" y="41" font-size="9.5" fill="#a8c4e0" letter-spacing="0.3">DEPARTMENT OF UTILITIES  ·  UTILITY SERVICE BILL  ·  RESIDENTIAL</text>
+<rect y="50" width="660" height="3" fill="#E9C791"/>
+
+<!-- ═══════════════════════════════════════════
+     METER TABLE SECTION
+     ═══════════════════════════════════════════ -->
+<rect y="53" width="660" height="18" fill="#f3f6fa"/>
+<text x="20" y="66" class="sec">UTILITY SERVICES – RESIDENTIAL METERS</text>
+<text x="504" y="66" class="muted">Service 7/3/25–8/4/25</text>
+
+<!-- Table header row -->
+<rect y="71" width="660" height="18" fill="#e9eef5"/>
+<text x="20"  y="84" class="thdr">METER NO.</text>
+<text x="140" y="84" class="thdr">METER SIZE</text>
+<text x="235" y="84" class="thdr">CURRENT</text>
+<text x="325" y="84" class="thdr">PREVIOUS</text>
+<text x="432" y="84" class="thdr">USAGE (CU. FT.)</text>
+<text x="580" y="84" class="thdr">GALLONS</text>
+
+<!-- Table data row -->
+<rect y="89" width="660" height="24" fill="white"/>
+<line x1="0" y1="113" x2="660" y2="113" stroke="#cfd7e4" stroke-width="0.8"/>
+<text x="20"  y="105" class="tval mono">64043068</text>
+
+<!-- ① Meter size highlight -->
+<rect x="136" y="91" width="66" height="20" rx="3" fill="#fef9ec" stroke="#d97706" stroke-width="1.5"/>
+<text x="146" y="105" class="tval mono" font-weight="700">1.0</text>
+<circle cx="136" cy="101" r="11" fill="#2A3B66"/>
+<text x="136" y="105" text-anchor="middle" font-size="10" font-weight="800" fill="white">1</text>
+
+<text x="235" y="105" class="tval mono">123,187</text>
+<text x="325" y="105" class="tval mono">120,790</text>
+
+<!-- ② Usage CF highlight -->
+<rect x="428" y="91" width="100" height="20" rx="3" fill="#fef9ec" stroke="#d97706" stroke-width="1.5"/>
+<text x="438" y="105" class="tval mono" font-weight="700">2,397 CF</text>
+<circle cx="428" cy="101" r="11" fill="#2A3B66"/>
+<text x="428" y="105" text-anchor="middle" font-size="10" font-weight="800" fill="white">2</text>
+
+<text x="580" y="105" class="tval mono">17,930</text>
+
+<!-- ═══════════════════════════════════════════
+     WATER – RESIDENTIAL METERED
+     ═══════════════════════════════════════════ -->
+<rect y="113" width="660" height="17" fill="#f3f6fa"/>
+<text x="20" y="125" class="lbl ital">Water – Residential Metered</text>
+
+<text x="28" y="145" class="lbl">Base service charge</text>
+<text x="644" y="145" text-anchor="end" class="amt">35.72</text>
+
+<!-- ② CF line — full highlight with CCF conversion note -->
+<rect x="27" y="151" width="372" height="20" rx="3" fill="#fef9ec" stroke="#d97706" stroke-width="1.5"/>
+<text x="35"  y="165" class="lbl-b">2,397 cubic feet @ $0.014587 per cubic foot</text>
+<text x="403" y="165" font-size="10" font-weight="700" fill="#9a2f2f">➜ 2,397 ÷ 100 = 24 CCF</text>
+<text x="644" y="165" text-anchor="end" class="amt">34.97</text>
+<circle cx="14" cy="161" r="11" fill="#2A3B66"/>
+<text x="14" y="165" text-anchor="middle" font-size="10" font-weight="800" fill="white">2</text>
+
+<line x1="0" y1="174" x2="660" y2="174" stroke="#cfd7e4" stroke-width="0.8"/>
+<text x="28" y="190" class="lbl-b">Subtotal</text>
+<text x="644" y="190" text-anchor="end" class="amt-b">$70.69</text>
+
+<!-- ═══════════════════════════════════════════
+     UTILITY SERVICES  (WW + STORM)
+     ═══════════════════════════════════════════ -->
+<line x1="0" y1="198" x2="660" y2="198" stroke="#cfd7e4" stroke-width="0.8"/>
+<rect y="199" width="660" height="18" fill="#f3f6fa"/>
+<text x="20" y="212" class="sec">UTILITY SERVICES</text>
+<text x="504" y="212" class="muted">Service 7/10/25–8/7/25</text>
+
+<!-- Wastewater line — highlight "7 rooms" -->
+<text x="28" y="233" class="lbl">Wastewater – Flat charge for</text>
+<rect x="223" y="221" width="66" height="18" rx="3" fill="#fef9ec" stroke="#d97706" stroke-width="1.5"/>
+<text x="229" y="233" class="lbl-b">7 rooms</text>
+<text x="644" y="233" text-anchor="end" class="amt">31.65</text>
+<circle cx="14" cy="230" r="11" fill="#2A3B66"/>
+<text x="14" y="234" text-anchor="middle" font-size="10" font-weight="800" fill="white">3</text>
+
+<!-- Storm 1996 -->
+<text x="28" y="253" class="lbl">Storm Drainage – 1996 Fee, flat charge for 7 rooms</text>
+<text x="644" y="253" text-anchor="end" class="amt">11.31</text>
+
+<!-- Storm 2022 -->
+<text x="28" y="273" class="lbl" fill="#4a5269" font-style="italic">Storm Drainage – 2022 Fee</text>
+
+<!-- ④ SFR2 tier highlight -->
+<rect x="27" y="280" width="340" height="18" rx="3" fill="#fef9ec" stroke="#d97706" stroke-width="1.5"/>
+<text x="35"  y="293" class="lbl">Storm Drainage Property Related Fee –</text>
+<text x="276" y="293" class="lbl-b">SFR2</text>
+<text x="644" y="293" text-anchor="end" class="amt">5.94</text>
+<circle cx="14" cy="289" r="11" fill="#2A3B66"/>
+<text x="14" y="293" text-anchor="middle" font-size="10" font-weight="800" fill="white">4</text>
+
+<!-- ═══════════════════════════════════════════
+     UTILITY SERVICES CONTINUED  (SOLID WASTE)
+     ═══════════════════════════════════════════ -->
+<line x1="0" y1="302" x2="660" y2="302" stroke="#cfd7e4" stroke-width="0.8"/>
+<rect y="303" width="660" height="18" fill="#f3f6fa"/>
+<text x="20" y="316" class="sec">UTILITY SERVICES (CONTINUED)</text>
+<text x="504" y="316" class="muted">Service 7/10/25–8/7/25</text>
+
+<!-- Garbage line: "Garbage – [⑥ 1] [⑤ 30-gallon] @ $19.04 per can" -->
+<text x="28" y="337" class="lbl">Garbage –</text>
+
+<!-- ⑥ quantity "1" highlight + small badge -->
+<rect x="100" y="324" width="20" height="18" rx="3" fill="#fef9ec" stroke="#d97706" stroke-width="1.5"/>
+<text x="104" y="337" class="lbl-b">1</text>
+<circle cx="99" cy="324" r="9" fill="#2A3B66"/>
+<text x="99" y="328" text-anchor="middle" font-size="9" font-weight="800" fill="white">6</text>
+
+<!-- ⑤ cart size "30-gallon" highlight -->
+<rect x="127" y="324" width="70" height="18" rx="3" fill="#fef9ec" stroke="#d97706" stroke-width="1.5"/>
+<text x="131" y="337" class="lbl-b">30-gallon</text>
+<text x="201" y="337" class="lbl"> @ $19.04 per can</text>
+<text x="644" y="337" text-anchor="end" class="amt">19.04</text>
+<circle cx="14" cy="333" r="11" fill="#2A3B66"/>
+<text x="14" y="337" text-anchor="middle" font-size="10" font-weight="800" fill="white">5</text>
+
+<!-- Note: 30-gallon = 32-gallon -->
+<text x="28" y="351" class="note">↑ Bill shows "30-gallon" — select 32-gallon in the calculator (same cart, same base rate)</text>
+
+<!-- Recycling -->
+<text x="28" y="371" class="lbl">Recycling – 1  96-gallon @ $8.10 per can</text>
+<text x="644" y="371" text-anchor="end" class="amt">8.10</text>
+
+<!-- Organics -->
+<text x="28" y="391" class="lbl">Organics – 1 container @ $19.18</text>
+<text x="644" y="391" text-anchor="end" class="amt">19.18</text>
+
+<!-- Street sweeping -->
+<text x="28" y="411" class="lbl">Street Sweeping – Single Family Dwelling</text>
+<text x="644" y="411" text-anchor="end" class="amt">1.73</text>
+
+<!-- ═══════════════════════════════════════════
+     SACSEWER — EXCLUDED
+     ═══════════════════════════════════════════ -->
+<line x1="0" y1="419" x2="660" y2="419" stroke="#cfd7e4" stroke-width="0.8"/>
+<rect y="420" width="660" height="39" fill="#fbeeee"/>
+<text x="20" y="435" class="excl">SacSewer Treatment – Flat charge for Single Family Dwelling</text>
+<text x="644" y="435" text-anchor="end" class="excl">44.00</text>
+<text x="20" y="451" class="excl-n">Billed by Sacramento Area Sewer District — NOT included in this rate study calculator.</text>
+
+<!-- Bottom rounded corner fill -->
+<rect y="459" width="660" height="33" rx="8" fill="white"/>
+<line x1="0" y1="459" x2="660" y2="459" stroke="#cfd7e4" stroke-width="0.8"/>
+
+</svg>
