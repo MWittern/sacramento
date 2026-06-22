@@ -1333,6 +1333,58 @@ function initBillTabs(){
 }
 initBillTabs();
 
+/* ===================== TABLE RENDER ===================== */
+function renderTable(id, rows, caption){
+  const head = '<thead><tr><th scope="col">Service</th>'+
+    YEARS.map(y=>`<th scope="col">${y}</th>`).join('')+'</tr></thead>';
+  const body = '<tbody>'+rows.map(([label,vals,cls])=>{
+    const c = cls?` class="${cls}"`:'';
+    const cells = vals.map(v=>{
+      if(v==null) return '<td class="empty">—</td>';
+      return `<td>${usd(v)}</td>`;
+    }).join('');
+    return `<tr${c}><th scope="row">${label}</th>${cells}</tr>`;
+  }).join('')+'</tbody>';
+  el(id).innerHTML = `<caption>${caption}</caption>${head}${body}`;
+}
+
+/* ===================== SVG STACKED-BAR CHART (no deps) ===================== */
+function renderChart(chartId, legendId, series, totals){
+  const W=720, H=320, padL=52, padR=16, padT=14, padB=42;
+  const plotW=W-padL-padR, plotH=H-padT-padB;
+  const n=YEARS.length;
+  const maxTotal=Math.max(...totals, 1);
+  const step=Math.pow(10,Math.floor(Math.log10(maxTotal)));
+  const ceil=Math.ceil(maxTotal/step)*step || maxTotal;
+  const yTo=v=>padT+plotH-(v/ceil)*plotH;
+  const bandW=plotW/n, barW=Math.min(64, bandW*0.6);
+
+  let g='';
+  for(let k=0;k<=4;k++){
+    const v=ceil*k/4, y=yTo(v);
+    g+=`<line x1="${padL}" y1="${y.toFixed(1)}" x2="${W-padR}" y2="${y.toFixed(1)}" stroke="var(--border)" stroke-width="1"/>`;
+    g+=`<text x="${padL-8}" y="${(y+4).toFixed(1)}" text-anchor="end" font-size="11" fill="var(--muted)">$${Math.round(v)}</text>`;
+  }
+  for(let i=0;i<n;i++){
+    const cx=padL+bandW*i+bandW/2;
+    let yCursor=padT+plotH;
+    series.forEach(([name,vals])=>{
+      const v=vals[i]||0; if(v<=0) return;
+      const h=(v/ceil)*plotH; yCursor-=h;
+      g+=`<rect x="${(cx-barW/2).toFixed(1)}" y="${yCursor.toFixed(1)}" width="${barW.toFixed(1)}" height="${h.toFixed(1)}" fill="${COLORS[name]}"><title>${name}: ${usd(v)}</title></rect>`;
+    });
+    const ty=yTo(totals[i])-6;
+    g+=`<text x="${cx.toFixed(1)}" y="${Math.max(ty,padT+10).toFixed(1)}" text-anchor="middle" font-size="11.5" font-weight="700" fill="var(--ink)">${usd(totals[i])}</text>`;
+    g+=`<text x="${cx.toFixed(1)}" y="${(H-padB+18).toFixed(1)}" text-anchor="middle" font-size="11.5" fill="var(--ink)">${YEARS[i]}</text>`;
+  }
+  const aria = 'Stacked bar chart of estimated monthly charges. ' +
+    YEARS.map((y,i)=>`${y}: ${usd(totals[i])}`).join('; ') + '.';
+  el(chartId).innerHTML =
+    `<svg viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="${aria}" style="display:block">${g}</svg>`;
+  el(legendId).innerHTML = series.map(([name])=>
+    `<span><i style="background:${COLORS[name]}"></i>${name}</span>`).join('');
+}
+
 /* ===================== SAMPLE-BILL MODAL ===================== */
 
 const modal=el('billModal'), openBtn=el('openBill'), closeBtn=el('closeBill');
