@@ -423,18 +423,18 @@ td.empty{color:var(--muted)}
           <option value="1">1 inch</option>
           <option value="1-1/2">1-1/2 inch</option>
           <option value="2">2 inch</option>
+          <option value="3">3 inch</option>
+          <option value="4">4 inch</option>
+          <option value="6">6 inch</option>
+          <option value="8">8 inch</option>
+          <option value="10">10 inch</option>
+          <option value="12">12 inch</option>
         </select>
       </div>
       <div class="field">
         <label for="c-use">Monthly water use (CCF)</label>
         <input type="number" id="c-use" value="40" min="0" step="1" inputmode="decimal">
-        <p class="hint">1 CCF = 748 gallons.</p>
-      </div>
-      <div class="field full">
-        <label for="c-edu">Equivalent dwelling units (EDUs)</label>
-        <input type="number" id="c-edu" value="1" min="1" step="1">
-        <p class="hint">Used for the proposed (FY 2028+) wastewater rate. Current wastewater uses your meter's
-          metered minimum.</p>
+        <p class="hint">1 CCF = 748 gallons. Also used to calculate the wastewater volume charge.</p>
       </div>
     </div>
 
@@ -478,8 +478,9 @@ td.empty{color:var(--muted)}
     <ul>
       <li>The regional <strong>SacSewer treatment charge</strong> appears on the same bill but is set by SacSewer and
         is excluded here.</li>
-      <li><strong>Commercial wastewater</strong>: current = the metered minimum for your meter size; FY 2028–2032 =
-        the proposed Non-Residential rate × your EDUs.</li>
+      <li><strong>Commercial wastewater (current):</strong> readiness-to-serve charge by meter size + $1.2953/CCF
+        on all usage (Table 5-1). <strong>Proposed:</strong> fixed meter charge + $X/CCF on usage above the
+        meter-size threshold (Tables 1-6 and 1-7). SacSewer treatment is excluded.</li>
       <li><strong>Storm drainage</strong> calculates the 1996 room-based charge automatically; the 2022 parcel rate
         varies by impervious area, so it's included only when you enter the amount from your bill.</li>
       <li><strong>Solid waste &amp; street sweeping</strong> are flat (effective Jan 1, 2024) and held constant across
@@ -549,40 +550,75 @@ td.empty{color:var(--muted)}
 const YEARS = ["Current","FY 2028","FY 2029","FY 2030","FY 2031","FY 2032"];
 
 const D = {
-  // Fixed meter charges — all classes
+  // ── Water fixed meter charges $/month (Table 1-2) ──────────────────────────
+  // [Current, FY28, FY29, FY30, FY31, FY32]
   waterFixed: {
-    "5/8":   [35.72, 28.78, 33.67, 39.06, 43.75, 47.25],
-    "3/4":   [35.72, 32.13, 37.63, 43.68, 48.94, 52.88],
-    "1":     [35.72, 40.52, 47.53, 55.23, 61.94, 66.95],
-    "1-1/2": [67.29, 65.65, 77.20, 89.87, 100.89, 109.15],
-    "2":     [105.15, 94.13, 110.82, 129.13, 145.06, 157.01]
+    "5/8":   [35.72,   28.75,   33.64,   39.02,   43.70,   47.20],
+    "3/4":   [35.72,   32.11,   37.57,   43.58,   48.81,   52.71],
+    "1":     [35.72,   38.83,   45.43,   52.70,   59.02,   63.74],
+    "1-1/2": [67.29,   55.62,   65.08,   75.49,   84.55,   91.31],
+    "2":     [105.15,  75.78,   88.66,  102.85,  115.19,  124.41],
+    "3":     [193.49, 139.60,  163.33,  189.46,  212.20,  229.18],
+    "4":     [319.72, 233.66,  273.38,  317.12,  355.17,  383.58],
+    "6":     [635.25, 458.72,  536.70,  622.57,  697.28,  753.06],
+    "8":    [1013.87, 962.58, 1126.22, 1306.42, 1463.19, 1580.25],
+    "10":   [1455.63,1432.86, 1676.45, 1944.68, 2178.04, 2352.28],
+    "12":   [2717.78,1802.36, 2108.76, 2446.16, 2739.70, 2958.88]
   },
-  // Variable usage rate, $/CCF — all classes
-  waterVar: [1.4587, 1.6465, 1.9961, 2.4042, 2.8804, 3.4262],
+  // ── Water variable rate $/CCF (Table 1-3) ──────────────────────────────────
+  waterVar: [1.4587, 2.0879, 2.4428, 2.8336, 3.1736, 3.4275],
 
-  // Residential wastewater — current room tiers (index 0..5)
+  // ── Residential wastewater — current room tiers (index 0–5) ───────────────
   wwRoomCurrent: [20.74, 26.28, 31.65, 36.56, 41.95, 41.95],
   wwOver15PerRoom: 2.87,
-  // Residential wastewater — proposed
-  wwSfrFlat:  [null, 33.22, 38.54, 43.94, 49.22, 54.15],   // per account
-  wwMfrUnit:  [null, 22.90, 26.57, 30.29, 33.93, 37.33],   // per dwelling unit
+  // ── Residential wastewater — proposed ──────────────────────────────────────
+  wwSfrFlat: [null, 33.22, 38.54, 43.94, 49.22, 54.15],  // $/account
+  wwMfrUnit: [null, 22.90, 26.57, 30.29, 33.93, 37.33],  // $/dwelling unit
 
-  // Commercial / non-residential wastewater
-  commMinByMeter: { "5/8":15.54, "3/4":22.02, "1":34.99, "1-1/2":67.42, "2":106.33 }, // current
-  nonResEdu:  [null, 21.63, 25.09, 28.60, 32.03, 35.27],   // proposed, $/EDU
+  // ── Commercial WW current: readiness-to-serve charge (Table 5-1) ──────────
+  commRts: {
+    "5/8":  15.54, "3/4":   22.02, "1":    27.20, "1-1/2":  47.92,
+    "2":    80.30, "3":    161.91, "4":   282.36, "6":     647.62,
+    "8": 1375.56,  "10": 2185.09,  "12": 3400.02
+  },
+  // ── Commercial WW current: consumption rate $/CCF (Table 5-1) ─────────────
+  commCurVar: 1.2953,
 
-  // Storm drainage — 1996 room-based (index 0..4) + over-15 per room
+  // ── Commercial WW proposed: fixed meter charges (Table 1-6) ───────────────
+  // null for Current column (uses commRts above)
+  wwMeterProp: {
+    "5/8":   [null,   21.63,   25.09,   28.60,   32.03,   35.23],
+    "3/4":   [null,   32.44,   37.63,   42.90,   48.05,   52.86],
+    "1":     [null,   54.07,   62.72,   71.50,   80.08,   88.09],
+    "1-1/2": [null,  108.14,  125.44,  143.00,  160.16,  176.18],
+    "2":     [null,  173.03,  200.71,  228.81,  256.27,  281.90],
+    "3":     [null,  378.50,  439.06,  500.53,  560.59,  616.65],
+    "4":     [null,  681.30,  790.31,  900.95, 1009.06, 1109.97],
+    "6":     [null, 1405.86, 1630.80, 1859.11, 2082.20, 2290.42],
+    "8":     [null, 2595.44, 3010.71, 3432.21, 3844.08, 4228.49],
+    "10":    [null, 4542.02, 5268.74, 6006.36, 6727.12, 7399.83],
+    "12":    [null, 5731.60, 6648.66, 7579.47, 8489.01, 9337.91]
+  },
+  // ── Commercial WW proposed: over-threshold variable rate $/CCF (Table 1-7) ─
+  wwVarProp: [null, 1.5285, 1.7731, 2.0213, 2.2639, 2.4903],
+  // ── Commercial WW thresholds CCF by meter (City website) ──────────────────
+  wwThresh: {
+    "5/8": 12, "3/4": 17, "1": 21, "1-1/2": 37, "2": 62,
+    "3": 125,  "4": 218,  "6": 500, "8": 1062, "10": 1687, "12": 2625
+  },
+
+  // ── Storm drainage — 1996 room-based (index 0–4) + over-15 adder ──────────
   stormRoom: [7.53, 9.58, 11.31, 13.38, 15.25],
   stormOver15PerRoom: 0.40,
 
-  // Solid waste (flat, Jan 1 2024)
-  garbage:     { "32G":19.04, "64G":25.07, "96G":30.51 },
-  garbageAddl: { "32G":18.83, "64G":21.82, "96G":25.76 },
+  // ── Solid waste (flat, effective Jan 1 2024) ───────────────────────────────
+  garbage:     { "32G": 19.04, "64G": 25.07, "96G": 30.51 },
+  garbageAddl: { "32G": 18.83, "64G": 21.82, "96G": 25.76 },
   recycle: 8.10, recycleAddl: 2.79,
   organicsYardFood: 19.18, organicsAddl: 6.23, foodOnly: 13.43,
 
-  // Street sweeping (flat, Jan 1 2024)
-  sweep: { sfr:1.73, two:2.74, u34:4.89, u5:5.64 }
+  // ── Street sweeping (flat, effective Jan 1 2024) ───────────────────────────
+  sweep: { sfr: 1.73, two: 2.74, u34: 4.89, u5: 5.64 }
 };
 
 const usd = v => (v == null) ? "—"
@@ -704,35 +740,51 @@ function calcRes(){
 function calcCom(){
   const meter = val('c-meter');
   const use   = num('c-use');
-  const edus  = Math.max(1, num('c-edu'));
   const showExtras = el('c-addsvc').checked;
   el('c-extras').classList.toggle('hidden', !showExtras);
 
-  const wFix=[], wVol=[], ww=[], sweep=[], total=[];
+  const thresh = D.wwThresh[meter];
+
+  const wFix=[], wVol=[], wwFix=[], wwVol=[], sweep=[], total=[];
   for(let i=0;i<YEARS.length;i++){
     const f = D.waterFixed[meter][i];
     const v = use * D.waterVar[i];
     wFix.push(f); wVol.push(v);
-    const w = (i===0) ? D.commMinByMeter[meter] : D.nonResEdu[i]*edus;
-    ww.push(w);
-    let t = f+v+w;
+
+    let wf, wv;
+    if(i===0){
+      // Current: readiness-to-serve charge + flat $/CCF on all usage (Table 5-1)
+      wf = D.commRts[meter];
+      wv = use * D.commCurVar;
+    } else {
+      // Proposed: fixed meter charge + $/CCF on usage over threshold (Tables 1-6, 1-7)
+      wf = D.wwMeterProp[meter][i];
+      wv = Math.max(0, use - thresh) * D.wwVarProp[i];
+    }
+    wwFix.push(wf); wwVol.push(wv);
+
+    let t = f + v + wf + wv;
     if(showExtras){ const sp = D.sweep.u5; sweep.push(sp); t += sp; }
     total.push(t);
   }
 
+  const wwTot = wwFix.map((x,i) => x + wwVol[i]);
   const rows = [
-    ['Water fixed', wFix],
-    ['Water volume', wVol],
-    ['Water subtotal', wFix.map((x,i)=>x+wVol[i]), 'sub'],
-    ['Wastewater', ww]
+    ['Water fixed',          wFix],
+    ['Water volume',         wVol],
+    ['Water subtotal',       wFix.map((x,i)=>x+wVol[i]), 'sub'],
+    ['WW fixed charge',      wwFix],
+    ['WW volume charge',     wwVol],
+    ['Wastewater subtotal',  wwTot, 'sub']
   ];
   if(showExtras) rows.push(['Street sweeping', sweep]);
   rows.push(['Total monthly bill', total, 'total']);
 
-  renderTable('c-table', rows,
-    'Commercial estimate; current wastewater = metered minimum, proposed = Non-Residential rate × '+edus+' EDU(s).');
+  const caption = `Commercial estimate. Current WW = readiness-to-serve + $${D.commCurVar}/CCF. `
+    + `Proposed WW = meter charge + over-${thresh}-CCF threshold rate.`;
+  renderTable('c-table', rows, caption);
 
-  const series = [['Water fixed',wFix],['Water volume',wVol],['Wastewater',ww]];
+  const series = [['Water fixed',wFix],['Water volume',wVol],['Wastewater',wwTot]];
   if(showExtras) series.push(['Street sweeping',sweep]);
   renderChart('c-chart','c-legend', series, total);
 }
@@ -820,7 +872,7 @@ modal.addEventListener('keydown', e=>{
  'sw-cart','sw-garb-total','sw-recyc-total','sw-org','sw-org-total','sw-sweep','r-storm-parcel']
   .forEach(id=>{ const e=el(id); e.addEventListener('input',calcRes); e.addEventListener('change',calcRes); });
 
-['c-meter','c-use','c-edu','c-addsvc']
+['c-meter','c-use','c-addsvc']
   .forEach(id=>{ const e=el(id); e.addEventListener('input',calcCom); e.addEventListener('change',calcCom); });
 
 calcRes(); calcCom();
