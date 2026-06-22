@@ -358,16 +358,30 @@ td.empty{color:var(--muted)}
         <div class="svc-group">
           <h3>Storm drainage</h3>
           <div class="svc-body">
-            <p class="hint" style="margin-top:0">The 1996 room-based charge is calculated automatically from the room
-              count you selected above.</p>
             <div class="grid">
-              <div class="field full">
-                <label for="r-storm-parcel">2022 parcel storm charge (from your bill)</label>
-                <input type="number" id="r-storm-parcel" value="0" min="0" step="0.01" inputmode="decimal">
-                <p class="hint">Optional. This charge varies by your parcel's impervious area, so enter the amount
-                  printed on your bill to include it in the total.</p>
+              <div class="field full" id="r-storm-sfr-field">
+                <label for="r-storm-sfr-tier">Parcel size (SFR)</label>
+                <select id="r-storm-sfr-tier">
+                  <option value="0">SFR1 — under 0.1 acre ($3.13/mo)</option>
+                  <option value="1" selected>SFR2 — 0.1 to 0.25 acre ($5.94/mo)</option>
+                  <option value="2">SFR3 — over 0.25 acre ($10.78/mo)</option>
+                </select>
+                <p class="hint">Your tier is shown on your bill (e.g., "Storm Drainage Property Related Fee — SFR2").
+                  SFR2 is the most common tier.</p>
+              </div>
+              <div class="field full hidden" id="r-storm-mfr-field">
+                <label for="r-storm-mfr-tier">Unit density (MFR)</label>
+                <select id="r-storm-mfr-tier">
+                  <option value="0">MFR1 — high density, 50+ units/acre ($0.67/unit)</option>
+                  <option value="1" selected>MFR2 — medium density, 11–50 units/acre ($2.41/unit)</option>
+                  <option value="2">MFR3 — low density, 1–10 units/acre ($5.84/unit)</option>
+                </select>
+                <p class="hint">Your tier is shown on your bill. The rate is multiplied by the number of
+                  dwelling units entered above.</p>
               </div>
             </div>
+            <p class="svc-note">The 1996 room-based fee and the 2022 parcel fee are shown as separate line items.
+              Both are held flat across all years — this rate study does not propose storm drainage changes.</p>
           </div>
         </div>
 
@@ -449,6 +463,32 @@ td.empty{color:var(--muted)}
 
       <div id="c-extras" class="hidden">
         <div class="svc-group">
+          <h3>Storm drainage</h3>
+          <div class="svc-body">
+            <div class="grid">
+              <div class="field">
+                <label for="c-storm-sqft">Gross parcel area (sq ft)</label>
+                <input type="number" id="c-storm-sqft" value="10000" min="0" step="1" inputmode="decimal">
+                <p class="hint">Shown on your bill or available from the Sacramento County Assessor.</p>
+              </div>
+              <div class="field">
+                <label for="c-storm-type">Property type</label>
+                <select id="c-storm-type">
+                  <option value="0.86">Industrial, retail, commercial</option>
+                  <option value="0.80">Office, recreational, church, health</option>
+                  <option value="0.44">Public &amp; utilities</option>
+                  <option value="0.30">Airport &amp; common areas</option>
+                  <option value="0.10">Golf, park, cemetery, vacant</option>
+                  <option value="0.04">Agriculture</option>
+                </select>
+                <p class="hint">Sets the impervious surface coefficient (ISC) for the 2022 fee.</p>
+              </div>
+            </div>
+            <p class="svc-note">1996 fee: gross sq ft × $0.001928 (min $8.39/mo). 2022 fee: gross sq ft × ISC ×
+              $0.001646 (min $1.00/mo). Both fees held flat across all years.</p>
+          </div>
+        </div>
+        <div class="svc-group">
           <h3>Street sweeping</h3>
           <div class="svc-body">
             <p class="hint" style="margin-top:0">Commercial street sweeping (5+ units / premise) ranges from $4.89 to
@@ -481,8 +521,9 @@ td.empty{color:var(--muted)}
       <li><strong>Commercial wastewater (current):</strong> readiness-to-serve charge by meter size + $1.2953/CCF
         on all usage (Table 5-1). <strong>Proposed:</strong> fixed meter charge + $X/CCF on usage above the
         meter-size threshold (Tables 1-6 and 1-7). SacSewer treatment is excluded.</li>
-      <li><strong>Storm drainage</strong> calculates the 1996 room-based charge automatically; the 2022 parcel rate
-        varies by impervious area, so it's included only when you enter the amount from your bill.</li>
+      <li><strong>Storm drainage</strong>: both the 1996 room-based fee and the 2022 parcel fee are fully
+        calculated — no manual entry required. Commercial storm fees use gross parcel sq ft and property type. Neither
+        fee is proposed to change in this rate study.</li>
       <li><strong>Solid waste &amp; street sweeping</strong> are flat (effective Jan 1, 2024) and held constant across
         all years.</li>
     </ul>
@@ -609,7 +650,19 @@ const D = {
 
   // ── Storm drainage — 1996 room-based (index 0–4) + over-15 adder ──────────
   stormRoom: [7.53, 9.58, 11.31, 13.38, 15.25],
-  stormOver15PerRoom: 0.40,
+  stormOver15PerRoom: 1.19,               // per room above 15 (Exhibit A)
+
+  // ── Storm drainage 2022 — residential tiers (monthly flat) ────────────────
+  storm2022SfrTiers:  [3.13, 5.94, 10.78],   // SFR1 / SFR2 / SFR3
+  storm2022MfrRates:  [0.67, 2.41, 5.84],    // per unit: high / mid / low density
+
+  // ── Storm drainage 2022 — non-residential ─────────────────────────────────
+  storm2022NonResRate: 0.0016458333,     // $/sq ft × ISC (Resolution 2022-0100)
+  storm2022NonResMin:  1.00,
+
+  // ── Storm drainage 1996 — non-residential ─────────────────────────────────
+  storm1996NonResRate: 0.001928,         // $/sq ft of gross surface area
+  storm1996NonResMin:  8.39,
 
   // ── Solid waste (flat, effective Jan 1 2024) ───────────────────────────────
   garbage:     { "32G": 19.04, "64G": 25.07, "96G": 30.51 },
@@ -666,9 +719,11 @@ function calcRes(){
   el('r-extrarooms-field').classList.toggle('hidden', roomIdx!==5);
   el('r-extras').classList.toggle('hidden', !showExtras);
   el('sw-org-total-field').classList.toggle('hidden', val('sw-org')!=='yardfood');
+  el('r-storm-sfr-field').classList.toggle('hidden', type === 'mfr');
+  el('r-storm-mfr-field').classList.toggle('hidden', type !== 'mfr');
 
   const rows = [];
-  const wFix=[], wVol=[], ww=[], solid=[], storm=[], sweep=[], total=[];
+  const wFix=[], wVol=[], ww=[], solid=[], storm96=[], storm22=[], sweep=[], total=[];
 
   for(let i=0;i<YEARS.length;i++){
     const f = D.waterFixed[meter][i];
@@ -700,11 +755,21 @@ function calcRes(){
       } else if(org==='foodonly'){ sw += D.foodOnly; }
       solid.push(sw); sTotal += sw;
 
-      // storm: 1996 room-based + optional 2022 parcel charge entered from the bill
-      const baseIdx = Math.min(roomIdx,4);
-      let st = D.stormRoom[baseIdx] + (roomIdx===5 ? extraRooms*D.stormOver15PerRoom : 0);
-      st += Math.max(0, num('r-storm-parcel'));
-      storm.push(st); sTotal += st;
+      // Storm drainage 1996 (room-based — flat across all years)
+      const baseIdx = Math.min(roomIdx, 4);
+      const st96 = D.stormRoom[baseIdx] + (roomIdx === 5 ? extraRooms * D.stormOver15PerRoom : 0);
+      storm96.push(st96);
+      // Storm drainage 2022 (tier-based — flat across all years)
+      let st22 = 0;
+      if(type === 'mfr'){
+        const mfrIdx = parseInt(val('r-storm-mfr-tier'), 10);
+        st22 = D.storm2022MfrRates[mfrIdx] * units;
+      } else {
+        const sfrIdx = parseInt(val('r-storm-sfr-tier'), 10);
+        st22 = D.storm2022SfrTiers[sfrIdx];
+      }
+      storm22.push(st22);
+      sTotal += st96 + st22;
 
       // sweep
       const sp = D.sweep[val('sw-sweep')];
@@ -720,7 +785,8 @@ function calcRes(){
   rows.push(['Wastewater', ww]);
   if(showExtras){
     rows.push(['Solid waste', solid]);
-    rows.push(['Storm drainage', storm]);
+    rows.push(['Storm drainage — 1996', storm96]);
+    rows.push(['Storm drainage — 2022', storm22]);
     rows.push(['Street sweeping', sweep]);
   }
   rows.push(['Total monthly bill', total, 'total']);
@@ -730,9 +796,12 @@ function calcRes(){
     : 'Single-family residential estimate.';
   renderTable('r-table', rows, rCaption);
 
-  // chart series (exclude subtotal/total)
+  // chart series — combine both storm fees into one bar segment
   const series = [['Water fixed',wFix],['Water volume',wVol],['Wastewater',ww]];
-  if(showExtras){ series.push(['Solid waste',solid],['Storm drainage',storm],['Street sweeping',sweep]); }
+  if(showExtras){
+    const stormTot = storm96.map((v,i) => v + storm22[i]);
+    series.push(['Solid waste',solid],['Storm drainage',stormTot],['Street sweeping',sweep]);
+  }
   renderChart('r-chart','r-legend', series, total);
 }
 
@@ -745,7 +814,16 @@ function calcCom(){
 
   const thresh = D.wwThresh[meter];
 
-  const wFix=[], wVol=[], wwFix=[], wwVol=[], sweep=[], total=[];
+  // Compute storm fees once — flat across all years
+  let cStorm96val = 0, cStorm22val = 0;
+  if(showExtras){
+    const sqft = Math.max(0, num('c-storm-sqft'));
+    const isc  = parseFloat(val('c-storm-type'));
+    cStorm96val = Math.max(D.storm1996NonResMin, sqft * D.storm1996NonResRate);
+    cStorm22val = Math.max(D.storm2022NonResMin, sqft * isc * D.storm2022NonResRate);
+  }
+
+  const wFix=[], wVol=[], wwFix=[], wwVol=[], cStorm96=[], cStorm22=[], sweep=[], total=[];
   for(let i=0;i<YEARS.length;i++){
     const f = D.waterFixed[meter][i];
     const v = use * D.waterVar[i];
@@ -753,7 +831,7 @@ function calcCom(){
 
     let wf, wv;
     if(i===0){
-      // Current: readiness-to-serve charge + flat $/CCF on all usage (Table 5-1)
+      // Current: readiness-to-serve + flat $/CCF on all usage (Table 5-1)
       wf = D.commRts[meter];
       wv = use * D.commCurVar;
     } else {
@@ -764,20 +842,28 @@ function calcCom(){
     wwFix.push(wf); wwVol.push(wv);
 
     let t = f + v + wf + wv;
-    if(showExtras){ const sp = D.sweep.u5; sweep.push(sp); t += sp; }
+    if(showExtras){
+      cStorm96.push(cStorm96val); cStorm22.push(cStorm22val);
+      const sp = D.sweep.u5; sweep.push(sp);
+      t += cStorm96val + cStorm22val + sp;
+    }
     total.push(t);
   }
 
   const wwTot = wwFix.map((x,i) => x + wwVol[i]);
   const rows = [
-    ['Water fixed',          wFix],
-    ['Water volume',         wVol],
-    ['Water subtotal',       wFix.map((x,i)=>x+wVol[i]), 'sub'],
-    ['WW fixed charge',      wwFix],
-    ['WW volume charge',     wwVol],
-    ['Wastewater subtotal',  wwTot, 'sub']
+    ['Water fixed',         wFix],
+    ['Water volume',        wVol],
+    ['Water subtotal',      wFix.map((x,i)=>x+wVol[i]), 'sub'],
+    ['WW fixed charge',     wwFix],
+    ['WW volume charge',    wwVol],
+    ['Wastewater subtotal', wwTot, 'sub']
   ];
-  if(showExtras) rows.push(['Street sweeping', sweep]);
+  if(showExtras){
+    rows.push(['Storm drainage — 1996', cStorm96]);
+    rows.push(['Storm drainage — 2022', cStorm22]);
+    rows.push(['Street sweeping', sweep]);
+  }
   rows.push(['Total monthly bill', total, 'total']);
 
   const caption = `Commercial estimate. Current WW = readiness-to-serve + $${D.commCurVar}/CCF. `
@@ -785,7 +871,10 @@ function calcCom(){
   renderTable('c-table', rows, caption);
 
   const series = [['Water fixed',wFix],['Water volume',wVol],['Wastewater',wwTot]];
-  if(showExtras) series.push(['Street sweeping',sweep]);
+  if(showExtras){
+    const stormTot = cStorm96.map((v,i) => v + cStorm22[i]);
+    series.push(['Storm drainage',stormTot],['Street sweeping',sweep]);
+  }
   renderChart('c-chart','c-legend', series, total);
 }
 
@@ -869,10 +958,11 @@ modal.addEventListener('keydown', e=>{
 
 /* ===================== WIRE INPUTS ===================== */
 ['r-meter','r-use','r-type','r-units','r-rooms','r-extrarooms','r-addsvc',
- 'sw-cart','sw-garb-total','sw-recyc-total','sw-org','sw-org-total','sw-sweep','r-storm-parcel']
+ 'sw-cart','sw-garb-total','sw-recyc-total','sw-org','sw-org-total','sw-sweep',
+ 'r-storm-sfr-tier','r-storm-mfr-tier']
   .forEach(id=>{ const e=el(id); e.addEventListener('input',calcRes); e.addEventListener('change',calcRes); });
 
-['c-meter','c-use','c-addsvc']
+['c-meter','c-use','c-addsvc','c-storm-sqft','c-storm-type']
   .forEach(id=>{ const e=el(id); e.addEventListener('input',calcCom); e.addEventListener('change',calcCom); });
 
 calcRes(); calcCom();
