@@ -243,7 +243,7 @@ td.empty{color:var(--muted)}
     </div>
     <div class="masthead-text">
       <h1>Utility Bill Estimator</h1>
-      <p>See how proposed water &amp; wastewater rates affect your bill through FY 2032.</p>
+      <p>See how proposed water &amp; wastewater rates affect your bill through 2032.</p>
     </div>
   </header>
 
@@ -273,7 +273,8 @@ td.empty{color:var(--muted)}
     <div class="scope">
       <span aria-hidden="true">ⓘ</span>
       <div><strong>What's included:</strong> City water and wastewater (sewer collection) charges. The SacSewer
-      regional treatment charge is <strong>not</strong> included.</div>
+      regional treatment charge is <strong>not</strong> included — see the note below the calculator for current
+      SacSewer rates.</div>
     </div>
 
     <div class="grid">
@@ -438,7 +439,7 @@ td.empty{color:var(--muted)}
 
     <div class="chart-card" aria-hidden="false">
       <h3>Where your money goes</h3>
-      <p class="csub">Stacked monthly charge by service, current through FY 2032.</p>
+      <p class="csub">Stacked monthly charge by service, current through 2032.</p>
       <div id="r-chart" role="img"></div>
       <div class="legend" id="r-legend"></div>
     </div>
@@ -544,7 +545,7 @@ td.empty{color:var(--muted)}
 
     <div class="chart-card" aria-hidden="false">
       <h3>Where your money goes</h3>
-      <p class="csub">Stacked monthly charge by service, current through FY 2032.</p>
+      <p class="csub">Stacked monthly charge by service, current through 2032.</p>
       <div id="c-chart" role="img"></div>
       <div class="legend" id="c-legend"></div>
     </div>
@@ -554,8 +555,12 @@ td.empty{color:var(--muted)}
   <div class="disclaimer">
     <strong>Estimates only.</strong> Figures are for planning and illustration; your actual bill may differ.
     <ul>
-      <li>The regional <strong>SacSewer treatment charge</strong> appears on the same bill but is set by SacSewer and
-        is excluded here.</li>
+      <li>The regional <strong>SacSewer treatment charge</strong> appears on the same bill but is set by SacSewer —
+        a separate regional agency — and is excluded from this calculator. Current SacSewer treatment rates are
+        approximately <strong>$44/month per equivalent sewage dwelling (ESD)</strong> as of July 2025. A
+        single-family home is typically billed as 1.0 ESD; multi-family units are billed as fractional ESDs using
+        the same per-ESD rate. For questions about how your property is classified, contact SacSewer at
+        (916) 875-5500 or visit <strong>sacsewer.com</strong>.</li>
       <li><strong>Commercial wastewater (current):</strong> readiness-to-serve charge by meter size + $1.2953/CCF
         on all usage. <strong>Proposed:</strong> fixed meter charge + $X/CCF on usage above the
         meter-size threshold. SacSewer treatment is excluded.</li>
@@ -962,7 +967,7 @@ td.empty{color:var(--muted)}
 "use strict";
 
 /* ===================== DATA (Master Data Ledger v2) ===================== */
-const YEARS = ["Current","FY 2028","FY 2029","FY 2030","FY 2031","FY 2032"];
+const YEARS = ["Current","Starting 7/1/28","Starting 7/1/29","Starting 7/1/30","Starting 7/1/31","Starting 7/1/32"];
 
 const D = {
   // ── Water fixed meter charges $/month (Table 1-2) ──────────────────────────
