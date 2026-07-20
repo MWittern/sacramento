@@ -1,5 +1,6 @@
 
 
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -356,7 +357,7 @@ td.empty{color:var(--muted)}
           <div class="svc-body">
             <div class="grid">
               <div class="field">
-                <label for="sw-cart">Garbage cart size</label>
+                <label for="sw-cart">Garbage container size</label>
                 <select id="sw-cart">
                   <option value="32G">32-gallon</option>
                   <option value="64G">64-gallon</option>
@@ -364,13 +365,13 @@ td.empty{color:var(--muted)}
                 </select>
               </div>
               <div class="field">
-                <label for="sw-garb-total">Total garbage carts</label>
+                <label for="sw-garb-total">Total garbage containers</label>
                 <input type="number" id="sw-garb-total" value="1" min="1" step="1">
-                <p class="hint">The first cart is the base rate; each cart beyond it adds the additional-can fee.</p>
+                <p class="hint">The first container is the base rate; each container beyond it adds the additional-can fee.</p>
               </div>
 
               <div class="field">
-                <label for="sw-recyc-total">Total recycling carts</label>
+                <label for="sw-recyc-total">Total recycling containers</label>
                 <input type="number" id="sw-recyc-total" value="1" min="0" step="1">
                 <p class="hint">Enter 0 if you have no recycling service.</p>
               </div>
@@ -383,9 +384,9 @@ td.empty{color:var(--muted)}
                 </select>
               </div>
               <div class="field" id="sw-org-total-field">
-                <label for="sw-org-total">Total organics carts</label>
+                <label for="sw-org-total">Total organics containers</label>
                 <input type="number" id="sw-org-total" value="1" min="1" step="1">
-                <p class="hint">Each cart beyond the first adds the additional-can fee.</p>
+                <p class="hint">Each container beyond the first adds the additional-can fee.</p>
               </div>
             </div>
             <p class="svc-note">Solid waste rates are flat (effective Jan 1, 2024) and are shown unchanged across all
@@ -649,7 +650,7 @@ td.empty{color:var(--muted)}
 <rect width="660" height="50" rx="8" fill="#2A3B66"/>
 <rect y="42" width="660" height="8" fill="#2A3B66"/>
 <text x="20" y="23" font-size="16" font-weight="800" fill="white">City of</text>
-<text x="72" y="23" font-size="16" font-weight="800" fill="white" letter-spacing="1.5">SACRAMENTO</text>
+<text x="84" y="23" font-size="16" font-weight="800" fill="white" letter-spacing="1.5">SACRAMENTO</text>
 <text x="21" y="41" font-size="9.5" fill="#a8c4e0" letter-spacing="0.3">DEPARTMENT OF UTILITIES  ·  UTILITY SERVICE BILL  ·  RESIDENTIAL</text>
 <rect y="50" width="660" height="3" fill="#E9C791"/>
 
@@ -769,7 +770,7 @@ td.empty{color:var(--muted)}
 <text x="14" y="337" text-anchor="middle" font-size="10" font-weight="800" fill="white">5</text>
 
 <!-- Note: 30-gallon = 32-gallon -->
-<text x="28" y="351" class="note">↑ Bill shows "30-gallon" — select 32-gallon in the calculator (same cart, same base rate)</text>
+<text x="28" y="351" class="note">↑ Bill shows "30-gallon" — select 32-gallon in the calculator (same container, same base rate)</text>
 
 <!-- Recycling -->
 <text x="28" y="371" class="lbl">Recycling – 1  96-gallon @ $8.10 per can</text>
@@ -804,8 +805,8 @@ td.empty{color:var(--muted)}
           <li><span class="chip">2</span><span><b>Water usage</b> — enter the cubic feet figure from your bill and set the units toggle to "Cubic feet," or divide by 100 and enter CCF.</span></li>
           <li><span class="chip">3</span><span><b>Number of rooms</b> — sets the current wastewater and 1996 storm drainage tier.</span></li>
           <li><span class="chip">4</span><span><b>Storm tier</b> — "SFR1," "SFR2," or "SFR3" on the 2022 storm drainage line. SFR2 is most common.</span></li>
-          <li><span class="chip">5</span><span><b>Garbage cart size</b> — bill shows "30-gallon"; select 32-gallon in the calculator (same cart, same rate).</span></li>
-          <li><span class="chip">6</span><span><b>Total garbage carts</b> — the quantity shown before the cart size on the garbage line.</span></li>
+          <li><span class="chip">5</span><span><b>Garbage container size</b> — bill shows "30-gallon"; select 32-gallon in the calculator (same container, same rate).</span></li>
+          <li><span class="chip">6</span><span><b>Total garbage containers</b> — the quantity shown before the container size on the garbage line.</span></li>
         </ul>
       </div>
 
@@ -847,7 +848,7 @@ td.empty{color:var(--muted)}
 <rect width="660" height="50" rx="8" fill="#2A3B66"/>
 <rect y="42" width="660" height="8" fill="#2A3B66"/>
 <text x="20" y="23" font-size="16" font-weight="800" fill="white">City of</text>
-<text x="72" y="23" font-size="16" font-weight="800" fill="white" letter-spacing="1.5">SACRAMENTO</text>
+<text x="84" y="23" font-size="16" font-weight="800" fill="white" letter-spacing="1.5">SACRAMENTO</text>
 <text x="21" y="41" font-size="9.5" fill="#a8c4e0" letter-spacing="0.3">DEPARTMENT OF UTILITIES  ·  UTILITY SERVICE BILL  ·  COMMERCIAL</text>
 <rect y="50" width="660" height="3" fill="#E9C791"/>
 
@@ -1037,13 +1038,13 @@ const D = {
     "3/4":   [null,   32.44,   37.63,   42.90,   48.05,   52.86],
     "1":     [null,   54.07,   62.72,   71.50,   80.08,   88.09],
     "1-1/2": [null,  108.14,  125.44,  143.00,  160.16,  176.18],
-    "2":     [null,  173.03,  200.71,  228.81,  256.27,  281.90],
-    "3":     [null,  378.50,  439.06,  500.53,  560.59,  616.65],
-    "4":     [null,  681.30,  790.31,  900.95, 1009.06, 1109.97],
-    "6":     [null, 1405.86, 1630.80, 1859.11, 2082.20, 2290.42],
-    "8":     [null, 2595.44, 3010.71, 3432.21, 3844.08, 4228.49],
-    "10":    [null, 4542.02, 5268.74, 6006.36, 6727.12, 7399.83],
-    "12":    [null, 5731.60, 6648.66, 7579.47, 8489.01, 9337.91]
+    "2":     [null,  173.02,  200.71,  228.81,  256.27,  281.90],
+    "3":     [null,  378.49,  439.06,  500.53,  560.59,  616.65],
+    "4":     [null,  681.27,  790.31,  900.95, 1009.06, 1109.97],
+    "6":     [null, 1405.80, 1630.80, 1859.11, 2082.20, 2290.42],
+    "8":     [null, 2595.33, 3010.71, 3432.21, 3844.08, 4228.49],
+    "10":    [null, 4541.82, 5268.74, 6006.36, 6727.12, 7399.83],
+    "12":    [null, 5731.35, 6648.66, 7579.47, 8489.01, 9337.91]
   },
   // ── Commercial WW proposed: over-threshold variable rate $/CCF (Table 1-7) ─
   wwVarProp: [null, 1.5285, 1.7731, 2.0213, 2.2639, 2.4903],
